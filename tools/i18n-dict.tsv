@@ -1,0 +1,542 @@
+"{n}" seçildi. Tüm projelerin kapağı bundan sonra bu olacak (paftaları yeniden üretin).	"{n}" selected. All projects will use this cover from now on (rebuild the layouts).	„{n}" ausgewählt. Alle Projekte verwenden ab jetzt dieses Deckblatt (Pläne neu erzeugen).
+"~" işareti kullanılmış (değerler kesin yazılır; 3~ faz gösterimi serbest): {w}	"~" used (values must be exact; 3~ phase notation is allowed): {w}	„~" verwendet (Werte exakt angeben; 3~ als Phasenangabe erlaubt): {w}
+(adsız satır)	(unnamed row)	(Zeile ohne Namen)
+(adsız)	(unnamed)	(ohne Namen)
+(başlıksız)	(untitled)	(ohne Titel)
+(boş etiket)	(empty label)	(leere Beschriftung)
+(boş not)	(empty note)	(leerer Hinweis)
+(boş)	(empty)	(leer)
+(görünüm yok)	(no view)	(keine Ansicht)
+(yazısız)	(no text)	(ohne Text)
+{a} A sigorta için {k} mm² kesit küçük görünüyor (önerilen en az {n} mm²).	{k} mm² looks too small for a {a} A breaker (recommended at least {n} mm²).	{k} mm² erscheint für eine {a}-A-Sicherung zu klein (empfohlen mindestens {n} mm²).
+{f} eklendi (ana ölçüler imalat resminden alınır).	{f} added (main dimensions are taken from the manufacturing drawing).	{f} hinzugefügt (Hauptmaße werden aus der Fertigungszeichnung übernommen).
+{k} harfini değiştir	Rename {k}	{k} umbenennen
+{k} noktası silinsin mi?	Delete point {k}?	Punkt {k} löschen?
+{k} zaten var.	{k} already exists.	{k} ist bereits vorhanden.
+{l} metinde ondalık ayırıcı nokta ({l}'de virgül): {w}	Decimal point in {l} text ({l} uses a comma): {w}	Dezimalpunkt im {l}-Text ({l} verwendet Komma): {w}
+{n} bilgi	Info: {n}	Hinweise: {n}
+{n} eksik	Missing: {n}	Fehlend: {n}
+{n} madde eksik (Eksikler sekmesi). Pafta yine de üretilsin mi?	Missing items: {n} (Issues tab). Build the layout anyway?	Fehlende Punkte: {n} (Reiter Mängel). Plan trotzdem erzeugen?
+{n} madde eksik ya da gözden geçirilmeli.	Items missing or to review: {n}.	Fehlende oder zu prüfende Punkte: {n}.
+{n} oluşturuldu. Görünümler için STEP yükleyin.	{n} created. Upload a STEP file for the views.	{n} angelegt. Für die Ansichten eine STEP-Datei hochladen.
+{n} standart not eklendi.	Standard notes added: {n}.	Standardhinweise hinzugefügt: {n}.
+{n} uyarı	Warnings: {n}	Warnungen: {n}
+{t} ({c}) bağlantısının detay kartı yok (§8).	No detail card for the {t} ({c}) connection (§8).	Keine Detailkarte für den Anschluss {t} ({c}) (§8).
++ Ekle	+ Add	+ Hinzufügen
++ Nokta	+ Point	+ Punkt
++ Nokta ekle	+ Add point	+ Punkt hinzufügen
++ Yeni Proje	+ New Project	+ Neues Projekt
+<seri no>-<MÜŞTERİ>-<MODEL>-Layout, boşluklar tire.	<serial no>-<CUSTOMER>-<MODEL>-Layout, spaces as hyphens.	<Serien-Nr.>-<KUNDE>-<MODELL>-Layout, Leerzeichen als Bindestrich.
+✓ Seçili kapak	✓ Selected cover	✓ Gewähltes Deckblatt
+3D izometrik görünüm ölçeksizdir ve STEP'ten otomatik üretilir.	The 3D isometric view is not to scale and is generated automatically from the STEP file.	Die 3D-Isometrie ist nicht maßstäblich und wird automatisch aus der STEP-Datei erzeugt.
+A3 yatay	A3 landscape	A3 quer
+A3 yatay. Bilgileri yukarıdan değiştirin, kullanmak istediğiniz tasarımı sağdan seçin.	A3 landscape. Edit the details above and pick the design you want on the right.	A3 quer. Angaben oben ändern, gewünschtes Design rechts wählen.
+Açıklama	Description	Beschreibung
+Açılan pafta güncel değil; son değişiklikler için "Pafta Üret".	The opened layout is out of date; use "Build Layout" for the latest changes.	Der geöffnete Plan ist nicht aktuell; für die letzten Änderungen „Plan erzeugen".
+Ad	Name	Name
+ad	name	Name
+Ana şalter (A)	Main switch (A)	Hauptschalter (A)
+Ana şalter (A) girilmedi.	Main switch (A) not entered.	Hauptschalter (A) nicht eingegeben.
+Aramayla eşleşen proje yok.	No project matches the search.	Kein Projekt entspricht der Suche.
+Arka	Rear	Hinten
+arka	rear	hinten
+Arka görünüm	Rear view	Rückansicht
+Arka görünüm yok (§2: arka görünüm şeridi). "Görünümler" ile yeniden üretin.	No rear view (§2: rear view strip). Regenerate with "Views".	Keine Rückansicht (§2: Rückansichtsstreifen). Mit „Ansichten" neu erzeugen.
+Arka planda sürsün	Continue in background	Im Hintergrund weiterlaufen
+Aşağı taşı	Move down	Nach unten
+Bağlantı	Connection	Anschluss
+Bağlantı {k}: adı yazılmadı.	Connection {k}: name missing.	Anschluss {k}: Name fehlt.
+Bağlantı {k}: detay metni (ölçü, tip, konum) yok.	Connection {k}: no detail text (size, type, position).	Anschluss {k}: kein Detailtext (Größe, Typ, Lage).
+Bağlantı {k}: konum makine kutusunun dışında görünüyor.	Connection {k}: position appears to be outside the machine envelope.	Anschluss {k}: Lage scheint außerhalb der Maschinenkontur zu liegen.
+Bağlantı {k}: konumu henüz yerleştirilmedi (görünümleri üretin ya da görünüme tıklayarak yerleştirin).	Connection {k}: not placed yet (generate the views or place it by clicking on a view).	Anschluss {k}: noch nicht platziert (Ansichten erzeugen oder durch Klick in die Ansicht platzieren).
+Bağlantı detayları	Connection details	Anschlussdetails
+Bağlantı hatası (sunucu kapalı olabilir)	Connection error (the server may be closed)	Verbindungsfehler (Server ist eventuell beendet)
+Bağlantı noktaları	Connection points	Anschlusspunkte
+Bağlantı noktası yok (E, P, W, D, X).	No connection points (E, P, W, D, X).	Keine Anschlusspunkte (E, P, W, D, X).
+Bağlantı noktasını sil	Delete connection point	Anschlusspunkt löschen
+Bağlantı yeniden kuruldu.	Connection restored.	Verbindung wiederhergestellt.
+Bağlantılar ön yüzdeyse: sol uçtan X ordinatları zeminin altında verilir (örn. E, W, P, D1).	If the connections are on the front: X ordinates from the left end are given below the floor line (e.g. E, W, P, D1).	Wenn die Anschlüsse vorne liegen: X-Ordinaten vom linken Ende unter der Bodenlinie (z. B. E, W, P, D1).
+Basınç	Pressure	Druck
+Basınçlı hava	Compressed air	Druckluft
+Başlangıç	Start	Anfang
+Başlangıç verisi	Starting data	Ausgangsdaten
+başlık	title	Titel
+Başlık	Title	Titel
+Başlıyor…	Starting…	Startet…
+Belge	Document	Dokument
+Belge dili	Document language	Dokumentsprache
+Belgede {n}. bölüm	Section {n} in the document	Abschnitt {n} im Dokument
+Belgede görünmüyor (içerik boş)	Not shown in the document (empty)	Nicht im Dokument (leer)
+Belgede yer almaz; görünümler ve ölçüler buradan gelir	Not part of the document; views and dimensions come from here	Nicht im Dokument; Ansichten und Maße stammen von hier
+Belgede: kapak ve her sayfanın anteti	In the document: cover and the header of every page	Im Dokument: Deckblatt und Kopfzeile jeder Seite
+Benzer bir makine için seçilen projenin metinleri ve tabloları kopyalanır; bağlantı noktaları yeni makinenin ölçüsüne oranlanır. O proje değişmez.	For a similar machine, the texts and tables of the selected project are copied; connection points are scaled to the new machine. That project is not changed.	Für eine ähnliche Maschine werden Texte und Tabellen des gewählten Projekts kopiert; Anschlusspunkte werden auf die neue Maschine skaliert. Das Projekt bleibt unverändert.
+Besleme gerilimi	Supply voltage	Versorgungsspannung
+Besleme gerilimi yazılmadı.	Supply voltage not entered.	Versorgungsspannung fehlt.
+Besleme kablosu	Supply cable	Zuleitung
+Besleme kablosu bölümü yok. Her paftada bulunur: tek hat şeması, kablo kesiti (IEC 60445 renkleri), uzunluğa göre kesit / ΔU tablosu, müşteri tesisatında zorunlu olanlar.	No supply cable section. Every layout has one: single-line diagram, cable cross-section (IEC 60445 colours), cross-section / ΔU table by length, mandatory items on the customer's installation.	Kein Abschnitt Zuleitung. Jeder Plan enthält ihn: Einliniendiagramm, Leitungsquerschnitt (Farben nach IEC 60445), Querschnitt-/ΔU-Tabelle nach Länge, kundenseitige Pflichtpunkte.
+Besleme kablosu ve koruma	Supply cable and protection	Zuleitung und Absicherung
+Besleme kablosu ve koruma bölümü yok (her paftada bulunmalı).	No supply cable and protection section (required in every layout).	Abschnitt Zuleitung und Absicherung fehlt (in jedem Plan erforderlich).
+Bilgi	Information	Hinweis
+Bilinmeyen alan türü: {k}	Unknown field type: {k}	Unbekannter Feldtyp: {k}
+Bitiş	End	Ende
+boş	empty	leer
+Boş bırakılan satırlar paftada görünmez.	Rows left empty are not shown in the layout.	Leere Zeilen erscheinen nicht im Plan.
+Boşsa "Arka görünüm (servis tarafı)".	If empty: "Rear view (service side)".	Wenn leer: „Rückansicht (Serviceseite)".
+Boşsa "OPERATÖR / YÜKLEME TARAFI" yazılır (konveyörlü makinede yükleme uçtadır).	If empty, "OPERATOR / LOADING SIDE" is written (on conveyor machines loading is at the end).	Wenn leer, steht „BEDIENER- / BELADESEITE" (bei Förderbandmaschinen erfolgt das Beladen am Ende).
+Boy L	Length L	Länge L
+Bölge etiketleri	Zone labels	Bereichsbeschriftungen
+Bölüm başlığı	Section title	Abschnittstitel
+Bölümler	Sections	Abschnitte
+Bu bölüm belgede yok (boş)	This section is not in the document (empty)	Dieser Abschnitt fehlt im Dokument (leer)
+Bu kapağı kullan	Use this cover	Dieses Deckblatt verwenden
+Bu projede arka görünüm yok. "Görünümler" ile yeniden üretince arka görünüm de çıkar (STEP yeniden okunmaz).	This project has no rear view. Regenerating with "Views" adds it (the STEP file is not read again).	Dieses Projekt hat keine Rückansicht. Neu erzeugen mit „Ansichten" ergänzt sie (die STEP-Datei wird nicht neu gelesen).
+cos φ	cos φ	cos φ
+Çalışma sıcaklığı	Operating temperature	Betriebstemperatur
+Çalışma sıcaklığı yazılmadı.	Operating temperature not entered.	Betriebstemperatur fehlt.
+Çalıştır	Run	Ausführen
+Çoğalt	Duplicate	Duplizieren
+Damar sayısı	Number of cores	Aderzahl
+Damar yapısı	Core arrangement	Aderaufbau
+değer	value	Wert
+Değer	Value	Wert
+Değer tablosu	Value table	Wertetabelle
+Değeri boş satır paftada görünmez.	A row without a value is not shown in the layout.	Zeilen ohne Wert erscheinen nicht im Plan.
+Değiştir	Change	Ändern
+detay	detail	Detail
+Detay (ölçü, tip, konum)	Detail (size, type, position)	Detail (Größe, Typ, Lage)
+Detay kartı	Detail card	Detailkarte
+Detay kartı {n}: başlık yok.	Detail card {n}: no title.	Detailkarte {n}: kein Titel.
+Detay kartı {n}: değer tablosu boş.	Detail card {n}: value table is empty.	Detailkarte {n}: Wertetabelle ist leer.
+Detay kartı {n}: yakın görünüm seçilmedi ya da üretilmedi.	Detail card {n}: close-up view not selected or not generated.	Detailkarte {n}: Detailansicht nicht gewählt oder nicht erzeugt.
+Detay kartları	Detail cards	Detailkarten
+Diğer	Other	Sonstiges
+Dikey	Vertical	Vertikal
+Dikey (v)	Vertical (v)	Vertikal (v)
+Dikey: a → b arası z (zeminden yükseklik), c = x konumu. Yatay: a → b arası x, c = z konumu.	Vertical: z from a → b (height above floor), c = x position. Horizontal: x from a → b, c = z position.	Vertikal: z von a → b (Höhe über Boden), c = x-Lage. Horizontal: x von a → b, c = z-Lage.
+Dillere ayır	Split into languages	In Sprachen aufteilen
+Diller	Languages	Sprachen
+Dosya adı (HTML / PDF)	File name (HTML / PDF)	Dateiname (HTML / PDF)
+Dosya adı boş; model adından türetilir.	File name is empty; it is derived from the model name.	Dateiname leer; er wird aus dem Modellnamen abgeleitet.
+Dosyalar	Files	Dateien
+Düzenle	Edit	Bearbeiten
+E · P · W · D · X · B konumları	E · P · W · D · X · B positions	Lage von E · P · W · D · X · B
+E elektrik · P hava · W su · D (D1…Dn) tahliye · X egzoz · B fan / ısıtıcı · S1/S2 yağ ayırıcı	E electrical · P air · W water · D (D1…Dn) drain · X exhaust · B fan / heater · S1/S2 oil separator	E Elektro · P Luft · W Wasser · D (D1…Dn) Ablauf · X Abluft · B Gebläse / Heizung · S1/S2 Ölabscheider
+Egzoz	Exhaust	Abluft
+Egzoz var ama kanal ölçüsü yazılmadı.	There is an exhaust but no duct size.	Abluft vorhanden, aber keine Kanalgröße angegeben.
+Ek ölçüler	Additional dimensions	Zusätzliche Maße
+Ek ölçüler (kotlar)	Additional dimensions (heights)	Zusätzliche Maße (Höhen)
+Ekle	Add	Hinzufügen
+Ekran koordinatı: arka görünümde x = −X. Dikey ölçüler bağlantı yükseklik kotları içindir.	Screen coordinate: x = −X in the rear view. Vertical dimensions are for connection heights.	Bildschirmkoordinate: in der Rückansicht x = −X. Vertikale Maße für Anschlusshöhen.
+Eksenler	Axes	Achsen
+Eksik yok	No issues	Keine Mängel
+Eksik yok. Teslim öncesi kontrol listesi tamam.	No issues. The pre-delivery checklist is complete.	Keine Mängel. Die Prüfliste vor Auslieferung ist vollständig.
+Eksikler	Issues	Mängel
+Eksikler var	There are issues	Es gibt Mängel
+Eksikler…	Issues…	Mängel…
+Eksikleri göster	Show issues	Mängel anzeigen
+Elektrik	Electrical	Elektro
+Elektrik bağlantısı	Electrical connection	Elektrischer Anschluss
+Elektrik notları	Electrical notes	Elektrohinweise
+En az bir bölüm seçin.	Select at least one section.	Mindestens einen Abschnitt wählen.
+En az bir dil seçin.	Select at least one language.	Mindestens eine Sprache wählen.
+EN metinde ondalık ayırıcı virgül (EN'de nokta): {w}	Decimal comma in EN text (EN uses a point): {w}	Dezimalkomma im EN-Text (EN verwendet Punkt): {w}
+En W	Width W	Breite W
+etiket	label	Beschriftung
+Etiketler	Labels	Beschriftungen
+Etiketler ve ek ölçüler	Labels and additional dimensions	Beschriftungen und zusätzliche Maße
+Faz sırası	Phase sequence	Drehfeld
+Geometri	Geometry	Geometrie
+Geri al (Ctrl+Z)	Undo (Ctrl+Z)	Rückgängig (Strg+Z)
+Görünüm (hepsi / on, yan, arka)	View (hepsi / on, yan, arka)	Ansicht (hepsi / on, yan, arka)
+Görünüm üzerindeki açıklamalar	Callouts on the view	Beschriftungen in der Ansicht
+Görünüm yok	No views	Keine Ansichten
+Görünümde yerleştir	Place on view	In Ansicht platzieren
+Görünüme tıklayarak yerleştir	Place by clicking on a view	Durch Klick in die Ansicht platzieren
+Görünümler	Views	Ansichten
+Görünümler (üst, ön, arka, yan, izometrik) ve makine ölçüleri STEP'ten üretilir. Kapak ve metinleri şimdiden doldurabilirsiniz.	The views (top, front, rear, side, isometric) and machine dimensions are generated from the STEP file. You can already fill in the cover and the texts.	Ansichten (oben, vorne, hinten, Seite, Isometrie) und Maschinenmaße werden aus der STEP-Datei erzeugt. Deckblatt und Texte können Sie schon ausfüllen.
+Görünümler üretildi.	Views generated.	Ansichten erzeugt.
+Görünümler üretiliyor	Generating views	Ansichten werden erzeugt
+Görünümler üretilmedi	Views not generated	Ansichten nicht erzeugt
+Görünümler üretilmedi; pafta önizlemesi ve teslim paftası için gerekli.	Views not generated; they are needed for the preview and the delivery layout.	Ansichten nicht erzeugt; sie werden für Vorschau und Lieferplan benötigt.
+Görünümleri üret	Generate views	Ansichten erzeugen
+Gözden geçirin	Review	Prüfen
+Güç, şalter, besleme, koruma	Power, main switch, supply, protection	Leistung, Hauptschalter, Versorgung, Absicherung
+güncel	up to date	aktuell
+güncel değil	out of date	nicht aktuell
+güncelleme	updated	geändert
+Harfi değiştir	Rename letter	Kennbuchstaben ändern
+Hava	Air	Luft
+Hava · su · egzoz · tahliye	Air · water · exhaust · drain	Luft · Wasser · Abluft · Ablauf
+Hava bağlantısı	Air connection	Luftanschluss
+Hava bağlantısı var ama hava basıncı yazılmadı.	There is an air connection but no air pressure.	Luftanschluss vorhanden, aber kein Luftdruck angegeben.
+Hava bağlantısının ölçüsü / yeri yazılmadı.	Size / position of the air connection not entered.	Größe / Lage des Luftanschlusses fehlt.
+Hava hazırlık	Air preparation	Luftaufbereitung
+Hazırlayan	Prepared by	Erstellt von
+Henüz bağlantı noktası yok. "+ Nokta" ile ekleyin.	No connection points yet. Add one with "+ Point".	Noch keine Anschlusspunkte. Mit „+ Punkt" hinzufügen.
+Henüz proje yok. "+ Yeni Proje" ile kapak bilgilerini girerek başlayın.	No projects yet. Start with "+ New Project" by entering the cover details.	Noch keine Projekte. Mit „+ Neues Projekt" und den Deckblattangaben beginnen.
+Her bağlantı türü için bir kart: yakın görünüm + açıklamalar + değer tablosu (bağlantı ölçüsü, konum, basınç, müşterinin bağlantı şekli).	One card per connection type: close-up view + callouts + value table (connection size, position, pressure, how the customer connects).	Eine Karte je Anschlussart: Detailansicht + Beschriftungen + Wertetabelle (Anschlussgröße, Lage, Druck, kundenseitiger Anschluss).
+Hesap gerilimi (V)	Calculation voltage (V)	Berechnungsspannung (V)
+Hesap gerilimi (V) yok; 400 V ile hesaplanır.	No calculation voltage (V); 400 V is used.	Keine Berechnungsspannung (V); es wird mit 400 V gerechnet.
+Hesaplanan nominal akım	Calculated rated current	Berechneter Nennstrom
+Hizalama	Alignment	Ausrichtung
+HTML yazılır, TR / EN / DE PDF headless tarayıcıyla basılıp gömülür (yaklaşık yarım dakika).	The HTML is written and the TR / EN / DE PDF is printed with a headless browser and embedded (about half a minute).	Das HTML wird geschrieben, das TR/EN/DE-PDF mit einem Headless-Browser gedruckt und eingebettet (etwa eine halbe Minute).
+İmalat resmi (PDF)	Manufacturing drawing (PDF)	Fertigungszeichnung (PDF)
+İmalat resmi ekle	Add manufacturing drawing	Fertigungszeichnung hinzufügen
+İnç ölçüsü "G" önekiyle yazılmış (1 1/2", 1/2" biçiminde yazılır): {w}	Inch size written with a "G" prefix (write as 1 1/2", 1/2"): {w}	Zollmaß mit „G"-Präfix (Schreibweise 1 1/2", 1/2"): {w}
+İptal	Cancel	Abbrechen
+isteğe bağlı	optional	optional
+İşaret	Marker	Markierung
+İşaret (örn. D1–D4)	Marker (e.g. D1–D4)	Markierung (z. B. D1–D4)
+İşaret harfi	Marker letter	Kennbuchstabe
+İşlem hata verdi; günlüğe bakın.	The job failed; see the log.	Der Vorgang ist fehlgeschlagen; siehe Protokoll.
+İşlem hatası – günlüğe bakın	Job error – see the log	Fehler – siehe Protokoll
+İşlem sürüyor…	Job running…	Vorgang läuft…
+İşlem tamamlandı	Job finished	Vorgang abgeschlossen
+izometrik	isometric	Isometrie
+Kablo	Cable	Kabel
+Kablo bölümü şablondan eklendi; kesiti sigortaya göre kontrol edin.	Cable section added from the template; check the cross-section against the breaker.	Kabelabschnitt aus der Vorlage hinzugefügt; Querschnitt anhand der Sicherung prüfen.
+Kablo bölümünü ekle (şablondan)	Add cable section (from template)	Kabelabschnitt hinzufügen (aus Vorlage)
+Kablo girişi	Cable entry	Kabeleinführung
+Kablo girişinin yeri yazılmadı.	Cable entry position not entered.	Lage der Kabeleinführung fehlt.
+Kablo kesiti (mm²) girilmedi.	Cable cross-section (mm²) not entered.	Leitungsquerschnitt (mm²) fehlt.
+Kablo tanımı	Cable description	Kabelbeschreibung
+Kablo tanımı (damar renkleri) boş.	Cable description (core colours) is empty.	Kabelbeschreibung (Aderfarben) ist leer.
+Kablo tipi	Cable type	Leitungstyp
+Kablo uzunlukları (5 / 10 / 15 / 20 m) yok.	No cable lengths (5 / 10 / 15 / 20 m).	Keine Kabellängen (5 / 10 / 15 / 20 m).
+Kaçak akım (mA)	Residual current (mA)	Fehlerstrom (mA)
+Kaçak akım koruması	Residual-current protection	Fehlerstromschutz
+Kapak	Cover	Deckblatt
+kapak + {n} sayfa	cover + {n} pages	Deckblatt + {n} Seiten
+Kapak bilgileri ve kapak tasarımı	Cover details and cover design	Deckblattangaben und -design
+Kapak bilgilerini girin. Proje projects/ klasöründe açılır; STEP seçerseniz görünümler hemen üretilir.	Enter the cover details. The project is created in the projects/ folder; if you select a STEP file, the views are generated right away.	Deckblattangaben eingeben. Das Projekt wird im Ordner projects/ angelegt; bei Auswahl einer STEP-Datei werden die Ansichten sofort erzeugt.
+Kapak stüdyosunu aç	Open cover studio	Deckblatt-Studio öffnen
+kapak tasarımı	cover design	Deckblattdesign
+Kapak ve antet	Cover and header	Deckblatt und Kopfzeile
+Kapak: {f} boş.	Cover: {f} is empty.	Deckblatt: {f} ist leer.
+Kapak: Tip (makine tam adı) boş.	Cover: Type (full machine name) is empty.	Deckblatt: Typ (vollständiger Maschinenname) ist leer.
+Kapakta ve antette Kontrol / Onay imza alanları boş.	The Checked / Approved signature fields on the cover and header are empty.	Die Unterschriftsfelder Geprüft / Freigabe auf Deckblatt und Kopfzeile sind leer.
+Kapat	Close	Schließen
+Kapat (Esc)	Close (Esc)	Schließen (Esc)
+Kaydedildi · {t}	Saved · {t}	Gespeichert · {t}
+Kaydedildi: {p}	Saved: {p}	Gespeichert: {p}
+Kaydedildi.	Saved.	Gespeichert.
+Kaydedilemedi: {e} (yeniden denenecek)	Could not save: {e} (will retry)	Speichern fehlgeschlagen: {e} (neuer Versuch folgt)
+Kaydediliyor…	Saving…	Wird gespeichert…
+Kaydedilmemiş değişiklik	Unsaved changes	Ungespeicherte Änderungen
+Kaydet	Save	Speichern
+Kaydet (Ctrl+S) – değişiklikler zaten otomatik kaydedilir	Save (Ctrl+S) – changes are saved automatically anyway	Speichern (Strg+S) – Änderungen werden ohnehin automatisch gespeichert
+Kayıtlı – değişiklik yok.	Saved – no changes.	Gespeichert – keine Änderungen.
+Kaynak model (STEP)	Source model (STEP)	Quellmodell (STEP)
+Kesit (mm²)	Cross-section (mm²)	Querschnitt (mm²)
+Kırmızı Bant	Red Band	Rotes Band
+Klasör	Folder	Ordner
+Klasörü aç	Open folder	Ordner öffnen
+Kontrol	Checked	Geprüft
+Kontrol sistemi	Control system	Steuerung
+Konum	Position	Lage
+Konum makine kutusuna göre oran olarak duruyor ({r}); görünümler üretilince yerleşir ya da görünüme tıklayarak yerleştirin.	The position is stored as a ratio of the machine envelope ({r}); it is placed when the views are generated, or place it by clicking on a view.	Die Lage ist als Verhältnis zur Maschinenkontur gespeichert ({r}); sie wird beim Erzeugen der Ansichten gesetzt, oder per Klick in die Ansicht platzieren.
+Kopyası: {p}	Copy of: {p}	Kopie von: {p}
+Koruma / sürücü	Protection / drive	Schutz / Antrieb
+Köşe Blok	Corner Block	Eckblock
+Köşede renkli blok, ortada büyük başlık	Coloured block in the corner, large title in the middle	Farbiger Block in der Ecke, großer Titel in der Mitte
+Kumanda gerilimi	Control voltage	Steuerspannung
+Kutu ölçüleri ve referans köşe görünümler üretilirken STEP'ten gelir. Ana ölçüler ÇNK imalat resmindekinden farklıysa buradan düzeltin; değerler tam mm yazılır.	The envelope dimensions and reference corner come from the STEP file when the views are generated. If the main dimensions differ from the ÇNK manufacturing drawing, correct them here; values are whole mm.	Konturmaße und Bezugsecke kommen beim Erzeugen der Ansichten aus der STEP-Datei. Weichen die Hauptmaße von der ÇNK-Fertigungszeichnung ab, hier korrigieren; Werte in ganzen mm.
+Küçük parça eleme (mm)	Small part filter (mm)	Kleinteilfilter (mm)
+kW	kW	kW
+L × W × H, ağırlık, kotlar	L × W × H, weight, heights	L × B × H, Gewicht, Höhen
+Layout Çizim Motoru	Layout Drawing Engine	Layout-Zeichenprogramm
+listede yok	not in list	nicht in der Liste
+Madde	Item	Punkt
+Makine kutusu (görünüm koordinatları, mm)	Machine envelope (view coordinates, mm)	Maschinenkontur (Ansichtskoordinaten, mm)
+Makine kutusu ölçüleri (L × W × H) eksik.	Machine envelope dimensions (L × W × H) missing.	Maschinenmaße (L × B × H) fehlen.
+Makine kutusu ölçüleri yok; konumlar görünümler üretildikten sonra doğrulanabilir.	No machine envelope dimensions; positions can be verified after the views are generated.	Keine Maschinenmaße; Lagen lassen sich nach dem Erzeugen der Ansichten prüfen.
+Makine kutusunu ve oranlı noktaları STEP'ten doldur	Fill the machine envelope and ratio-based points from the STEP file	Maschinenkontur und verhältnisbasierte Punkte aus der STEP-Datei füllen
+Marka	Brand	Marke
+Metinde çalışma dosyası adı geçiyor (proje adı kullanılır): {w}	A working file name appears in the text (use the project name): {w}	Im Text steht ein Arbeitsdateiname (Projektname verwenden): {w}
+Model	Model	Modell
+Model (STEP)	Model (STEP)	Modell (STEP)
+Model ve görünümler	Model and views	Modell und Ansichten
+müşteri	customer	Kunde
+Müşteri	Customer	Kunde
+Müşteri tahliye hattı	Customer drain line	Kundenseitige Ablaufleitung
+Müşteri tarafı koruma	Customer-side protection	Kundenseitige Absicherung
+Müşteri tesisatında zorunlu olanlar	Mandatory on the customer's installation	Kundenseitig zwingend erforderlich
+Müşteri tesisatında zorunlu olanlar listesi boş.	The list of items mandatory on the customer's installation is empty.	Die Liste der kundenseitigen Pflichtpunkte ist leer.
+Nokta yerleştirme	Place points	Punkte platzieren
+Nokta yerleştirmek için önce görünümleri üretin.	Generate the views first to place points.	Zum Platzieren von Punkten zuerst die Ansichten erzeugen.
+Nokta:	Point:	Punkt:
+Nominal akım	Rated current	Nennstrom
+Not	Note	Hinweis
+Notlar	Notes	Hinweise
+Notlar boş (ölçü notu, servis alanı + terazileme, bağlantıların yeri).	Notes are empty (dimension note, service area + levelling, location of connections).	Hinweise sind leer (Maßhinweis, Servicebereich + Ausrichten, Lage der Anschlüsse).
+Oluştur	Create	Anlegen
+Onay	Approved	Freigabe
+Operatör tarafı	Operator side	Bedienerseite
+Operatör tarafı, kotlar	Operator side, heights	Bedienerseite, Höhen
+Ortalı	Centred	Zentriert
+Otomatik su dolumu	Automatic water filling	Automatische Wasserbefüllung
+Ölçü tablosu satırları	Dimension table rows	Zeilen der Maßtabelle
+Ölçü tablosunda boş ağırlık satırı yok.	The dimension table has no empty-weight row.	Die Maßtabelle hat keine Zeile Leergewicht.
+Ölçü, servis alanı, terazileme	Dimensions, service area, levelling	Maße, Servicebereich, Ausrichten
+Ölçüler	Dimensions	Abmessungen
+Ölçüler: "{n}" değeri boş (paftada görünmez).	Dimensions: "{n}" has no value (not shown in the layout).	Abmessungen: „{n}" ohne Wert (erscheint nicht im Plan).
+Ölçüler: "{n}" içinde doldurulmamış yer tutucu var.	Dimensions: "{n}" contains an unfilled placeholder.	Abmessungen: „{n}" enthält einen nicht gefüllten Platzhalter.
+ön	front	vorne
+Ön	Front	Vorne
+Ön görünüm	Front view	Vorderansicht
+Ön görünüm (operatör tarafı)	Front view (operator side)	Vorderansicht (Bedienerseite)
+Ön taraf yazısı	Front side text	Text Vorderseite
+Önce STEP dosyası yükleyin.	Upload a STEP file first.	Zuerst eine STEP-Datei hochladen.
+Önizleme güncelleniyor…	Updating preview…	Vorschau wird aktualisiert…
+Önizleme henüz hazır değil; birkaç saniye sonra tekrar deneyin.	The preview is not ready yet; try again in a few seconds.	Die Vorschau ist noch nicht bereit; in einigen Sekunden erneut versuchen.
+Önizleme için görünümler gerekli	Views are needed for the preview	Für die Vorschau werden Ansichten benötigt
+Önizleme üretilemedi: {e}	Preview could not be generated: {e}	Vorschau konnte nicht erzeugt werden: {e}
+Önizlemeyi yenile	Refresh preview	Vorschau aktualisieren
+Özdirenç (Ω·mm²/m, 70 °C Cu)	Resistivity (Ω·mm²/m, 70 °C Cu)	Spez. Widerstand (Ω·mm²/m, 70 °C Cu)
+Pafta	Layout	Plan
+Pafta (HTML)	Layout (HTML)	Plan (HTML)
+Pafta güncel	Layout up to date	Plan aktuell
+Pafta güncel değil	Layout out of date	Plan nicht aktuell
+Pafta henüz üretilmedi. Şimdi üretilsin mi? (Gömülü PDF ile birlikte yaklaşık yarım dakika.)	The layout has not been built yet. Build it now? (About half a minute including the embedded PDF.)	Der Plan wurde noch nicht erzeugt. Jetzt erzeugen? (Mit eingebettetem PDF etwa eine halbe Minute.)
+Pafta için önce görünümleri üretin.	Generate the views first to build the layout.	Für den Plan zuerst die Ansichten erzeugen.
+Pafta Üret	Build Layout	Plan erzeugen
+Pafta üretildi: {n}	Layout built: {n}	Plan erzeugt: {n}
+Pafta yok	No layout	Kein Plan
+Paftayı Aç	Open Layout	Plan öffnen
+PDF (imalat resmi ve çıktılar)	PDF (manufacturing drawing and outputs)	PDF (Fertigungszeichnung und Ausgaben)
+PDF gömülü	PDF embedded	PDF eingebettet
+PDF hazırlanıyor…	Preparing PDF…	PDF wird erstellt…
+PDF için önce görünümleri üretin.	Generate the views first to create a PDF.	Für das PDF zuerst die Ansichten erzeugen.
+PDF İndir	Download PDF	PDF herunterladen
+PDF üretilemedi: {e}. "Tarayıcıda yazdır" ile alabilirsiniz.	The PDF could not be created: {e}. You can use "Print in browser".	PDF konnte nicht erstellt werden: {e}. Sie können „Im Browser drucken" verwenden.
+Pnömatik tüketiciler	Pneumatic consumers	Pneumatische Verbraucher
+Pnömatik ve diğer bağlantılar	Pneumatics and other connections	Pneumatik und weitere Anschlüsse
+Program dili	Program language	Programmsprache
+Proje	Project	Projekt
+Proje açılamadı: {e}	Project could not be opened: {e}	Projekt konnte nicht geöffnet werden: {e}
+Proje adı (belge başlığı)	Project name (document title)	Projektname (Dokumenttitel)
+Proje No	Project No	Projekt-Nr.
+Proje no (seri no)	Project no. (serial no.)	Projekt-Nr. (Serien-Nr.)
+Proje no, müşteri, imzalar, revizyonlar	Project no., customer, signatures, revisions	Projekt-Nr., Kunde, Unterschriften, Revisionen
+Proje oluşturuluyor…	Creating project…	Projekt wird angelegt…
+Projeler	Projects	Projekte
+Projeler okunamadı: {e}. Uygulamayı masaüstündeki "Layout Çizim Motoru" simgesiyle ya da Layout.html ile başlatın.	Projects could not be read: {e}. Start the program with the "Layout Çizim Motoru" desktop icon or with Layout.html.	Projekte konnten nicht gelesen werden: {e}. Programm über das Desktop-Symbol „Layout Çizim Motoru" oder über Layout.html starten.
+Projelere dön	Back to projects	Zurück zu den Projekten
+Projeyi Kaydet	Save Project	Projekt speichern
+Ref	Ref	Ref
+Referans köşe (sol-ön-alt) x, y, z	Reference corner (left-front-bottom) x, y, z	Bezugsecke (links-vorne-unten) x, y, z
+Rev.	Rev.	Rev.
+Revizyon	Revision	Revision
+Revizyon geçmişi	Revision history	Revisionsverlauf
+Revizyon harfle yazılır (ilk yayın A).	Revisions are letters (first issue A).	Revisionen werden mit Buchstaben angegeben (Erstausgabe A).
+Revizyonlar	Revisions	Revisionen
+Röle tipi (A / AC / B)	Relay type (A / AC / B)	Relaistyp (A / AC / B)
+Sağ	Right	Rechts
+Sağa dayalı	Right-aligned	Rechtsbündig
+Sağdan bakış, izometrik	View from the right, isometric	Ansicht von rechts, Isometrie
+satır	row	Zeile
+Satır {n}	Row {n}	Zeile {n}
+Seçilen dil ve bölümlerle PDF çıktısı	PDF output with the selected languages and sections	PDF-Ausgabe mit den gewählten Sprachen und Abschnitten
+Seri no, müşteri veya model ara…	Search serial no., customer or model…	Serien-Nr., Kunde oder Modell suchen…
+Servis alanı (mm)	Service area (mm)	Servicebereich (mm)
+Servis alanı {s}: {v} mm (standart 1000 mm).	Service area {s}: {v} mm (standard 1000 mm).	Servicebereich {s}: {v} mm (Standard 1000 mm).
+Servis alanı, etiketler, ek ölçüler	Service area, labels, additional dimensions	Servicebereich, Beschriftungen, zusätzliche Maße
+Servis tarafı, ordinatlar	Service side, ordinates	Serviceseite, Ordinaten
+Sıra: kapak, antetli sayfalar. Birden çok dil seçilirse her dil kapağıyla birlikte TR, EN, DE sırasıyla tek dosyada birleşir.	Order: cover, pages with header. If several languages are selected, each language with its cover is combined into one file in the order TR, EN, DE.	Reihenfolge: Deckblatt, Seiten mit Kopfzeile. Bei mehreren Sprachen wird jede mit ihrem Deckblatt in der Reihenfolge TR, EN, DE zu einer Datei zusammengefasst.
+Sil	Delete	Löschen
+Sol	Left	Links
+Sol uçtan X ordinatları (arka görünümde sol uç resmin sağındadır).	X ordinates from the left end (in the rear view the left end is on the right of the image).	X-Ordinaten vom linken Ende (in der Rückansicht liegt das linke Ende rechts im Bild).
+Sola dayalı	Left-aligned	Linksbündig
+Solda dikey bant, sağda bilgi listesi	Vertical band on the left, information list on the right	Senkrechtes Band links, Angabenliste rechts
+Soldan bölüm seçip sağdan düzenleyin; değişiklikler otomatik kaydedilir.	Pick a section on the left and edit it on the right; changes are saved automatically.	Links einen Abschnitt wählen und rechts bearbeiten; Änderungen werden automatisch gespeichert.
+SolidWorks dışa aktarımlarında yukarı eksen genelde +Y'dir. Operatör tarafı, yükleme kapağının baktığı eksendir; yanlışsa projede "Görünümler" ile düzeltilir.	In SolidWorks exports the up axis is usually +Y. The operator side is the axis the loading door faces; if it is wrong, fix it in the project with "Views".	In SolidWorks-Exporten ist die Hochachse meist +Y. Die Bedienerseite ist die Achse, in die die Beladetür zeigt; falls falsch, im Projekt mit „Ansichten" korrigieren.
+Son dört revizyon her sayfada başlık bloğunun üstündeki tabloda görünür. İlk yayın Rev A; her içerik değişikliğinde bir harf artar.	The last four revisions appear in the table above the title block on every page. First issue Rev A; each content change increases the letter by one.	Die letzten vier Revisionen erscheinen auf jeder Seite in der Tabelle über dem Schriftfeld. Erstausgabe Rev A; jede inhaltliche Änderung erhöht den Buchstaben um eins.
+Soru işareti var (paftada soru bulunmaz): {w}	Contains a question mark (the layout must not contain questions): {w}	Enthält ein Fragezeichen (der Plan darf keine Fragen enthalten): {w}
+Standart kurulum notunu ekle	Add standard installation note	Standard-Aufstellhinweis hinzufügen
+Standart metinlerdeki {A} (ana şalter), {kesit} (kablo kesiti) ve {V} (gerilim) paftada değerleriyle yazılır.	{A} (main switch), {kesit} (cable cross-section) and {V} (voltage) in the standard texts are replaced by their values in the layout.	{A} (Hauptschalter), {kesit} (Leitungsquerschnitt) und {V} (Spannung) in den Standardtexten werden im Plan durch ihre Werte ersetzt.
+Standart notlar zaten var.	The standard notes already exist.	Die Standardhinweise sind bereits vorhanden.
+STEP ayarları (eksenler, eleme)	STEP settings (axes, filter)	STEP-Einstellungen (Achsen, Filter)
+STEP dosyası	STEP file	STEP-Datei
+STEP dosyası yok	No STEP file	Keine STEP-Datei
+STEP dosyası yok. Dosyalar sekmesinden ya da "Model ve görünümler" bölümünden yükleyin.	No STEP file. Upload it from the Files tab or the "Model and views" section.	Keine STEP-Datei. Über den Reiter Dateien oder den Abschnitt „Modell und Ansichten" hochladen.
+STEP okuma → üçgenleme → VTK görünümler → geometri → önizleme. Büyük dosyada birkaç dakika sürer; pencereyi kapatabilirsiniz, iş sürer.	STEP reading → meshing → VTK views → geometry → preview. Large files take a few minutes; you can close this window, the job continues.	STEP lesen → Vernetzen → VTK-Ansichten → Geometrie → Vorschau. Große Dateien dauern einige Minuten; Sie können das Fenster schließen, der Vorgang läuft weiter.
+STEP yok	No STEP	Keine STEP
+STEP yükle	Upload STEP	STEP hochladen
+STEP yüklendi. Görünümleri üretin.	STEP uploaded. Generate the views.	STEP hochgeladen. Ansichten erzeugen.
+STEP yükleniyor	Uploading STEP	STEP wird hochgeladen
+STEP yükleniyor… %{p} ({s})	Uploading STEP… {p} % ({s})	STEP wird hochgeladen… {p} % ({s})
+STEP, eksenler, makine kutusu	STEP, axes, machine envelope	STEP, Achsen, Maschinenkontur
+STEP'i yeniden oku (dosya değiştiyse; büyük dosyada birkaç dakika)	Read the STEP again (if the file changed; a few minutes for large files)	STEP neu lesen (falls die Datei geändert wurde; bei großen Dateien einige Minuten)
+STEP'ten görünümleri yeniden üret (eksen seçimi)	Regenerate the views from STEP (axis selection)	Ansichten aus STEP neu erzeugen (Achsauswahl)
+STEP değiştir	Replace STEP	STEP ersetzen
+sn	s	s
+Su	Water	Wasser
+Su · egzoz · tahliye	Water · exhaust · drain	Wasser · Abluft · Ablauf
+Su basıncı	Water pressure	Wasserdruck
+Su basıncı yazılmadı.	Water pressure not entered.	Wasserdruck fehlt.
+Su girişi	Water inlet	Wasserzulauf
+Su girişi var ama ölçüsü / yeri yazılmadı.	There is a water inlet but no size / position.	Wasserzulauf vorhanden, aber Größe / Lage fehlt.
+Şablon	Template	Vorlage
+Şablon – yeni projelerin başlangıç değerleri	Template – starting values for new projects	Vorlage – Startwerte für neue Projekte
+Şablon (varsayılan değerler)	Template (default values)	Vorlage (Standardwerte)
+Şablon kaydedildi.	Template saved.	Vorlage gespeichert.
+Şablonun dosyası yok.	The template has no files.	Die Vorlage hat keine Dateien.
+Şema sayfası	Diagram page	Schaltplanseite
+Şemadaki kablo girişi yazısı	Cable entry text in the diagram	Text Kabeleinführung im Schema
+Tablolar	Tables	Tabellen
+Tablonun ilk satırı (otomatik)	First table row (automatic)	Erste Tabellenzeile (automatisch)
+Tahliye	Drain	Ablauf
+Tahliye var ama ölçüsü / yeri yazılmadı.	There is a drain but no size / position.	Ablauf vorhanden, aber Größe / Lage fehlt.
+Tamam	OK	OK
+Tarayıcıda yazdır	Print in browser	Im Browser drucken
+Tarih	Date	Datum
+Tarih gg.aa.yyyy biçiminde yazılmalı.	The date must be written as dd.mm.yyyy.	Das Datum muss als TT.MM.JJJJ geschrieben werden.
+Tek hat şeması, kesit, ΔU	Single-line diagram, cross-section, ΔU	Einliniendiagramm, Querschnitt, ΔU
+Tek metin yap	Make single text	Als ein Text
+Tekrar dene	Try again	Erneut versuchen
+Teslim edilmeden tamamlanmalı	Must be completed before delivery	Vor der Auslieferung zu ergänzen
+Teslim paftası	Delivery layout	Lieferplan
+Teslim paftası güncel değil: veride, görünümlerde ya da kapakta değişiklik var ("Pafta Üret").	The delivery layout is out of date: the data, views or cover have changed ("Build Layout").	Der Lieferplan ist nicht aktuell: Daten, Ansichten oder Deckblatt wurden geändert („Plan erzeugen").
+Teslim paftası henüz üretilmedi	Delivery layout not built yet	Lieferplan noch nicht erzeugt
+Teslim paftası henüz üretilmedi ("Pafta Üret").	The delivery layout has not been built yet ("Build Layout").	Der Lieferplan wurde noch nicht erzeugt („Plan erzeugen").
+Teslim paftası üretiliyor	Building delivery layout	Lieferplan wird erzeugt
+Teslim paftası yok	No delivery layout	Kein Lieferplan
+Teslim paftasında gömülü PDF yok; "PDF indir" düğmesi yazdırma penceresini açar.	The delivery layout has no embedded PDF; its "Download PDF" button opens the print dialog.	Der Lieferplan enthält kein eingebettetes PDF; „PDF herunterladen" öffnet den Druckdialog.
+Teslim paftasını üretir: tek HTML, TR/EN/DE, gömülü PDF	Builds the delivery layout: single HTML, TR/EN/DE, embedded PDF	Erzeugt den Lieferplan: eine HTML-Datei, TR/EN/DE, eingebettetes PDF
+Teslim paftasını yeni sekmede açar	Opens the delivery layout in a new tab	Öffnet den Lieferplan in einem neuen Tab
+Tip	Type	Typ
+tip	type	Typ
+Tip (makine tam adı)	Type (full machine name)	Typ (vollständiger Maschinenname)
+Toplam güç (kW)	Total power (kW)	Gesamtleistung (kW)
+Toplam güç (kW) girilmedi.	Total power (kW) not entered.	Gesamtleistung (kW) fehlt.
+Topraklama	Earthing	Erdung
+Topraklama (TN-S, PE) metni yok.	No earthing text (TN-S, PE).	Kein Erdungstext (TN-S, PE).
+TR / EN / DE ayrı yazılsın	Write TR / EN / DE separately	TR / EN / DE getrennt schreiben
+Tüketici	Load	Verbraucher
+Tüketiciler	Loads	Verbraucher
+Tümü	All	Alle
+Uygulama sunucusuna ulaşılamıyor	The program server cannot be reached	Der Programmserver ist nicht erreichbar
+Uygulama sunucusuna ulaşılamıyor; değişiklikler bu sayfada bekliyor.	The program server cannot be reached; your changes are kept on this page.	Der Programmserver ist nicht erreichbar; Ihre Änderungen bleiben auf dieser Seite erhalten.
+Uzunluklar (m)	Lengths (m)	Längen (m)
+Üç dil eksik ({m} boş): {w}	Languages incomplete ({m} empty): {w}	Sprachen unvollständig ({m} leer): {w}
+Üç dilde aynı yazılan özel adlar için (TR metni kalır)	For proper names written the same in all three languages (the TR text is kept)	Für Eigennamen, die in allen drei Sprachen gleich sind (der TR-Text bleibt)
+Üçgenleme sapması (mm)	Meshing deviation (mm)	Vernetzungsabweichung (mm)
+üretilmedi	not generated	nicht erzeugt
+üst	top	oben
+Üst Bant	Top Band	Oberes Band
+Üst görünüm (plan)	Top view (plan)	Draufsicht
+Üst görünüme tıklayınca x – y, ön görünüme tıklayınca x – z yazılır (mm, görünüm koordinatları).	Clicking the top view sets x – y, clicking the front view sets x – z (mm, view coordinates).	Klick in die Draufsicht setzt x – y, Klick in die Vorderansicht x – z (mm, Ansichtskoordinaten).
+Üstte tam genişlik bant, altta bilgi tablosu	Full-width band at the top, information table below	Band über die ganze Breite oben, Angabentabelle unten
+Vazgeç	Cancel	Abbrechen
+Veri	Data	Daten
+X / Y / Z görünüm koordinatlarıdır; paftada sol-ön-alt köşeye göre yazılır. Görünüm: "hepsi" ya da virgüllü liste (on, yan, arka); üst görünümde bütün noktalar çizilir.	X / Y / Z are view coordinates; the layout shows them relative to the left-front-bottom corner. View: "hepsi" (all) or a comma list (on = front, yan = side, arka = rear); all points are drawn in the top view.	X / Y / Z sind Ansichtskoordinaten; im Plan bezogen auf die Ecke links-vorne-unten. Ansicht: „hepsi" (alle) oder Kommaliste (on = vorne, yan = Seite, arka = hinten); in der Draufsicht werden alle Punkte gezeichnet.
+X ordinatları (nokta harfleri)	X ordinates (point letters)	X-Ordinaten (Punktbuchstaben)
+x, y, z görünüm koordinatı (mm); dx, dy etiket kaydırma; işaret harfi verilirse turuncu daire çizilir.	x, y, z view coordinate (mm); dx, dy label offset; if a marker letter is given, an orange circle is drawn.	x, y, z Ansichtskoordinate (mm); dx, dy Versatz der Beschriftung; mit Kennbuchstabe wird ein oranger Kreis gezeichnet.
+Yağ ayırıcı	Oil separator	Ölabscheider
+Yakın detay görünümleri	Close-up detail views	Detailansichten
+Yakın görünüm	Close-up view	Detailansicht
+Yakın görünüm kartları	Close-up view cards	Karten mit Detailansicht
+Yakın:	Close-up:	Detail:
+Yalnızca elektrik şeması varsa	Only if there is an electrical diagram	Nur wenn ein Schaltplan vorliegt
+yan	side	Seite
+Yan görünüm · 3D	Side view · 3D	Seitenansicht · 3D
+Yasaklı ifade ({l}): "{x}" – değerler kesin yazılır. {w}	Forbidden wording ({l}): "{x}" – values must be exact. {w}	Unzulässige Formulierung ({l}): „{x}" – Werte exakt angeben. {w}
+Yatay	Horizontal	Horizontal
+Yatay (h)	Horizontal (h)	Horizontal (h)
+Yatay: a → b arası x, c = y konumu. Dikey: a → b arası y, c = x konumu (görünüm koordinatları, mm).	Horizontal: x from a → b, c = y position. Vertical: y from a → b, c = x position (view coordinates, mm).	Horizontal: x von a → b, c = y-Lage. Vertikal: y von a → b, c = x-Lage (Ansichtskoordinaten, mm).
+Yatay: a → b arası y (en), c = z konumu. Dikey: a → b arası z, c = y konumu.	Horizontal: y from a → b (width), c = z position. Vertical: z from a → b, c = y position.	Horizontal: y von a → b (Breite), c = z-Lage. Vertikal: z von a → b, c = y-Lage.
+Yazı	Text	Text
+Yeni bağlantı noktası	New connection point	Neuer Anschlusspunkt
+Yeni Proje	New Project	Neues Projekt
+Yeni projeler bu değerlerle başlar (TOMTAŞ standardı). "rel" verilen bağlantı noktaları makine kutusuna göre yerleşir; {L} {W} {H} ölçülerle, {A} {kesit} {V} elektrik değerleriyle doldurulur.	New projects start with these values (TOMTAŞ standard). Connection points given as "rel" are placed relative to the machine envelope; {L} {W} {H} are filled with the dimensions, {A} {kesit} {V} with the electrical values.	Neue Projekte beginnen mit diesen Werten (TOMTAŞ-Standard). Anschlusspunkte mit „rel" werden relativ zur Maschinenkontur gesetzt; {L} {W} {H} werden mit den Maßen, {A} {kesit} {V} mit den Elektrowerten gefüllt.
+Yeni projelerin başlangıç değerleri	Starting values for new projects	Startwerte für neue Projekte
+Yeniden başlat	Restart	Neu starten
+Yenile	Refresh	Aktualisieren
+Yer tutucu metin kalmış: {w}	Placeholder text left: {w}	Platzhaltertext übrig: {w}
+Yerleşim Planı · STEP → A3 pafta · TR / EN / DE	Installation layout · STEP → A3 sheets · TR / EN / DE	Aufstellungsplan · STEP → A3-Blätter · TR / EN / DE
+yerleştirilmedi	not placed	nicht platziert
+Yine de üret	Build anyway	Trotzdem erzeugen
+Yinele (Ctrl+Y)	Redo (Ctrl+Y)	Wiederholen (Strg+Y)
+Yok	None	Keine
+yok	none	keine
+Yön	Direction	Richtung
+yukarı {u} · operatör {f}	up {u} · operator {f}	oben {u} · Bediener {f}
+Yukarı eksen	Up axis	Hochachse
+Yukarı taşı	Move up	Nach oben
+Yük listesi	Load list	Verbraucherliste
+Yük listesi yok (yalnızca elektrik şeması varsa eklenir).	No load list (added only if there is an electrical diagram).	Keine Verbraucherliste (nur wenn ein Schaltplan vorliegt).
+Yükseklik H	Height H	Höhe H
+zorunlu	mandatory	Pflicht
+"PDF İndir" PDF'i proje klasörüne kaydeder ve indirir. "Tarayıcıda yazdır" sunucu olmadan da çalışır: yazdırma penceresinde Hedef olarak "PDF olarak kaydet" seçin (A3 yatay, kenar boşluğu yok).	"Download PDF" saves the PDF in the project folder and downloads it. "Print in browser" also works without the server: in the print dialog choose "Save as PDF" as the destination (A3 landscape, no margins).	„PDF herunterladen" speichert das PDF im Projektordner und lädt es herunter. „Im Browser drucken" funktioniert auch ohne Server: im Druckdialog als Ziel „Als PDF speichern" wählen (A3 quer, keine Ränder).
+{s} · üst, ön, arka, yan ve izometrik görünümler VTK ile üretilir. Elle eklenen yakın detay görünümleri korunur.	{s} · the top, front, rear, side and isometric views are generated with VTK. Manually added close-up views are kept.	{s} · Drauf-, Vorder-, Rück-, Seitenansicht und Isometrie werden mit VTK erzeugt. Manuell ergänzte Detailansichten bleiben erhalten.
+{s} yüklü. Görünümleri üretmek için eksenleri seçip çalıştırın (büyük dosyalarda birkaç dakika sürer).	{s} is uploaded. Choose the axes and run to generate the views (a few minutes for large files).	{s} ist hochgeladen. Achsen wählen und ausführen, um die Ansichten zu erzeugen (bei großen Dateien einige Minuten).
+Bölümler	Sections	Abschnitte
+Biçim	Format	Format
+Çıktılar: {n} dosya (PDF / HTML)	Outputs: {n} files (PDF / HTML)	Ausgaben: {n} Dateien (PDF / HTML)
+HTML çıktıları	HTML outputs	HTML-Ausgaben
+HTML hazırlanıyor…	Preparing HTML…	HTML wird erstellt…
+HTML indir	Download HTML	HTML herunterladen
+HTML üretilemedi: {e}	The HTML could not be created: {e}	HTML konnte nicht erstellt werden: {e}
+HTML: tek dosya, internet ve program gerekmez; seçilen diller arka arkaya. Açınca sağ üstteki "Yazdır" düğmesiyle PDF de alınır.	HTML: a single file, no internet or program needed; the selected languages follow one another. Once opened, the "Print" button at the top right also produces a PDF.	HTML: eine Datei, ohne Internet und Programm; die gewählten Sprachen folgen nacheinander. Nach dem Öffnen liefert „Drucken" oben rechts auch ein PDF.
+İndir	Download	Herunterladen
+İndir (PDF / HTML)	Download (PDF / HTML)	Herunterladen (PDF / HTML)
+İndirmek için önce görünümleri üretin.	Generate the views first to download.	Zum Herunterladen zuerst die Ansichten erzeugen.
+PDF indir	Download PDF	PDF herunterladen
+PDF: A3 yatay, vektörel. Dosya proje klasörüne kaydedilir ve indirilir. "Tarayıcıda yazdır" sunucu olmadan da çalışır (Hedef: "PDF olarak kaydet").	PDF: A3 landscape, vector. The file is saved in the project folder and downloaded. "Print in browser" also works without the server (destination: "Save as PDF").	PDF: A3 quer, vektoriell. Die Datei wird im Projektordner gespeichert und heruntergeladen. „Im Browser drucken" funktioniert auch ohne Server (Ziel: „Als PDF speichern").
+Revizyon iki haneli sayıyla yazılır (ilk yayın 00).	Revisions are two-digit numbers (first issue 00).	Revisionen werden zweistellig angegeben (Erstausgabe 00).
+Seçilen dil ve bölümlerle PDF ya da HTML olarak indir (Ctrl+P)	Download as PDF or HTML with the selected languages and sections (Ctrl+P)	Mit den gewählten Sprachen und Abschnitten als PDF oder HTML herunterladen (Strg+P)
+Son dört revizyon her sayfada başlık bloğunun üstündeki tabloda görünür. İlk yayın Rev 00; her içerik değişikliğinde bir artar (01, 02, …).	The last four revisions appear in the table above the title block on every page. First issue Rev 00; each content change increases it by one (01, 02, …).	Die letzten vier Revisionen erscheinen auf jeder Seite in der Tabelle über dem Schriftfeld. Erstausgabe Rev 00; jede inhaltliche Änderung erhöht sie um eins (01, 02, …).
+"Only select repositories" altında yalnız bu depoyu seçin; Contents: Read and write.	Under "Only select repositories" choose only this repository; Contents: Read and write.	Unter „Only select repositories" nur dieses Repository wählen; Contents: Read and write.
+(layoutx-veri oluşturduysanız geçin).	(skip if you have already created layoutx-veri).	(überspringen, wenn layoutx-veri bereits angelegt ist).
+{n} dosya gönderilecek	{n} files to send	{n} Dateien zu senden
+50 MB üstü dosyalar	Files larger than 50 MB	Dateien über 50 MB
+Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu bilgisayarda saklanır, depoya ve tarayıcıya gitmez.	Paste the token below and click Connect. The token is stored only on this computer; it never goes to the repository or the browser.	Token unten einfügen und auf Verbinden klicken. Der Token wird nur auf diesem Computer gespeichert und gelangt weder ins Repository noch in den Browser.
+Ara dosyalar (_work) ve indirilen PDF / HTML çıktıları	Working files (_work) and downloaded PDF / HTML outputs	Arbeitsdateien (_work) und heruntergeladene PDF-/HTML-Ausgaben
+Bağlan	Connect	Verbinden
+Bağlandı: {r}. İlk eşitleme başladı.	Connected: {r}. The first sync has started.	Verbunden: {r}. Die erste Synchronisierung hat begonnen.
+Bağlantıyı kaldır	Disconnect	Verbindung trennen
+Başka bilgisayardaki değişiklikler alındı.	Changes from another computer have been received.	Änderungen von einem anderen Computer wurden übernommen.
+Boş bırakılırsa mevcut anahtar kalır	Leave empty to keep the current token	Leer lassen, um den aktuellen Token zu behalten
+Bu bilgisayar	This computer	Dieser Computer
+Bu bilgisayar depoyla eşitlenmeyi bırakır ve erişim anahtarı silinir. Proje dosyaları ve depodaki veriler silinmez.	This computer stops syncing with the repository and the token is deleted. Project files and the data in the repository are not deleted.	Dieser Computer synchronisiert nicht mehr mit dem Repository und der Token wird gelöscht. Projektdateien und die Daten im Repository bleiben erhalten.
+Bu projede başka bilgisayardan değişiklik geldi; kaydettiğinizde sizin sürümünüz asıl olur, gelen sürüm .catisma kopyası olarak saklanır.	Changes to this project arrived from another computer; when you save, your version becomes the main file and the incoming one is kept as a .catisma copy.	Für dieses Projekt sind Änderungen von einem anderen Computer eingegangen; beim Speichern wird Ihre Version die Hauptdatei, die eingegangene bleibt als .catisma-Kopie erhalten.
+Çakışma kopyaları (eski sürümler, inceleyip silebilirsiniz):	Conflict copies (older versions, review and delete them):	Konfliktkopien (ältere Versionen, prüfen und löschen):
+Değişenler birkaç saniye içinde, ayrıca dakikada bir tek commit olarak depoya gönderilir; depodaki yenilikler aynı anda alınır.	Changes are sent to the repository as a single commit within a few seconds, and also once a minute; new data in the repository is fetched at the same time.	Änderungen werden innerhalb weniger Sekunden und zusätzlich einmal pro Minute als ein Commit ins Repository gesendet; Neues aus dem Repository wird dabei übernommen.
+Deneniyor…	Trying…	Wird versucht…
+Depo (kullanıcı/depo)	Repository (user/repository)	Repository (Benutzer/Repository)
+Depodaki dosya	Files in the repository	Dateien im Repository
+Depoya alınmayan büyük dosyalar (bilgisayarda kalır):	Large files not stored in the repository (they stay on this computer):	Große Dateien, die nicht ins Repository kommen (bleiben auf diesem Computer):
+Depoya girenler	Stored in the repository	Im Repository gespeichert
+Depoya girmeyenler	Not stored in the repository	Nicht im Repository
+Depoyu ya da anahtarı değiştir	Change repository or token	Repository oder Token ändern
+Dosya bu arada başka yerden değişmişti; sizin sürümünüz kaydedildi, öbürü {f} olarak saklandı.	The file had changed elsewhere in the meantime; your version was saved and the other one was kept as {f}.	Die Datei wurde zwischenzeitlich anderswo geändert; Ihre Version wurde gespeichert, die andere als {f} aufbewahrt.
+Durum	Status	Status
+Erişim anahtarı	Access token	Zugriffstoken
+Erişim anahtarı (yalnız bu bilgisayarda saklanır)	Access token (stored only on this computer)	Zugriffstoken (nur auf diesem Computer gespeichert)
+Erişim anahtarı oluşturun	Create an access token	Zugriffstoken erstellen
+Eski sürümler GitHub'daki commit geçmişinden alınabilir.	Older versions can be retrieved from the commit history on GitHub.	Ältere Versionen sind im Commit-Verlauf auf GitHub abrufbar.
+Eşitleme hatası	Sync error	Synchronisierungsfehler
+Eşitlendi · {t}	Synced · {t}	Synchronisiert · {t}
+Eşitleniyor…	Syncing…	Wird synchronisiert…
+Eşitlenmedi	Not synced yet	Noch nicht synchronisiert
+GitHub deposu	GitHub repository	GitHub-Repository
+GitHub deposu: projeler her bilgisayardan erişilir	GitHub repository: projects are available on every computer	GitHub-Repository: Projekte sind auf jedem Computer verfügbar
+GitHub'da aç	Open on GitHub	Auf GitHub öffnen
+Görünümler (üst, ön, arka, yan, izometrik, yakın detaylar) ve görünüm ayarları	Views (top, front, rear, side, isometric, close-ups) and view settings	Ansichten (oben, vorne, hinten, Seite, Isometrie, Details) und Ansichtseinstellungen
+Her değişiklik önce bu bilgisayardaki proje klasörüne yazılır; internet kesilse de kaybolmaz.	Every change is first written to the project folder on this computer; nothing is lost if the internet is down.	Jede Änderung wird zuerst in den Projektordner auf diesem Computer geschrieben; ohne Internet geht nichts verloren.
+İki bilgisayarda aynı dosya değişirse yeni olan asıl dosya olur, eskisi yanında .catisma-<tarih> adıyla saklanır. Silme ile düzenleme karşılaşırsa düzenleme kalır.	If the same file changes on two computers, the newer one becomes the main file and the older one is kept next to it as .catisma-<date>. If a deletion meets an edit, the edit is kept.	Ändert sich dieselbe Datei auf zwei Computern, wird die neuere zur Hauptdatei, die ältere bleibt daneben als .catisma-<Datum>. Trifft Löschen auf Bearbeiten, bleibt die Bearbeitung.
+Kayıt nasıl çalışır	How saving works	So funktioniert das Speichern
+Montaj ağacı, imalat resmi PDF'leri	Assembly tree, manufacturing drawing PDFs	Baugruppenstruktur, PDFs der Fertigungszeichnung
+Özel bir GitHub deposu veritabanı olur: ücretsizdir, her kayıt geçmişte durur, her bilgisayardan erişilir.	A private GitHub repository becomes the database: it is free, every save is kept in the history, and it is available on every computer.	Ein privates GitHub-Repository wird zur Datenbank: kostenlos, jede Speicherung bleibt im Verlauf, von jedem Computer erreichbar.
+Özel depo oluşturun	Create a private repository	Privates Repository anlegen
+Özel depo. Projeler bu depodan her bilgisayara gelir; değişiklikler kendiliğinden gönderilir.	Private repository. Projects come to every computer from this repository; changes are sent automatically.	Privates Repository. Projekte kommen von hier auf jeden Computer; Änderungen werden automatisch gesendet.
+Proje verileri (kapak, metinler, tablolar, bağlantı noktaları)	Project data (cover, texts, tables, connection points)	Projektdaten (Deckblatt, Texte, Tabellen, Anschlusspunkte)
+Son eşitleme	Last sync	Letzte Synchronisierung
+STEP bu bilgisayarda yok (büyük olduğu için veritabanına alınmaz). Görünümler hazır; yeniden üretmek gerekirse STEP yükleyin.	The STEP file is not on this computer (it is too large for the database). The views are ready; upload the STEP file if they need to be regenerated.	Die STEP-Datei ist nicht auf diesem Computer (zu groß für die Datenbank). Die Ansichten sind vorhanden; zum Neuerzeugen die STEP-Datei hochladen.
+STEP dosyaları (büyük; bilgisayarda kalır). Başka bilgisayarda görünümler hazır gelir.	STEP files (large; they stay on the computer). On another computer the views arrive ready-made.	STEP-Dateien (groß; bleiben auf dem Computer). Auf einem anderen Computer kommen die Ansichten fertig an.
+Şablon ve kapak tasarımı	Template and cover design	Vorlage und Deckblattdesign
+Şimdi eşitle	Sync now	Jetzt synchronisieren
+Verileriniz nerede dursun?	Where should your data be kept?	Wo sollen Ihre Daten liegen?
+Veritabanı	Database	Datenbank
+Veritabanı bağlı değil	Database not connected	Datenbank nicht verbunden
+Veritabanı sekmesinden GitHub deposuna bağlanın	Connect to the GitHub repository in the Database tab	Im Reiter Datenbank mit dem GitHub-Repository verbinden

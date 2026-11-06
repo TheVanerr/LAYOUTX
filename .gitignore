@@ -1,0 +1,11 @@
+# Proje verileri (müşteri verisi, STEP) programla gelmez: veritabanı deposundadır (layoutx-veri)
+projects/
+
+# Bu bilgisayara özgü / üretilen
+__pycache__/
+*.pyc
+*.lnk
+*.tmp
+*.dbtmp
+*.log
+tools/ayarlar.json

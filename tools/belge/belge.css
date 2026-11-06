@@ -1,0 +1,215 @@
+/* Layout belgesi (A3 yatay): kapak, antetli sayfalar, görünümler ve tablolar.
+   P&PX'in kapak tasarımları (Kırmızı Bant / Üst Bant / Köşe Blok), anteti ve başlık bloğuyla birebir aynı düzen.
+   Bu dosya hem pafta HTML'ine gömülür hem de Layout Stüdyosu'nda kapak önizlemesinde kullanılır. */
+
+.lb-sheet, .pcv, .lb-measure {
+  --lb-font: Calibri, Carlito, 'Segoe UI', Selawik, Arial, sans-serif;
+  --lb-head: 'Segoe UI', Selawik, Calibri, Carlito, Arial, sans-serif;
+  --ink: #1b2430; --ink-2: #4a5665; --line: #c9d1da; --grid: #edf0f4; --sheet: #ffffff;
+  --accent: #1f5f8b; --accent-2: #d8e6f1; --warn: #c8540a; --svc: #7a8794;
+}
+
+/* ─────────────────────────── Kapak (P&PX kapak tasarımları) ─────────────────────────── */
+.pcv {
+  --pcv-accent: #ff0000;
+  --pcv-ink: #15171c;
+  --pcv-gray: #6b7280;
+  --pcv-line: #d7dbe2;
+  position: relative;
+  width: 1587.4px;
+  height: 1122.5px;
+  overflow: hidden;
+  background: #fff;
+  color: var(--pcv-ink);
+  font-family: var(--lb-head);
+  font-size: 16px;
+  line-height: 1.3;
+  text-align: left;
+  white-space: normal;
+  box-sizing: border-box;
+}
+.pcv *, .pcv *::before, .pcv *::after { box-sizing: border-box; }
+.pcv h1, .pcv dl, .pcv dd { margin: 0; }
+.pcv .pcv-title { font-weight: 800; line-height: 1.04; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.pcv .pcv-kicker { font-size: 18px; font-weight: 700; letter-spacing: 0.16em; color: var(--pcv-accent); }
+.pcv .pcv-rule { width: 132px; height: 8px; background: var(--pcv-accent); }
+.pcv .pcv-customer { font-size: 27px; color: #3c4250; overflow-wrap: anywhere; line-height: 1.2; }
+.pcv .pcv-type { font-size: 20px; color: #5b6270; margin-top: 10px; overflow-wrap: anywhere; line-height: 1.25; }
+.pcv .pcv-logo { display: block; width: 320px; height: 114px; object-fit: contain; object-position: left center; flex-shrink: 0; }
+.pcv .pcv-foot { font-size: 15px; color: var(--pcv-accent); font-family: var(--lb-font); }
+
+.pcv .pcv-list { border-top: 1px solid var(--pcv-line); }
+.pcv .pcv-row { display: grid; grid-template-columns: 158px minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 10px 2px; border-bottom: 1px solid var(--pcv-line); }
+.pcv .pcv-row dt { font-size: 15px; color: var(--pcv-gray); }
+.pcv .pcv-row dd { font-size: 18.5px; font-weight: 600; overflow-wrap: anywhere; line-height: 1.2; }
+.pcv .pcv-row dd.strong { color: var(--pcv-accent); font-weight: 800; }
+
+.pcv .pcv-cells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 22px; }
+.pcv .pcv-cell { padding: 11px 0 13px; border-bottom: 1px solid var(--pcv-line); min-width: 0; }
+.pcv .pcv-cell span { display: block; font-size: 14px; color: var(--pcv-gray); margin-bottom: 3px; }
+.pcv .pcv-cell b { display: block; font-size: 18.5px; font-weight: 600; overflow-wrap: anywhere; line-height: 1.2; }
+.pcv .pcv-cell b.strong { color: var(--pcv-accent); font-weight: 800; }
+
+.pcv .pcv-sign { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pcv .pcv-sign-box { border: 1px solid var(--pcv-line); border-top: 4px solid var(--pcv-ink); padding: 11px 14px 0; height: 118px; min-width: 0; overflow: hidden; }
+.pcv .pcv-sign-box span { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; color: var(--pcv-gray); text-transform: uppercase; margin-bottom: 3px; }
+.pcv .pcv-sign-box b { display: block; font-size: 18px; font-weight: 600; overflow-wrap: anywhere; line-height: 1.2; }
+
+/* 1. Kırmızı Bant */
+.pcv-bant { display: flex; }
+.pcv-bant .pcv-band { width: 236px; flex-shrink: 0; position: relative; overflow: hidden; background: var(--pcv-accent); color: #fff; }
+.pcv-bant .pcv-band-std { position: absolute; left: 0; right: 0; top: 66px; padding: 0 24px; text-align: center; font-size: 15px; letter-spacing: 0.06em; line-height: 1.5; }
+.pcv-bant .pcv-band-mark { position: absolute; left: 0; right: 0; bottom: 60px; display: flex; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 150px; font-weight: 800; letter-spacing: -0.01em; line-height: 236px; white-space: nowrap; }
+.pcv-bant .pcv-main { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 62px 92px 46px; }
+.pcv-bant .pcv-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 76px; align-items: center; }
+.pcv-bant .pcv-head .pcv-title { margin-top: 18px; }
+.pcv-bant .pcv-head .pcv-rule { margin-top: 30px; }
+.pcv-bant .pcv-head .pcv-customer { margin-top: 26px; }
+.pcv-bant .pcv-foot { margin-top: 18px; }
+
+/* 2. Üst Bant */
+.pcv-ust .pcv-u-band { position: absolute; left: 0; right: 0; top: 0; height: 480px; overflow: hidden; background: var(--pcv-accent); color: #fff; }
+.pcv-ust .pcv-u-std { position: absolute; right: 92px; top: 62px; font-size: 15px; letter-spacing: 0.06em; }
+.pcv-ust .pcv-u-mark { position: absolute; right: 56px; bottom: -26px; font-size: 190px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: rgba(255, 255, 255, 0.12); white-space: nowrap; }
+.pcv-ust .pcv-u-text { position: absolute; left: 92px; right: 92px; bottom: 58px; }
+.pcv-ust .pcv-kicker { color: #fff; }
+.pcv-ust .pcv-u-text .pcv-title { margin-top: 16px; color: #fff; }
+.pcv-ust .pcv-u-text .pcv-customer { margin-top: 18px; color: #fff; }
+.pcv-ust .pcv-u-text .pcv-type { color: rgba(255, 255, 255, 0.86); }
+.pcv-ust .pcv-u-lower { position: absolute; left: 92px; right: 92px; top: 480px; bottom: 0; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 76px; padding: 52px 0 46px; }
+.pcv-ust .pcv-u-left { display: flex; flex-direction: column; justify-content: space-between; }
+.pcv-ust .pcv-u-right { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+
+/* 3. Köşe Blok */
+.pcv-kose .pcv-k-top { position: absolute; left: 400px; right: 0; top: 0; height: 16px; background: var(--pcv-accent); }
+.pcv-kose .pcv-k-side { position: absolute; left: 0; top: 400px; bottom: 0; width: 16px; background: var(--pcv-accent); }
+.pcv-kose .pcv-k-block { position: absolute; left: 0; top: 0; width: 400px; height: 400px; padding: 44px 42px 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--pcv-accent); color: #fff; }
+.pcv-kose .pcv-k-block span { font-size: 15px; letter-spacing: 0.06em; }
+.pcv-kose .pcv-k-block b { font-size: 84px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.pcv-kose .pcv-k-logo { position: absolute; right: 92px; top: 66px; }
+.pcv-kose .pcv-k-logo .pcv-logo { object-position: right center; }
+.pcv-kose .pcv-k-head { position: absolute; left: 484px; right: 92px; top: 232px; }
+.pcv-kose .pcv-k-head .pcv-title { margin-top: 16px; }
+.pcv-kose .pcv-k-head .pcv-rule { margin-top: 28px; }
+.pcv-kose .pcv-k-head .pcv-customer { margin-top: 24px; }
+.pcv-kose .pcv-k-lower { position: absolute; left: 92px; right: 92px; bottom: 84px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 56px; align-items: end; }
+.pcv-kose .pcv-k-foot { position: absolute; left: 92px; bottom: 46px; }
+
+/* ─────────────────────────── Antetli sayfa ─────────────────────────── */
+.lb-sheet {
+  position: relative;
+  width: 420mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #fff;
+  color: #15171c;
+  font-family: var(--lb-font);
+  font-size: 9pt;
+  line-height: 1.3;
+  text-align: left;
+  box-sizing: border-box;
+}
+.lb-sheet *, .lb-sheet *::before, .lb-sheet *::after { box-sizing: border-box; }
+.lb-sheet > svg.lb-frame { position: absolute; left: 0; top: 0; width: 420mm; height: 297mm; }
+.lb-frag { position: absolute; }
+
+/* Bölüm başlığı (P&ID açıklama sayfasıyla aynı) */
+.rp-head { display: flex; align-items: center; gap: 2.4mm; padding-bottom: 1.6mm; margin-bottom: 3mm; border-bottom: 0.7mm solid var(--lb-accent, #ff0000); }
+.rp-num { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 5.6mm; height: 5.6mm; background: var(--lb-accent, #ff0000); color: #fff;
+  font: 800 9.5pt var(--lb-head); }
+.rp-title { font: 700 11pt var(--lb-head); letter-spacing: 0.04em; }
+.rp-cont { font-weight: 400; color: #6b7280; letter-spacing: 0; }
+
+/* Tablolar */
+.lb-sheet table, .lb-measure table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 9pt; line-height: 1.28; }
+.lb-sheet th, .lb-sheet td, .lb-measure th, .lb-measure td { padding: 1.2mm 1.5mm; border-bottom: 0.2mm solid #d7dbe2; vertical-align: top; text-align: left; overflow-wrap: anywhere; }
+.lb-sheet thead th, .lb-measure thead th { background: #f1f2f5; border-bottom: 0.3mm solid #15171c; color: #3c4250; font-size: 8.5pt; font-weight: 700; vertical-align: middle; }
+.lb-sheet tbody th, .lb-measure tbody th { width: 36%; font-weight: 600; color: #3c4250; }
+.lb-sheet td.num, .lb-sheet th.num, .lb-measure td.num, .lb-measure th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lb-sheet td.mono, .lb-measure td.mono { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
+.lb-sheet small, .lb-measure small { color: #4b5563; font-size: 8pt; }
+.chip { display: inline-block; min-width: 6mm; text-align: center; padding: 0.2mm 1.6mm; border-radius: 3mm; font: 700 8.5pt var(--lb-head); color: #fff; background: var(--warn, #c8540a); }
+
+/* Görünümler */
+.lb-view { display: block; }
+svg.view { width: 100%; height: auto; display: block; max-height: var(--cap, 190mm); background: #fff; }
+svg.view .outline { fill: none; stroke: var(--ink); stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+svg.view .svc { fill: var(--accent-2); fill-opacity: .4; stroke: var(--svc); stroke-dasharray: 36 22; stroke-width: 1.2px; vector-effect: non-scaling-stroke; }
+svg.view .floor { stroke: var(--ink); stroke-width: 2px; vector-effect: non-scaling-stroke; }
+svg.view .dim line { stroke: var(--accent); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+svg.view marker path { fill: var(--accent); }
+svg.view .dim text { font: 700 var(--fs) var(--lb-font); fill: var(--accent); }
+svg.view .dim-svc line { stroke: var(--svc); }
+svg.view .dim-svc text { fill: var(--svc); font-size: calc(var(--fs) * .85); }
+svg.view .dim-2 text { font-size: calc(var(--fs) * .85); }
+svg.view .pt circle { fill: var(--warn); stroke: #fff; stroke-width: 2px; vector-effect: non-scaling-stroke; }
+svg.view .pt text { font: 700 calc(var(--fs) * .78) var(--lb-head); fill: #fff; }
+svg.view .side { font: 700 calc(var(--fs) * .8) var(--lb-font); fill: var(--ink-2); letter-spacing: .08em; }
+svg.view .lbl { font: 400 calc(var(--fs) * .74) var(--lb-font); fill: var(--ink-2); }
+svg.view .leader { stroke: var(--ink-2); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+svg.view .dot { fill: var(--warn); stroke: #fff; stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+svg.view .dlbl { font: 700 calc(var(--fs) * .85) var(--lb-font); fill: var(--ink); paint-order: stroke; stroke: #fff; stroke-width: calc(var(--fs) * .3); stroke-linejoin: round; }
+svg.view .cable { stroke: var(--ink); stroke-width: 5px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+svg.view marker path.c { fill: var(--ink); }
+svg.view .ord text { font-size: calc(var(--fs) * .8); }
+img.iso { display: block; width: 100%; height: auto; max-height: var(--cap, 190mm); object-fit: contain; background: #fff; }
+/* Yan görünüm + izometrik: eşit yükseklikte iki çerçeveli pano */
+.lb-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6mm; align-items: stretch; }
+.lb-pair > div { display: flex; flex-direction: column; border: 0.25mm solid #cfd5dd; border-radius: 1.2mm; padding: 2.5mm 3mm 3mm; background: #fff; min-width: 0; }
+.lb-pair svg.view, .lb-pair img.iso { flex: 1; height: 168mm; max-height: 168mm; width: 100%; }
+.lb-cap { font: 700 8.5pt var(--lb-head); letter-spacing: .06em; text-transform: uppercase; color: #3c4250; margin: 0 0 2mm;
+  padding-bottom: 1.5mm; border-bottom: 0.25mm solid #e3e7ec; }
+
+/* Bağlantı detay kartı */
+/* Bağlantı detay kartı: başlık şeridi, sabit yükseklikte çerçeveli fotoğraf alanı, altında değer tablosu */
+.dcard { border: 0.25mm solid #cfd5dd; border-radius: 1.2mm; background: #fff; overflow: hidden; }
+.dcard h3 { display: flex; align-items: center; gap: 2mm; font: 700 10pt var(--lb-head); letter-spacing: .04em; margin: 0; padding: 2mm 3mm;
+  color: #15171c; background: #f4f6f8; border-bottom: 0.25mm solid #cfd5dd; }
+.dcard .ph { padding: 2.5mm 3mm; background: #fff; border-bottom: 0.25mm solid #e3e7ec; }
+.dcard svg.view.det { --cap: 100mm; width: 100%; height: 100mm; max-height: 100mm; margin: 0; }
+.dcard table { margin: 0; }
+.dcard table th, .dcard table td { padding-left: 3mm; padding-right: 3mm; }
+.dcard table tr:last-child th, .dcard table tr:last-child td { border-bottom: 0; }
+
+/* Besleme kablosu */
+.cab { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); gap: 6mm 12mm; align-items: start; }
+.cab figure { margin: 0; min-width: 0; }
+.cab figcaption, p.fine { font-size: 8.5pt; color: #4a5665; margin: 2mm 0 0; }
+.cab .xs svg { max-width: 52mm; margin: 0 auto; }
+h3.sub { font: 700 9.5pt var(--lb-head); letter-spacing: .04em; margin: 0 0 2mm; color: #15171c; }
+svg.sld, svg.xsec { width: 100%; height: auto; display: block; }
+svg.sld text { font-family: var(--lb-font); fill: var(--ink); }
+svg.sld .box { fill: none; stroke: var(--svc); stroke-width: 1.2; stroke-dasharray: 6 5; }
+svg.sld .sheath { fill: var(--accent-2); stroke: var(--ink-2); stroke-width: 1; }
+svg.sld .w { stroke-width: 3.5; fill: none; }
+svg.sld .w.halo { stroke: var(--ink-2); stroke-width: 6; }
+svg.sld .gnd { stroke: #2f9a47; stroke-width: 3; }
+svg.sld .term { fill: #fff; stroke: var(--ink); stroke-width: 1.5; }
+svg.sld .dev { fill: #fff; stroke: var(--ink); stroke-width: 1.5; }
+svg.sld .dv { font-weight: 700; font-size: 15px; }
+svg.sld .dl { font-weight: 700; font-size: 13px; fill: var(--ink-2); }
+svg.sld .ds { font-weight: 400; font-size: 12.5px; fill: var(--ink-2); }
+svg.sld .bt { font-weight: 700; font-size: 12px; letter-spacing: .1em; fill: var(--ink-2); }
+svg.sld .wl { font-weight: 700; font-size: 13px; }
+svg.xsec .jacket { fill: #2a2e33; stroke: var(--ink-2); stroke-width: 1.5; }
+svg.xsec .filler { fill: #3d434a; }
+svg.xsec .core { stroke: #c9d1da; stroke-width: 1.5; }
+svg.xsec .cu { fill: #c98a4b; stroke: #8a5a2b; stroke-width: 1; }
+svg.xsec .cl { font: 700 15px var(--lb-font); fill: #fff; paint-order: stroke; stroke: #1b2430; stroke-width: 3px; stroke-linejoin: round; }
+ul.cores { list-style: none; padding: 0; margin: 3mm 0 0; font-size: 8.5pt; }
+ul.cores li { display: flex; gap: 2mm; align-items: center; padding: 0.8mm 0; border-bottom: 0.2mm solid #d7dbe2; }
+ul.cores b { min-width: 6mm; }
+.sw { width: 7mm; height: 2.6mm; border-radius: 1.3mm; flex: none; border: 0.2mm solid var(--ink-2); }
+.sw-l1 { background: #8b5a2b; } .sw-l2 { background: #1d1d1d; } .sw-l3 { background: #8f969c; } .sw-n { background: #2e6fd2; }
+.sw-pe { background: repeating-linear-gradient(45deg, #2f9a47 0 1.3mm, #f0c419 1.3mm 2.6mm); }
+ol.req { margin: 0; padding: 2mm 3mm 2mm 8mm; border-left: 0.8mm solid var(--warn); background: #fdf3ec; }
+ol.req li { margin: 0.6mm 0 1.6mm; }
+
+/* Notlar */
+ul.notes { margin: 0; padding-left: 5mm; font-size: 9.5pt; line-height: 1.4; }
+ul.notes li { margin-bottom: 1.6mm; }
+
+/* Ölçüm alanı (sayfa dizgisi için görünmez yerde) */
+.lb-measure { position: absolute; left: -30000px; top: 0; visibility: hidden; pointer-events: none; font-family: var(--lb-font); font-size: 9pt; line-height: 1.3; }
+.lb-measure > div { position: relative; }

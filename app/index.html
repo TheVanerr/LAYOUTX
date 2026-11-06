@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Çizim Motoru</title>
+  <link rel="icon" type="image/png" href="/app/icon.png">
+  <script>
+    // Dosyadan (çift tıkla) açıldıysa: sunucuyu başlatan HTML sayfasına git
+    if (location.protocol === 'file:') location.replace('../Layout.html');
+  </script>
+  <link rel="stylesheet" href="/belge/belge.css">
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+  <div id="offline" class="offline hidden" role="alert">
+    <span data-i18n="Uygulama sunucusuna ulaşılamıyor; değişiklikler bu sayfada bekliyor.">Uygulama sunucusuna ulaşılamıyor; değişiklikler bu sayfada bekliyor.</span>
+    <a class="btn btn-sm btn-primary" href="layoutx://start" data-i18n="Yeniden başlat">Yeniden başlat</a>
+    <button type="button" class="btn btn-sm" id="btnRetry" data-i18n="Tekrar dene">Tekrar dene</button>
+  </div>
+
+  <!-- ─────────────── Proje ekranı ─────────────── -->
+  <section id="home" class="home">
+    <div class="home-bar">
+      <img src="/app/icon.png" alt="" class="home-icon">
+      <img src="/belge/logos/dolfin.png" alt="Dolfin" class="home-logo">
+      <div class="home-title">
+        <h1 data-i18n="Layout Çizim Motoru">Layout Çizim Motoru</h1>
+        <p data-i18n="Yerleşim Planı · STEP → A3 pafta · TR / EN / DE">Yerleşim Planı · STEP → A3 pafta · TR / EN / DE</p>
+      </div>
+      <div class="home-actions">
+        <span class="lang-label" data-i18n="Program dili">Program dili</span>
+        <div class="seg ui-lang" role="group" aria-label="Program dili">
+          <button type="button" data-ui-lang="tr">TR</button><button type="button" data-ui-lang="en">EN</button><button type="button" data-ui-lang="de">DE</button>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnNewProject" data-i18n="+ Yeni Proje">+ Yeni Proje</button>
+      </div>
+    </div>
+    <nav class="home-nav">
+      <button type="button" class="home-tab active" data-home-tab="projects"><span data-i18n="Projeler">Projeler</span> <span id="projCount" class="home-count"></span></button>
+      <button type="button" class="home-tab" data-home-tab="template" data-i18n-title="Yeni projelerin başlangıç değerleri"><span data-i18n="Şablon">Şablon</span></button>
+      <button type="button" class="home-tab" data-home-tab="db" data-i18n-title="GitHub deposu: projeler her bilgisayardan erişilir"><span class="db-dot" id="dbDot"></span><span data-i18n="Veritabanı">Veritabanı</span></button>
+      <div class="tb-spacer"></div>
+      <input type="search" id="projSearch" class="search home-search" data-i18n-ph="Seri no, müşteri veya model ara…" placeholder="Seri no, müşteri veya model ara…" autocomplete="off">
+    </nav>
+    <div id="homeProjects" class="home-page">
+      <div id="projectList" class="project-list"></div>
+    </div>
+    <div id="homeDb" class="home-page hidden">
+      <div id="dbPanel" class="db-page"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────── Proje çalışma ekranı ─────────────── -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <button type="button" class="tb-logo" id="btnHome" data-i18n-title="Projelere dön"><img src="/belge/logos/dolfin.png" alt="Dolfin"></button>
+      <div class="tb-project">
+        <strong id="projName"></strong>
+        <span id="saveState" class="save-state"></span>
+      </div>
+      <div class="tb-group">
+        <button type="button" class="icon-btn" id="btnUndo" data-i18n-title="Geri al (Ctrl+Z)"><svg viewBox="0 0 20 20"><path d="M7 4L3 8l4 4M3 8h9a5 5 0 010 10H8"/></svg></button>
+        <button type="button" class="icon-btn" id="btnRedo" data-i18n-title="Yinele (Ctrl+Y)"><svg viewBox="0 0 20 20"><path d="M13 4l4 4-4 4M17 8H8a5 5 0 000 10h4"/></svg></button>
+      </div>
+      <div class="tb-group">
+        <span class="lang-label tb-hide-md" data-i18n="Belge dili">Belge dili</span>
+        <div class="seg" id="docLang" role="group" aria-label="Belge dili">
+          <button type="button" data-lang="tr" class="active">TR</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="de">DE</button>
+        </div>
+      </div>
+      <div class="tb-spacer"></div>
+      <div class="tb-group tb-actions">
+        <button type="button" class="btn btn-sm" id="btnSave" data-i18n="Kaydet" data-i18n-title="Kaydet (Ctrl+S) – değişiklikler zaten otomatik kaydedilir">Kaydet</button>
+        <button type="button" class="btn btn-sm" id="btnCover" data-i18n="Kapak" data-i18n-title="Kapak bilgileri ve kapak tasarımı">Kapak</button>
+        <button type="button" class="btn btn-sm" id="btnViews" data-i18n="Görünümler" data-i18n-title="STEP'ten görünümleri yeniden üret (eksen seçimi)">Görünümler</button>
+        <button type="button" class="btn btn-sm btn-primary" id="btnPdf" data-i18n="İndir (PDF / HTML)" data-i18n-title="Seçilen dil ve bölümlerle PDF ya da HTML olarak indir (Ctrl+P)">İndir (PDF / HTML)</button>
+      </div>
+    </header>
+
+    <aside class="left-panel">
+      <nav class="panel-tabs" data-panel="left">
+        <button type="button" class="panel-tab active" data-tab="sections" data-i18n="Bölümler">Bölümler</button>
+        <button type="button" class="panel-tab" data-tab="files" data-i18n="Dosyalar">Dosyalar</button>
+      </nav>
+      <section class="panel-body" id="tab-sections"><div id="sectionList" class="sec-list"></div></section>
+      <section class="panel-body hidden" id="tab-files"><div id="fileList"></div></section>
+    </aside>
+
+    <main class="canvas-wrap" id="canvasWrap">
+      <div class="cv-bar">
+        <div class="seg" id="cvMode" role="group">
+          <button type="button" data-mode="doc" class="active" data-i18n="Belge">Belge</button><button type="button" data-mode="picker" data-i18n="Nokta yerleştirme">Nokta yerleştirme</button>
+        </div>
+        <span class="cv-info" id="cvInfo"></span>
+        <div class="tb-spacer"></div>
+        <button type="button" class="btn btn-sm btn-ghost" id="btnRefresh" data-i18n="Yenile" data-i18n-title="Önizlemeyi yenile">Yenile</button>
+      </div>
+      <iframe id="preview" class="preview" title="Belge önizleme"></iframe>
+      <div id="cvEmpty" class="cv-empty hidden"></div>
+      <div id="picker" class="picker hidden"></div>
+      <div id="cvBusy" class="cv-busy hidden" data-i18n="Önizleme güncelleniyor…">Önizleme güncelleniyor…</div>
+    </main>
+
+    <aside class="right-panel">
+      <nav class="panel-tabs" data-panel="right">
+        <button type="button" class="panel-tab active" data-tab="edit" data-i18n="Düzenle">Düzenle</button>
+        <button type="button" class="panel-tab" data-tab="checks"><span data-i18n="Eksikler">Eksikler</span> <span id="checkBadge" class="badge hidden"></span></button>
+      </nav>
+      <section class="panel-body" id="tab-edit"><div id="inspector" class="inspector"></div></section>
+      <section class="panel-body hidden" id="tab-checks"><div id="checkList" class="check-list"></div></section>
+    </aside>
+
+    <footer class="bottombar">
+      <span id="statusDoc"></span>
+      <div class="tb-spacer"></div>
+      <span id="statusJob" class="job"></span>
+      <button type="button" class="db-chip" id="dbChip"></button>
+      <span id="statusFolder"></span>
+      <span class="lang-label" data-i18n="Program dili">Program dili</span>
+      <div class="seg seg-xs ui-lang" role="group" aria-label="Program dili">
+        <button type="button" data-ui-lang="tr">TR</button><button type="button" data-ui-lang="en">EN</button><button type="button" data-ui-lang="de">DE</button>
+      </div>
+    </footer>
+  </div>
+
+  <div id="coverStudio" class="cover-studio hidden"></div>
+  <div id="modalRoot"></div>
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script src="/app/i18n-dict.js"></script>
+  <script src="/app/i18n.js"></script>
+  <script src="/belge/belge.js"></script>
+  <script src="/app/sections.js"></script>
+  <script src="/app/form.js"></script>
+  <script src="/app/checks.js"></script>
+  <script src="/app/studio.js"></script>
+  <script src="/app/app.js"></script>
+</body>
+</html>

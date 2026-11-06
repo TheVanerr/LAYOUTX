@@ -1,0 +1,348 @@
+{
+  "_yorum": "Layout şablonu – TOMTAŞ standardı (bkz. LAYOUT-KURALLARI.md). Yeni proje açıldığında bu dosya kopyalanır; geometri (origin/boy/en/yükseklik) STEP'ten otomatik doldurulur, 'rel' verilen bağlantı noktaları makine kutusuna göre yerleştirilir ({L},{W},{H} yer tutucuları ölçülerle değiştirilir). Elektrik metinlerindeki {A} (ana şalter), {kesit} (kablo kesiti) ve {V} (gerilim) paftada değerleriyle yazılır. Boş bırakılan alanlar paftada gösterilmez.",
+  "makine": {
+    "model": "",
+    "proje": "",
+    "dosya_adi": "",
+    "tam_ad": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "seri_no": "",
+    "musteri": "",
+    "firma": "DOLFIN",
+    "tarih": "",
+    "rev": "00",
+    "hazirlayan": "Fatih GÜRAL",
+    "kontrol": "Furkan BIÇAK",
+    "onay": "Furkan BIÇAK",
+    "kaynak_step": "",
+    "revizyonlar": []
+  },
+  "elektrik": {
+    "besleme": {
+      "tr": "3~ {V} V AC, 50 Hz – 3P + N + PE (L1, L2, L3, N, PE)",
+      "en": "3-phase {V} V AC, 50 Hz – 3P + N + PE (L1, L2, L3, N, PE)",
+      "de": "3~ {V} V AC, 50 Hz – 3P + N + PE (L1, L2, L3, N, PE)"
+    },
+    "gerilim_v": 380,
+    "toplam_guc_kw": 0,
+    "ana_salter_a": 63,
+    "cos_phi": 0.85,
+    "kumanda": {
+      "tr": "24 V DC",
+      "en": "24 V DC",
+      "de": "24 V DC"
+    },
+    "kontrol": {
+      "tr": "PLC + emniyet rölesi",
+      "en": "PLC + safety relay",
+      "de": "SPS + Sicherheitsrelais"
+    },
+    "ust_koruma": {
+      "tr": "Müşteri dağıtım panosunda 1 adet {A} A sigorta (3 kutuplu, L1-L2-L3)",
+      "en": "1 × {A} A circuit breaker (3-pole, L1-L2-L3) in the customer's distribution board",
+      "de": "1 × Leitungsschutzschalter {A} A (3-polig, L1-L2-L3) in der kundenseitigen Verteilung"
+    },
+    "rcd": {
+      "tr": "1 adet {A} A / 30 mA kaçak akım koruma rölesi, 4 kutuplu (L1-L2-L3-N)",
+      "en": "1 × {A} A / 30 mA residual-current circuit breaker, 4-pole (L1-L2-L3-N)",
+      "de": "1 × FI-Schutzschalter {A} A / 30 mA, 4-polig (L1-L2-L3-N)"
+    },
+    "kablo_oneri": {
+      "tr": "5 × {kesit} mm² Cu, 3P + N + PE (5–20 m arası tüm uzunluklarda); bkz. Besleme kablosu ve koruma",
+      "en": "5 × {kesit} mm² Cu, 3P + N + PE (all lengths from 5 to 20 m); see Supply cable and protection",
+      "de": "5 × {kesit} mm² Cu, 3P + N + PE (alle Längen von 5 bis 20 m); siehe Zuleitung und Absicherung"
+    },
+    "kablo_giris": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "topraklama": {
+      "tr": "Tesiste standarda uygun koruma topraklama hattı (PE) bulunması zorunludur. PE hattı nötr (N) hattından ayrı ve yalıtılmış olmalıdır (TN-S); TS HD 60364-5-54 ve Elektrik Tesislerinde Topraklamalar Yönetmeliği'ne uygun olmalıdır. PE kesiti {kesit} mm² Cu.",
+      "en": "A standard-compliant protective earth conductor (PE) is mandatory on site. PE must be separate from and insulated against the neutral conductor (N) (TN-S) and comply with IEC 60364-5-54 and the local earthing regulations. PE cross-section {kesit} mm² Cu.",
+      "de": "Ein normgerechter Schutzleiter (PE) ist bauseits zwingend erforderlich. PE muss vom Neutralleiter (N) getrennt und isoliert geführt werden (TN-S) und IEC 60364-5-54 sowie den örtlichen Erdungsvorschriften entsprechen. PE-Querschnitt {kesit} mm² Cu."
+    },
+    "faz_sirasi": {
+      "tr": "L1-L2-L3 (sağ döner alan)",
+      "en": "L1-L2-L3 (clockwise rotating field)",
+      "de": "L1-L2-L3 (Rechtsdrehfeld)"
+    },
+    "kablo": {
+      "damar_sayisi": 5,
+      "kesit_mm2": 16,
+      "yapi": "3P + N + PE",
+      "uzunluklar_m": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "rcd_ma": 30,
+      "rho_ohm_mm2_m": 0.0225,
+      "giris_kisa": {
+        "tr": "",
+        "en": "",
+        "de": ""
+      },
+      "tanim": {
+        "tr": "Besleme kablosu 5 damarlıdır: 3 faz (L1, L2, L3) + nötr (N) + koruma topraklaması (PE); {V} V, 50 Hz. Damar renkleri IEC 60445'e göredir.",
+        "en": "The supply cable has 5 cores: 3 phases (L1, L2, L3) + neutral (N) + protective earth (PE); {V} V, 50 Hz. Core colours per IEC 60445.",
+        "de": "Die Zuleitung ist 5-adrig: 3 Außenleiter (L1, L2, L3) + Neutralleiter (N) + Schutzleiter (PE); {V} V, 50 Hz. Aderfarben nach IEC 60445."
+      },
+      "tip": {
+        "tr": "H07RN-F 5G{kesit} (esnek, kauçuk kılıflı) veya NYY-J 5 × {kesit} mm² (sabit döşeme)",
+        "en": "H07RN-F 5G{kesit} (flexible, rubber-sheathed) or NYY-J 5 × {kesit} mm² (fixed installation)",
+        "de": "H07RN-F 5G{kesit} (flexibel, Gummimantel) oder NYY-J 5 × {kesit} mm² (feste Verlegung)"
+      },
+      "sartlar": [
+        {
+          "tr": "{A} A sigorta: makinenin besleme hattı için 1 adet, 3 kutuplu (L1-L2-L3).",
+          "en": "{A} A circuit breaker: 1 unit for the machine supply line, 3-pole (L1-L2-L3).",
+          "de": "Leitungsschutzschalter {A} A: 1 Stück für die Maschinenzuleitung, 3-polig (L1-L2-L3)."
+        },
+        {
+          "tr": "{A} A / 30 mA kaçak akım koruma rölesi: 1 adet, 4 kutuplu (L1-L2-L3-N).",
+          "en": "{A} A / 30 mA residual-current circuit breaker: 1 unit, 4-pole (L1-L2-L3-N).",
+          "de": "FI-Schutzschalter {A} A / 30 mA: 1 Stück, 4-polig (L1-L2-L3-N)."
+        },
+        {
+          "tr": "Topraklama hattı (PE): tesiste mutlaka bulunmalıdır. Hat nötr (N) hattından ayrı ve yalıtılmış olmalı (TN-S), TS HD 60364-5-54 / IEC 60364-5-54 ve Elektrik Tesislerinde Topraklamalar Yönetmeliği'ne uygun olmalıdır. Nötr ile topraklama makinede ve besleme hattında birleştirilmez.",
+          "en": "Protective earth conductor (PE): mandatory on site. It must be separate from and insulated against the neutral (N) (TN-S) and comply with IEC 60364-5-54 and the local earthing regulations. Neutral and earth are not bridged in the machine or in the supply line.",
+          "de": "Schutzleiter (PE): bauseits zwingend erforderlich. Er muss vom Neutralleiter (N) getrennt und isoliert geführt werden (TN-S) und IEC 60364-5-54 sowie den örtlichen Erdungsvorschriften entsprechen. N und PE werden weder in der Maschine noch in der Zuleitung verbunden."
+        },
+        {
+          "tr": "Besleme kablosu 5 × {kesit} mm² Cu (3P + N + PE), {V} V 50 Hz; kablo elektrik panosuna E noktasından girer.",
+          "en": "Supply cable 5 × {kesit} mm² Cu (3P + N + PE), {V} V 50 Hz; it enters the electrical panel at point E.",
+          "de": "Zuleitung 5 × {kesit} mm² Cu (3P + N + PE), {V} V 50 Hz; Einführung in den Schaltschrank am Punkt E."
+        }
+      ]
+    },
+    "notlar": [],
+    "yukler": []
+  },
+  "pnomatik": {
+    "basinc": {
+      "tr": "6 bar, kuru ve filtreli basınçlı hava",
+      "en": "6 bar, dry filtered compressed air",
+      "de": "6 bar, trockene gefilterte Druckluft"
+    },
+    "baglanti": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "hazirlik": {
+      "tr": "Filtre-regülatör",
+      "en": "Filter-regulator",
+      "de": "Filterregler"
+    },
+    "tuketiciler": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    }
+  },
+  "diger": {
+    "sicaklik": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "su_basinc": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "su": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "su_dolum": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "tahliye": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "tahliye_hat": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "egzoz": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    }
+  },
+  "detaylar": [],
+  "geometri": {
+    "_yorum": "Görünüm koordinatları: x = sağ (uzunluk), y = arkaya doğru (küçük y = operatör tarafı), z = yukarı. Uygulama STEP'ten doldurur.",
+    "eksen": {
+      "x": "",
+      "y": "",
+      "z": ""
+    },
+    "zemin_model_y": 0,
+    "origin": [
+      0,
+      0,
+      0
+    ],
+    "boy": 0,
+    "en": 0,
+    "yukseklik": 0,
+    "servis_alani": {
+      "on": 1000,
+      "arka": 1000,
+      "sol": 1000,
+      "sag": 1000
+    },
+    "noktalar": {
+      "E": {
+        "rel": [
+          0.95,
+          0.0,
+          0.3
+        ],
+        "gorunum": "on",
+        "ad": {
+          "tr": "Elektrik girişi",
+          "en": "Electrical entry",
+          "de": "Einspeisung"
+        },
+        "detay": {
+          "tr": "",
+          "en": "",
+          "de": ""
+        }
+      },
+      "P": {
+        "rel": [
+          0.05,
+          1.0,
+          0.5
+        ],
+        "gorunum": "arka",
+        "ad": {
+          "tr": "Basınçlı hava girişi",
+          "en": "Compressed-air inlet",
+          "de": "Druckluftanschluss"
+        },
+        "detay": {
+          "tr": "",
+          "en": "",
+          "de": ""
+        }
+      },
+      "W": {
+        "rel": [
+          0.02,
+          1.0,
+          0.3
+        ],
+        "gorunum": "arka",
+        "ad": {
+          "tr": "Su girişi",
+          "en": "Water inlet",
+          "de": "Wasserzulauf"
+        },
+        "detay": {
+          "tr": "",
+          "en": "",
+          "de": ""
+        }
+      },
+      "D": {
+        "rel": [
+          0.3,
+          1.0,
+          0.08
+        ],
+        "gorunum": "arka",
+        "ad": {
+          "tr": "Tahliye",
+          "en": "Drain",
+          "de": "Ablauf"
+        },
+        "detay": {
+          "tr": "",
+          "en": "",
+          "de": ""
+        }
+      },
+      "X": {
+        "rel": [
+          0.6,
+          0.7,
+          1.0
+        ],
+        "gorunum": "yan",
+        "ad": {
+          "tr": "Egzoz çıkışı",
+          "en": "Exhaust outlet",
+          "de": "Abluftaustritt"
+        },
+        "detay": {
+          "tr": "",
+          "en": "",
+          "de": ""
+        }
+      }
+    },
+    "ek_olculer_ust": [],
+    "ek_olculer_on": [],
+    "ek_olculer_yan": [],
+    "ek_olculer_arka": [],
+    "arka_baslik": {
+      "tr": "",
+      "en": "",
+      "de": ""
+    },
+    "ordinat_arka": [],
+    "etiketler_ust": [],
+    "etiketler_arka": [],
+    "olcu_satirlari": [
+      {
+        "ad": {
+          "tr": "Toplam L × W × H",
+          "en": "Overall L × W × H",
+          "de": "Gesamt L × B × H"
+        },
+        "deger": "{L} × {W} × {H} mm"
+      },
+      {
+        "ad": {
+          "tr": "Ağırlık (boş)",
+          "en": "Weight (empty)",
+          "de": "Gewicht (leer)"
+        },
+        "deger": ""
+      }
+    ],
+    "notlar": [
+      {
+        "tr": "Ölçüler mm'dir.",
+        "en": "Dimensions in mm.",
+        "de": "Maße in mm."
+      },
+      {
+        "tr": "Makinenin her yanında 1000 mm boşluk bırakılmalıdır. Makine ayarlı ayaklar üzerinde durur. Kurulumda makine, ayarlı ayaklarla su terazisi kullanılarak boyuna ve enine teraziye alınmalıdır; zemin düz ve yük taşıyabilen beton olmalıdır.",
+        "en": "Keep 1000 mm free on all sides. The machine stands on adjustable feet. At installation the machine must be levelled lengthwise and crosswise with a spirit level using the adjustable feet; the floor must be flat, load-bearing concrete.",
+        "de": "Rundum 1000 mm freihalten. Die Maschine steht auf Stellfüßen. Bei der Aufstellung ist die Maschine mit den Stellfüßen und einer Wasserwaage in Längs- und Querrichtung waagerecht auszurichten; der Boden muss eben und tragfähig (Beton) sein."
+      },
+      {
+        "tr": "X ölçüleri makinenin sol ucundan alınmıştır; arka görünümde sol uç resmin sağ tarafındadır.",
+        "en": "X dimensions are measured from the left end; in the rear view the left end appears on the right.",
+        "de": "X-Maße ab dem linken Ende; in der Rückansicht liegt das linke Ende rechts."
+      }
+    ]
+  }
+}

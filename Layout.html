@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Çizim Motoru</title>
+  <link rel="icon" type="image/png" href="app/icon.png">
+  <style>
+    :root { color-scheme: dark; --bg: #14161b; --card: #1b1e25; --line: #2f343e; --text: #e8eaef; --muted: #aab0bc; --red: #d40000; --ok: #3fb56f; --warn: #f5a524; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html, body { margin: 0; min-height: 100%; }
+    body { background: var(--bg); color: var(--text); font: 14px/1.5 'Segoe UI', system-ui, sans-serif; display: flex; align-items: center; justify-content: center; padding: 32px 16px; min-height: 100vh; }
+    main { width: 100%; max-width: 640px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: 10px; padding: 26px 28px 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, .5); }
+    .head { display: flex; align-items: center; gap: 16px; }
+    .head img.icon { width: 64px; height: 64px; border-radius: 14px; }
+    .head h1 { margin: 0; font-size: 21px; font-weight: 600; }
+    .head p { margin: 2px 0 0; color: var(--muted); font-size: 12.5px; letter-spacing: .03em; }
+    .head .sp { flex: 1; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; align-self: flex-start; }
+    .seg button { background: #23272f; color: var(--muted); border: 0; border-right: 1px solid var(--line); padding: 5px 10px; font: 600 12px 'Segoe UI', sans-serif; cursor: pointer; }
+    .seg button:last-child { border-right: 0; }
+    .seg button.active { background: var(--red); color: #fff; }
+    .status { display: flex; align-items: center; gap: 10px; margin: 22px 0 16px; padding: 11px 14px; background: #23272f; border-radius: 8px; font-size: 13px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--warn); flex-shrink: 0; }
+    .dot.ok { background: var(--ok); }
+    .dot.wait { animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: .3; } }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font: 600 13.5px 'Segoe UI', sans-serif; color: var(--text); background: #2b3039; border: 1px solid var(--line); border-radius: 7px; padding: 10px 16px; cursor: pointer; }
+    .btn:hover { background: #363c47; }
+    .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .btn.primary:hover { background: #ff0000; }
+    .btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    h2 { font-size: 13px; font-weight: 600; margin: 24px 0 8px; color: var(--muted); letter-spacing: .03em; text-transform: uppercase; }
+    ol, ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; }
+    li { margin-bottom: 5px; }
+    code { background: #0d0f13; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; font-size: 12px; color: var(--text); }
+    .foot { margin-top: 18px; color: #6f7684; font-size: 11.5px; text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+      <div class="head">
+        <img class="icon" src="app/icon.png" alt="">
+        <div>
+          <h1 data-k="title">Layout Çizim Motoru</h1>
+          <p data-k="sub">Yerleşim Planı · STEP → A3 pafta · TR / EN / DE</p>
+        </div>
+        <span class="sp"></span>
+        <div class="seg" role="group" aria-label="Dil / Language / Sprache">
+          <button type="button" data-lang="tr">TR</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="de">DE</button>
+        </div>
+      </div>
+
+      <div class="status" role="status"><span class="dot wait" id="dot"></span><span id="state" data-k="checking">Uygulama aranıyor…</span></div>
+
+      <div class="actions">
+        <a class="btn primary" id="start" href="layoutx://start">
+          <svg viewBox="0 0 20 20"><path d="M6 4l10 6-10 6z"/></svg><span data-k="start">Uygulamayı başlat</span></a>
+        <a class="btn" href="layoutx://app">
+          <svg viewBox="0 0 20 20"><rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M2.5 7h15"/></svg><span data-k="window">Ayrı pencerede aç</span></a>
+        <a class="btn" id="open" href="http://127.0.0.1:8765/" hidden>
+          <svg viewBox="0 0 20 20"><path d="M8 4H4v12h12v-4M11 3h6v6M17 3l-8 8"/></svg><span data-k="open">Bu sekmede aç</span></a>
+      </div>
+
+      <h2 data-k="howTitle">Nasıl çalışır</h2>
+      <ol>
+        <li data-k="how1">"Uygulamayı başlat" uygulamayı arka planda çalıştırır ve bu sekmede açar. Tarayıcı izin isterse "Aç"a tıklayın (her zaman izin ver).</li>
+        <li data-k="how2">"Ayrı pencerede aç" uygulamayı adres çubuksuz kendi penceresinde açar; masaüstündeki "Layout Çizim Motoru" simgesi de aynısını yapar.</li>
+        <li data-k="how3">Düğmeler çalışmıyorsa bir kez LAYOUT klasöründeki Kurulum.bat dosyasına çift tıklayın (masaüstü simgesi ve başlatma bağlantısı kurulur; yönetici izni gerekmez).</li>
+      </ol>
+
+      <h2 data-k="pdfTitle">PDF çıktısı</h2>
+      <ul>
+        <li data-k="pdf1">Uygulamada üst çubuktaki "PDF İndir": dil (TR / EN / DE) ve bölüm seçilir; PDF proje klasörüne kaydedilir ve indirilir.</li>
+        <li data-k="pdf2">Teslim paftası (projects/&lt;proje&gt;/…-Layout.html) uygulama olmadan da açılır: çift tıklayın, sağ üstteki "PDF indir" seçilen dillerde PDF verir; "Yazdır" tarayıcının "PDF olarak kaydet"iyle çalışır.</li>
+      </ul>
+    </div>
+    <p class="foot">LAYOUT/Layout.html · http://127.0.0.1:8765</p>
+  </main>
+
+  <script>
+    (function () {
+      var URL = 'http://127.0.0.1:8765/';
+      var T = {
+        tr: {
+          title: 'Layout Çizim Motoru', sub: 'Yerleşim Planı · STEP → A3 pafta · TR / EN / DE',
+          checking: 'Uygulama aranıyor…', off: 'Uygulama çalışmıyor. "Uygulamayı başlat"a tıklayın.', starting: 'Başlatılıyor… (ilk açılış birkaç saniye sürebilir)',
+          ready: 'Uygulama hazır, açılıyor…', start: 'Uygulamayı başlat', window: 'Ayrı pencerede aç', open: 'Bu sekmede aç',
+          noLaunch: 'Başlatılamadı. Bir kez Kurulum.bat dosyasına çift tıklayın ya da Layout.bat ile başlatın.',
+          howTitle: 'Nasıl çalışır',
+          how1: '"Uygulamayı başlat" uygulamayı arka planda çalıştırır ve bu sekmede açar. Tarayıcı izin isterse "Aç"a tıklayın (her zaman izin ver).',
+          how2: '"Ayrı pencerede aç" uygulamayı adres çubuksuz kendi penceresinde açar; masaüstündeki "Layout Çizim Motoru" simgesi de aynısını yapar.',
+          how3: 'Düğmeler çalışmıyorsa bir kez LAYOUT klasöründeki Kurulum.bat dosyasına çift tıklayın (masaüstü simgesi ve başlatma bağlantısı kurulur; yönetici izni gerekmez).',
+          pdfTitle: 'PDF çıktısı',
+          pdf1: 'Uygulamada üst çubuktaki "PDF İndir": dil (TR / EN / DE) ve bölüm seçilir; PDF proje klasörüne kaydedilir ve indirilir.',
+          pdf2: 'Teslim paftası (projects/<proje>/…-Layout.html) uygulama olmadan da açılır: çift tıklayın, sağ üstteki "PDF indir" seçilen dillerde PDF verir; "Yazdır" tarayıcının "PDF olarak kaydet"iyle çalışır.'
+        },
+        en: {
+          title: 'Layout Drawing Engine', sub: 'Installation layout · STEP → A3 sheets · TR / EN / DE',
+          checking: 'Looking for the program…', off: 'The program is not running. Click "Start program".', starting: 'Starting… (the first start can take a few seconds)',
+          ready: 'Program ready, opening…', start: 'Start program', window: 'Open in own window', open: 'Open in this tab',
+          noLaunch: 'Could not start. Double-click Kurulum.bat once, or start with Layout.bat.',
+          howTitle: 'How it works',
+          how1: '"Start program" runs the program in the background and opens it in this tab. If the browser asks for permission, click "Open" (always allow).',
+          how2: '"Open in own window" opens the program in its own window without an address bar; the "Layout Çizim Motoru" desktop icon does the same.',
+          how3: 'If the buttons do not work, double-click Kurulum.bat in the LAYOUT folder once (installs the desktop icon and the start link; no administrator rights needed).',
+          pdfTitle: 'PDF output',
+          pdf1: '"Download PDF" in the program\'s top bar: choose the languages (TR / EN / DE) and sections; the PDF is saved in the project folder and downloaded.',
+          pdf2: 'The delivery layout (projects/<project>/…-Layout.html) also opens without the program: double-click it, "Download PDF" (top right) gives the PDF in the chosen languages; "Print" works with the browser\'s "Save as PDF".'
+        },
+        de: {
+          title: 'Layout-Zeichenprogramm', sub: 'Aufstellungsplan · STEP → A3-Blätter · TR / EN / DE',
+          checking: 'Programm wird gesucht…', off: 'Das Programm läuft nicht. Auf „Programm starten" klicken.', starting: 'Wird gestartet… (der erste Start kann einige Sekunden dauern)',
+          ready: 'Programm bereit, wird geöffnet…', start: 'Programm starten', window: 'Im eigenen Fenster öffnen', open: 'In diesem Tab öffnen',
+          noLaunch: 'Start fehlgeschlagen. Einmal Kurulum.bat doppelklicken oder mit Layout.bat starten.',
+          howTitle: 'So funktioniert es',
+          how1: '„Programm starten" führt das Programm im Hintergrund aus und öffnet es in diesem Tab. Fragt der Browser nach Erlaubnis, auf „Öffnen" klicken (immer erlauben).',
+          how2: '„Im eigenen Fenster öffnen" öffnet das Programm in einem eigenen Fenster ohne Adressleiste; das Desktop-Symbol „Layout Çizim Motoru" macht dasselbe.',
+          how3: 'Wenn die Schaltflächen nicht funktionieren, einmal Kurulum.bat im Ordner LAYOUT doppelklicken (richtet Desktop-Symbol und Startverknüpfung ein; keine Administratorrechte nötig).',
+          pdfTitle: 'PDF-Ausgabe',
+          pdf1: '„PDF herunterladen" in der oberen Leiste des Programms: Sprachen (TR / EN / DE) und Abschnitte wählen; das PDF wird im Projektordner gespeichert und heruntergeladen.',
+          pdf2: 'Der Lieferplan (projects/<Projekt>/…-Layout.html) öffnet sich auch ohne Programm: doppelklicken, „PDF herunterladen" (oben rechts) liefert das PDF in den gewählten Sprachen; „Drucken" funktioniert mit „Als PDF speichern" des Browsers.'
+        }
+      };
+      var lang = 'tr';
+      try { var s = localStorage.getItem('layout-launch-lang'); if (T[s]) lang = s; } catch (e) {}
+      if (!localStorage || !T[lang]) lang = 'tr';
+      var stateKey = 'checking';
+      var dot = document.getElementById('dot');
+      var st = document.getElementById('state');
+      function apply() {
+        document.documentElement.lang = lang;
+        document.title = T[lang].title;
+        [].forEach.call(document.querySelectorAll('[data-k]'), function (el) { el.textContent = T[lang][el.getAttribute('data-k')]; });
+        st.textContent = T[lang][stateKey];
+        [].forEach.call(document.querySelectorAll('[data-lang]'), function (b) { b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+        document.getElementById('open').href = URL + '?ui=' + lang;
+      }
+      function setState(k, cls) {
+        stateKey = k;
+        st.textContent = T[lang][k];
+        dot.className = 'dot ' + (cls || '');
+      }
+      [].forEach.call(document.querySelectorAll('[data-lang]'), function (b) {
+        b.addEventListener('click', function () {
+          lang = b.getAttribute('data-lang');
+          try { localStorage.setItem('layout-launch-lang', lang); } catch (e) {}
+          apply();
+        });
+      });
+      // Sunucu var mı? (dosyadan açılan sayfa API'ye erişemez; simge resmi yüklenirse çalışıyor demektir)
+      function probe(cb) {
+        var img = new Image();
+        var done = false;
+        var t = setTimeout(function () { if (!done) { done = true; cb(false); } }, 1500);
+        img.onload = function () { if (!done) { done = true; clearTimeout(t); cb(true); } };
+        img.onerror = function () { if (!done) { done = true; clearTimeout(t); cb(false); } };
+        img.src = URL + 'app/icon.png?t=' + Date.now();
+      }
+      var waiting = 0;
+      function go() { location.href = URL + '?ui=' + lang; }
+      function loop() {
+        probe(function (ok) {
+          if (ok) {
+            document.getElementById('open').hidden = false;
+            setState('ready', 'ok');
+            setTimeout(go, 600);
+            return;
+          }
+          if (waiting > 0) {
+            waiting -= 1;
+            if (waiting === 0) setState('noLaunch', '');
+          } else if (stateKey === 'checking') setState('off', '');
+          setTimeout(loop, 1200);
+        });
+      }
+      document.getElementById('start').addEventListener('click', function () {
+        waiting = 20;
+        setState('starting', 'wait');
+      });
+      apply();
+      loop();
+    })();
+  </script>
+</body>
+</html>
