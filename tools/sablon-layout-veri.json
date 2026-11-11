@@ -1,5 +1,5 @@
 {
-  "_yorum": "Layout şablonu – TOMTAŞ standardı (bkz. LAYOUT-KURALLARI.md). Yeni proje açıldığında bu dosya kopyalanır; geometri (origin/boy/en/yükseklik) STEP'ten otomatik doldurulur, 'rel' verilen bağlantı noktaları makine kutusuna göre yerleştirilir ({L},{W},{H} yer tutucuları ölçülerle değiştirilir). Elektrik metinlerindeki {A} (ana şalter), {kesit} (kablo kesiti) ve {V} (gerilim) paftada değerleriyle yazılır. Boş bırakılan alanlar paftada gösterilmez.",
+  "_yorum": "Layout şablonu – ÇNK standardı (bkz. LAYOUT-KURALLARI.md). Yeni proje açıldığında bu dosya kopyalanır; geometri (origin/boy/en/yükseklik) STEP'ten otomatik doldurulur, 'rel' verilen bağlantı noktaları makine kutusuna göre yerleştirilir ({L},{W},{H} yer tutucuları ölçülerle değiştirilir). Elektrik metinlerindeki {A} (ana şalter), {kesit} (kablo kesiti) ve {V} (gerilim) paftada değerleriyle yazılır. Boş bırakılan alanlar paftada gösterilmez.",
   "makine": {
     "model": "",
     "proje": "",

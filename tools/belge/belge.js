@@ -723,7 +723,8 @@
       return;
     }
 
-    const embed = /[?&]embed=1/.test(location.search);
+    const O = (typeof window !== 'undefined' && window.LB_OPTS) || {};   // uygulamanın önizlemesi (srcdoc) seçenekleri
+    const embed = /[?&]embed=1/.test(location.search) || !!O.embed;
     if (embed) document.body.classList.add('lb-embed');
     const mount = document.getElementById('lb-pages');
     const state = { lang: 'tr', total: 0, first: {}, cover: null };
@@ -794,7 +795,7 @@
     let saved = null;
     try { saved = localStorage.getItem('layout-doc-lang'); } catch (e) { /* yok */ }
     const fromUrl = /[?&]lang=(tr|en|de)/.exec(location.search);
-    render(fromUrl ? fromUrl[1] : (TEXT[saved] ? saved : 'tr'));
+    render(fromUrl ? fromUrl[1] : (TEXT[O.lang] ? O.lang : (TEXT[saved] ? saved : 'tr')));
     window.LBDoc = {
       goto, setLang: render, state, fit,
       /** Uygulamadan: tarayıcıyla yazdır / PDF olarak kaydet. opts: { only, cover } */

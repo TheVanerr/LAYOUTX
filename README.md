@@ -11,13 +11,29 @@ PDF ya da HTML çıktı. Arayüz P&PX (P&ID / pnömatik) programlarıyla aynıd�
 
 Gereksinimler: Windows, Python 3.11 (numpy, OCP / OpenCASCADE, vtk), Edge ya da Chrome.
 
+## Web sürümü (PWA, GitHub Pages)
+
+Adres: https://thevanerr.github.io/LAYOUTX/ · telefona ya da bilgisayara **Uygulamayı yükle** ile kurulur
+(manifest kimliği `cnk-layoutx-cizim-motoru-3f7a2c91`).
+
+- Kurulum (bir kez): depo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+  Her `main` gönderiminde `.github/workflows/pages.yml` denetler (JS sözdizimi, eşitleme testi), siteyi
+  `tools/build_site.py` ile üretir ve yayınlar.
+- Web sürümü sunucusuzdur: veriler tarayıcıda (IndexedDB) durur ve doğrudan GitHub API ile `layoutx-veri`
+  deposuna eşitlenir. Erişim anahtarı yalnız o tarayıcıda saklanır; siteye ya da bu depoya hiçbir veri girmez.
+- Kapak, metinler, önizleme, HTML indirme ve PDF (tarayıcının "PDF olarak kaydet"i) çalışır.
+  STEP okuma ve görünüm üretme yalnız masaüstündedir; üretilen görünümler veritabanıyla web'e gelir.
+- Yerelde deneme: `python tools/build_site.py _site` → `_site` klasörünü herhangi bir statik sunucuyla açın
+  (`?web=1` masaüstü sunucusunda da web kipini zorlar).
+
 ## Klasörler
 
 | Yol | İçerik |
 |---|---|
 | `layout_app.py` | Yerel sunucu (http://127.0.0.1:8765) |
 | `layout_db.py` | Veritabanı: GitHub deposuyla eşitleme |
-| `app/` | Arayüz |
+| `app/` | Arayüz (`web.js`: web kipi depolama + eşitleme, `sw.js` / `manifest.webmanifest`: PWA, `icons/`) |
+| `.github/workflows/pages.yml` | GitHub Pages yayını |
 | `tools/` | STEP okuma, görünümler, belge üretici, belge çalışma zamanı (`tools/belge/`) |
 | `projects/` | Projeler (programla gelmez; veritabanı deposundan eşitlenir) |
 

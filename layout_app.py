@@ -42,7 +42,7 @@ DESIGNS = ("bant", "ust", "kose")
 BRANDS = ("DOLFIN", "ENVA", "VICO", "KSYSTEM")
 MIME = {".html": "text/html; charset=utf-8", ".json": "application/json; charset=utf-8", ".png": "image/png",
         ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml",
-        ".pdf": "application/pdf", ".ttf": "font/ttf", ".txt": "text/plain; charset=utf-8", ".md": "text/plain; charset=utf-8",
+        ".pdf": "application/pdf", ".webmanifest": "application/manifest+json", ".ico": "image/x-icon", ".ttf": "font/ttf", ".txt": "text/plain; charset=utf-8", ".md": "text/plain; charset=utf-8",
         ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
 
 
@@ -56,7 +56,7 @@ def slug(s):
 
 
 def ascii_upper(s):
-    """Klasör adındaki müşteri: Türkçe karaktersiz büyük harf (örn. MİTAŞ -> MITAS)."""
+    """Klasör adındaki müşteri: Türkçe karaktersiz büyük harf (örn. ŞİŞECAM -> SISECAM)."""
     return str(s).translate(TR_MAP).upper()
 
 
@@ -469,6 +469,53 @@ def print_pdf(name, langs, secs=None, cover=True):
     return os.path.basename(out)
 
 
+def find_chrome():
+    for b in (os.environ.get("CHROME_PATH"), r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+              r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+              r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+              shutil.which("chrome"), shutil.which("msedge"), shutil.which("google-chrome"), shutil.which("chromium")):
+        if b and os.path.exists(b):
+            return b
+    raise RuntimeError("Chrome / Edge bulunamadı (CHROME_PATH ortam değişkeniyle verilebilir)")
+
+
+def safe_file(fn, exts):
+    fn = safe_name(os.path.basename(str(fn or "")))
+    if not fn or not fn.lower().endswith(exts):
+        raise ValueError("geçersiz dosya adı")
+    return fn
+
+
+def print_html(name, html_text, file, langs, secs=None, cover=True):
+    """Uygulamanın (tarayıcıda) ürettiği pafta HTML'ini headless tarayıcıyla A3 yatay PDF'e basar, proje klasörüne yazar."""
+    d = proj_dir(name)
+    if not find_veri(d):
+        raise ValueError("proje yok")
+    fn = safe_file(file, (".pdf",))
+    os.makedirs(os.path.join(d, "_work"), exist_ok=True)
+    src = os.path.join(d, "_work", "baski.html")
+    with open(src, "w", encoding="utf-8") as f:
+        f.write(html_text)
+    url = pathlib.Path(src).resolve().as_uri() + "#pdf-print=" + ",".join(langs)
+    if secs is not None:
+        url += "&secs=" + ",".join(re.sub(r"[^a-z]", "", x) for x in secs)
+    if not cover:
+        url += "&cover=0"
+    tmp = tempfile.mkdtemp(prefix="layout-pdf-")
+    try:
+        part = os.path.join(tmp, "out.pdf")
+        subprocess.run([find_chrome(), "--headless=new", "--disable-gpu", "--disable-crash-reporter", "--no-first-run",
+                        "--no-pdf-header-footer", "--virtual-time-budget=15000", "--user-data-dir=" + os.path.join(tmp, "profil"),
+                        "--print-to-pdf=" + part, url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=300,
+                       creationflags=NOWIN)
+        if not os.path.exists(part) or not os.path.getsize(part):
+            raise RuntimeError("tarayıcı PDF üretmedi")
+        shutil.move(part, os.path.join(d, fn))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    return fn
+
+
 def export_html(name, langs, secs=None, cover=True):
     """Seçilen diller arka arkaya tek HTML (kapak + antetli sayfalar, PDF gömülmez; içindeki düğme yazdırır)."""
     d = proj_dir(name)
@@ -550,6 +597,9 @@ class H(BaseHTTPRequestHandler):
             LAST_SEEN[0] = time.time()
         try:
             return fn()
+        except (ConnectionError, BrokenPipeError):   # tarayıcı isteği yarıda bıraktı (indirme iptali vb.): yanıt verilecek kimse yok
+            self.close_connection = True
+            return None
         except (ValueError, RuntimeError, KeyError, layout_db.GitHubError) as e:
             return self.send_json({"error": str(e)}, 400)
         except Exception as e:   # beklenmeyen hata: istemciye anlaşılır mesaj
@@ -563,6 +613,10 @@ class H(BaseHTTPRequestHandler):
         path, qs = self.q()
         if path in ("/", "/index.html"):
             return self.send_file(os.path.join(APPDIR, "index.html"))
+        if path in ("/sw.js", "/manifest.webmanifest"):     # PWA: kök kapsamı için kökten sunulur
+            return self.send_file(os.path.join(APPDIR, path[1:]))
+        if path.startswith("/tools/") and path.endswith(".json"):
+            return self.static(TOOLS, path[7:])
         if path.startswith("/app/"):
             return self.static(APPDIR, path[5:])
         if path.startswith("/belge/"):
@@ -710,6 +764,22 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json({"error": "Görünümler yok: önce STEP yükleyip görünümleri üretin"}, 400)
             start_job(name, "build", run_build)
             return self.send_json({"ok": True})
+        if path == "/api/print":
+            langs = [l for l in ("tr", "en", "de") if l in (req.get("langs") or [])]
+            if not langs or not isinstance(req.get("html"), str):
+                return self.send_json({"error": "En az bir dil seçin"}, 400)
+            secs = req.get("secs")
+            secs = [str(x) for x in secs] if isinstance(secs, list) else None
+            fn = print_html(name, req["html"], req.get("file") or "Layout.pdf", langs, secs, req.get("cover") is not False)
+            return self.send_json({"ok": True, "file": fn, "url": files_url(os.path.basename(proj_dir(name)), fn)})
+        if path == "/api/savefile":
+            d = proj_dir(name)
+            if not find_veri(d) or not isinstance(req.get("text"), str):
+                return self.send_json({"error": "proje yok"}, 404)
+            fn = safe_file(req.get("file"), (".html",))
+            with open(os.path.join(d, fn), "w", encoding="utf-8") as f:
+                f.write(req["text"])
+            return self.send_json({"ok": True, "file": fn, "url": files_url(os.path.basename(d), fn)})
         if path in ("/api/pdf", "/api/export"):
             langs = [l for l in ("tr", "en", "de") if l in (req.get("langs") or [])]
             if not langs:

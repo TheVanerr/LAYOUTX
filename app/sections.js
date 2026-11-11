@@ -60,7 +60,7 @@ const LayoutSections = (() => {
       fields: [
         { k: 'actions', buttons: [{ label: 'Kapak stüdyosunu aç', act: 'cover', primary: true }] },
         { k: 'row', cols: 2, fields: [
-          { k: 'text', path: 'makine.seri_no', label: 'Proje no (seri no)', ph: '0626051' },
+          { k: 'text', path: 'makine.seri_no', label: 'Proje no (seri no)', ph: '0000000' },
           { k: 'select', path: 'makine.firma', label: 'Marka', options: LayoutBelge.BRAND_LIST, def: 'DOLFIN' }
         ] },
         { k: 'mixed', path: 'makine.musteri', label: 'Müşteri' },

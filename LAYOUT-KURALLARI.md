@@ -1,13 +1,12 @@
 # Layout kuralları – ÇNK yerleşim planı standardı
 
-Her yeni yerleşim planı (layout) bu kurallarla üretilir. Referans pafta: **`0626051-TOMTA-ULT M200 3B L` (Rev C)** –
-bölüm sırası ve veri yapısı bu paftadakiyle aynıdır. Kapak, antet ve başlık bloğu P&ID / pnömatik dokümanlarıyla
+Her yeni yerleşim planı (layout) bu kurallarla üretilir. Bölüm sırası ve veri yapısı veritabanındaki referans paftayla aynıdır. Kapak, antet ve başlık bloğu P&ID / pnömatik dokümanlarıyla
 (P&PX) aynıdır. Uygulama: Layout Çizim Motoru (masaüstü simgesi, `Layout.html` ya da `python layout_app.py`; ilk kez `Kurulum.bat`). Komutlar ve araç zinciri: [tools/README.md](tools/README.md).
 
 ## 1. Klasör ve adlandırma
 
 - Proje klasörü: `LAYOUT/projects/<seri no>-<MÜŞTERİ>-<MODEL>/` (müşteri adı Türkçe karaktersiz büyük harf, örn.
-  `projects/0326067-MITAS-KBN 2B 1500`). Uygulamada "+ Yeni Proje" kapak bilgilerinden klasörü kendisi açar.
+  `projects/0000000-MUSTERI-MODEL 2B 1500`). Uygulamada "+ Yeni Proje" kapak bilgilerinden klasörü kendisi açar.
 - Klasör içeriği:
 
 | Dosya | İçerik |

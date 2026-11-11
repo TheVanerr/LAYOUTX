@@ -448,7 +448,7 @@ Yatay: a → b arası y (en), c = z konumu. Dikey: a → b arası z, c = y konum
 Yazı	Text	Text
 Yeni bağlantı noktası	New connection point	Neuer Anschlusspunkt
 Yeni Proje	New Project	Neues Projekt
-Yeni projeler bu değerlerle başlar (TOMTAŞ standardı). "rel" verilen bağlantı noktaları makine kutusuna göre yerleşir; {L} {W} {H} ölçülerle, {A} {kesit} {V} elektrik değerleriyle doldurulur.	New projects start with these values (TOMTAŞ standard). Connection points given as "rel" are placed relative to the machine envelope; {L} {W} {H} are filled with the dimensions, {A} {kesit} {V} with the electrical values.	Neue Projekte beginnen mit diesen Werten (TOMTAŞ-Standard). Anschlusspunkte mit „rel" werden relativ zur Maschinenkontur gesetzt; {L} {W} {H} werden mit den Maßen, {A} {kesit} {V} mit den Elektrowerten gefüllt.
+Yeni projeler bu değerlerle başlar (ÇNK standardı). "rel" verilen bağlantı noktaları makine kutusuna göre yerleşir; {L} {W} {H} ölçülerle, {A} {kesit} {V} elektrik değerleriyle doldurulur.	New projects start with these values (ÇNK standard). Connection points given as "rel" are placed relative to the machine envelope; {L} {W} {H} are filled with the dimensions, {A} {kesit} {V} with the electrical values.	Neue Projekte beginnen mit diesen Werten (ÇNK-Standard). Anschlusspunkte mit „rel" werden relativ zur Maschinenkontur gesetzt; {L} {W} {H} werden mit den Maßen, {A} {kesit} {V} mit den Elektrowerten gefüllt.
 Yeni projelerin başlangıç değerleri	Starting values for new projects	Startwerte für neue Projekte
 Yeniden başlat	Restart	Neu starten
 Yenile	Refresh	Aktualisieren
@@ -540,3 +540,34 @@ Verileriniz nerede dursun?	Where should your data be kept?	Wo sollen Ihre Daten 
 Veritabanı	Database	Datenbank
 Veritabanı bağlı değil	Database not connected	Datenbank nicht verbunden
 Veritabanı sekmesinden GitHub deposuna bağlanın	Connect to the GitHub repository in the Database tab	Im Reiter Datenbank mit dem GitHub-Repository verbinden
+Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu tarayıcıda saklanır, başka yere gönderilmez; yalnız bu depoya izinli olmalıdır.	Paste the token below and press Connect. The token is stored only in this browser and is never sent anywhere else; it should have access to this repository only.	Token unten einfügen und auf Verbinden klicken. Der Token wird nur in diesem Browser gespeichert und nirgendwohin gesendet; er sollte nur Zugriff auf dieses Repository haben.
+Bu bilgisayara ya da telefona uygulama olarak yükler (PWA)	Installs as an app on this computer or phone (PWA)	Als App auf diesem Computer oder Telefon installieren (PWA)
+Görünümler henüz yok	No views yet	Noch keine Ansichten
+İndirildi: {f}	Downloaded: {f}	Heruntergeladen: {f}
+PDF olarak kaydet	Save as PDF	Als PDF speichern
+PDF: tarayıcının yazdırma penceresi açılır; Hedef olarak "PDF olarak kaydet" seçin (A3 yatay, kenar boşluğu yok). Seçilen diller arka arkaya tek dosya olur.	PDF: the browser's print dialog opens; choose "Save as PDF" as the destination (A3 landscape, no margins). The selected languages are combined into one file.	PDF: Der Druckdialog des Browsers öffnet sich; als Ziel „Als PDF speichern" wählen (A3 quer, ohne Ränder). Die gewählten Sprachen werden zu einer Datei zusammengefügt.
+Uygulamayı yükle	Install app	App installieren
+Web sürümü: STEP okuma ve görünüm üretme masaüstü uygulamasında yapılır; görünümler veritabanından hazır gelir.	Web version: STEP reading and view generation run in the desktop app; the views arrive ready from the database.	Webversion: STEP-Import und Ansichtserzeugung erfolgen in der Desktop-App; die Ansichten kommen fertig aus der Datenbank.
+Web sürümünde STEP okunamaz. Projeyi masaüstü uygulamasında açıp STEP'ten görünümleri üretin; veritabanı eşitlenince görünümler buraya kendiliğinden gelir. Kapak ve metinleri şimdiden doldurabilirsiniz.	The web version cannot read STEP files. Open the project in the desktop app and generate the views from the STEP; once the database syncs, the views appear here automatically. You can already fill in the cover and texts.	Die Webversion kann keine STEP-Dateien lesen. Projekt in der Desktop-App öffnen und die Ansichten aus der STEP erzeugen; nach dem Datenbankabgleich erscheinen sie hier automatisch. Deckblatt und Texte können Sie schon jetzt ausfüllen.
+Bu işlem masaüstü uygulamasında yapılır (STEP okuma ve görünüm üretme Python ister). Görünümler masaüstünde üretilince veritabanından buraya gelir.	This is done in the desktop app (STEP reading and view generation need Python). Once generated on the desktop, the views arrive here from the database.	Dies erfolgt in der Desktop-App (STEP-Import und Ansichtserzeugung benötigen Python). Nach der Erzeugung am Desktop kommen die Ansichten über die Datenbank hierher.
+Bu proje zaten var: {n}	This project already exists: {n}	Dieses Projekt existiert bereits: {n}
+Bu tarayıcı	This browser	Dieser Browser
+Depo adı kullanici/depo biçiminde olmalı	Repository name must be in user/repo format	Repository-Name muss im Format benutzer/repo sein
+Depo bir seferde okunamayacak kadar büyük	The repository is too large to read in one go	Das Repository ist zu groß, um es auf einmal zu lesen
+Depo bulunamadı ya da erişim anahtarının bu depoya izni yok.	Repository not found, or the token has no access to it.	Repository nicht gefunden oder der Token hat keinen Zugriff darauf.
+Depo herkese açık. Müşteri verisi içerdiği için yalnız özel (private) depoya bağlanılır.	The repository is public. Because it holds customer data, only a private repository can be connected.	Das Repository ist öffentlich. Da es Kundendaten enthält, kann nur ein privates Repository verbunden werden.
+Depodan gelen dosya bozuk, yeniden denenecek	A file from the repository is corrupt; it will be retried	Eine Datei aus dem Repository ist beschädigt; es wird erneut versucht
+Dosya çok büyük (en çok 50 MB)	File is too large (max. 50 MB)	Datei ist zu groß (max. 50 MB)
+Erişim anahtarı gerekli	Access token required	Zugriffstoken erforderlich
+Erişim anahtarının bu depoya yazma izni yok (Contents: Read and write gerekli).	The token has no write access to this repository (Contents: Read and write required).	Der Token hat keine Schreibberechtigung für dieses Repository (Contents: Read and write erforderlich).
+GitHub erişim anahtarı geçersiz ya da süresi dolmuş. Veritabanı sekmesinden yenileyin.	The GitHub token is invalid or expired. Renew it in the Database tab.	Der GitHub-Token ist ungültig oder abgelaufen. Im Reiter Datenbank erneuern.
+GitHub hız sınırına ulaşıldı. Değişiklikler bekliyor, kendiliğinden gönderilecek.	GitHub rate limit reached. Changes are waiting and will be sent automatically.	GitHub-Ratenlimit erreicht. Änderungen warten und werden automatisch gesendet.
+GitHub şu an yanıt vermiyor. Değişiklikler bekliyor.	GitHub is not responding right now. Changes are waiting.	GitHub antwortet gerade nicht. Änderungen warten.
+Kopyalanacak proje bulunamadı	Project to copy not found	Zu kopierendes Projekt nicht gefunden
+PDF dosyası seçin	Choose a PDF file	PDF-Datei wählen
+STEP okuma ve görünüm üretme masaüstü uygulamasında yapılır (Python, OpenCASCADE). Görünümler masaüstünde üretilince veritabanından buraya gelir.	STEP reading and view generation run in the desktop app (Python, OpenCASCADE). Once generated on the desktop, the views arrive here from the database.	STEP-Import und Ansichtserzeugung erfolgen in der Desktop-App (Python, OpenCASCADE). Nach der Erzeugung am Desktop kommen die Ansichten über die Datenbank hierher.
+Seri no, müşteri ve model gerekli	Serial no., customer and model are required	Seriennr., Kunde und Modell sind erforderlich
+proje yok	no project	kein Projekt
+veri eksik	data missing	Daten fehlen
+İnternet bağlantısı yok ya da GitHub'a ulaşılamıyor. Değişiklikler bu tarayıcıda bekliyor.	No internet connection or GitHub is unreachable. Changes are waiting in this browser.	Keine Internetverbindung oder GitHub nicht erreichbar. Änderungen warten in diesem Browser.
+Şablon bulunamadı	Template not found	Vorlage nicht gefunden

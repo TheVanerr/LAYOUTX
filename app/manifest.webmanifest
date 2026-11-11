@@ -1,0 +1,27 @@
+{
+  "id": "cnk-layoutx-cizim-motoru-3f7a2c91",
+  "name": "Layout Çizim Motoru",
+  "short_name": "LayoutX",
+  "description": "Makine yerleşim planı (layout): kapak + antetli A3 sayfalar, TR / EN / DE, PDF ve HTML çıktı, GitHub deposu veritabanı.",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#14161b",
+  "theme_color": "#1b1e25",
+  "categories": ["productivity", "business", "utilities"],
+  "icons": [
+    { "src": "app/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "app/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "app/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "app/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Yeni Proje", "short_name": "Yeni", "url": "./?new=1", "icons": [{ "src": "app/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Veritabanı", "short_name": "Veritabanı", "url": "./?db=1", "icons": [{ "src": "app/icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "prefer_related_applications": false
+}

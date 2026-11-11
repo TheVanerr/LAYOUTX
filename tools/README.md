@@ -2,7 +2,7 @@
 
 Pafta standardı (arayüz, bölüm sırası, işaret harfleri, elektrik standardı, yazım kuralları):
 [../LAYOUT-KURALLARI.md](../LAYOUT-KURALLARI.md). Claude Code'da "layout" istendiğinde ya da `/layout` yazıldığında
-`.claude/skills/layout` bu kuralları yükler. Referans pafta: `0626051-TOMTA-ULT M200 3B L`.
+`.claude/skills/layout` bu kuralları yükler.
 
 ## Uygulama: Layout Çizim Motoru
 
@@ -77,7 +77,7 @@ her dil kapağıyla TR → EN → DE sırasıyla **tek dosyada** arka arkaya gel
   elle eklenen `detay_*` görünümleri korunur).
 - **İmzalar:** yeni projelerde Hazırlayan *Fatih GÜRAL*, Kontrol ve Onay *Furkan BIÇAK*, Rev *00* kendiliğinden gelir
   (şablondan; Şablon sekmesinden değiştirilebilir).
-- **Şablon** sekmesi: `tools/sablon-layout-veri.json` (yeni projelerin başlangıç değerleri, TOMTAŞ standardı; `rel` =
+- **Şablon** sekmesi: `tools/sablon-layout-veri.json` (yeni projelerin başlangıç değerleri, ÇNK standardı; `rel` =
   makine kutusuna göre 0–1 oranı, `{L} {W} {H}` yer tutucuları ölçülerle doldurulur; standart elektrik metinlerindeki
   `{A}` (ana şalter), `{kesit}` (kablo kesiti) ve `{V}` (gerilim) paftada değerleriyle yazılır).
 - Doğrudan bağlantı: `?p=<proje>&s=<bölüm>&tab=edit|checks&mode=picker&studio=1`, `?new=1`, `?sablon=1`.
@@ -117,7 +117,7 @@ Betikler ortaktır (`LAYOUT/tools/`). Komutlar `LAYOUT/` klasöründen:
 Veri JSON'daki `geometri` bloğu görünüm koordinatlarında yazılır: `origin` = sol-ön-alt köşe, `boy/en/yukseklik`,
 `servis_alani`, `noktalar` (E/P/W/D/X bağlantı işaretleri), ek ölçü çizgileri ve etiketler.
 
-İsteğe bağlı ekler (yoksa paftada çıkmaz; örnek: `0626051-TOMTA-ULT M200 3B L`):
+İsteğe bağlı ekler (yoksa paftada çıkmaz):
 - **Arka görünüm:** `views_cfg.json` içinde `"rear"` görünümü varsa pafta arka görünüm şeridi alır. Noktanın
   `gorunum` alanı `hepsi` ya da virgüllü liste (`on`, `yan`, `arka`); üst görünümde bütün noktalar çizilir.
   `ek_olculer_arka` (ekran koordinatı: arka görünümde x = −X), `etiketler_arka`, `ordinat_arka` (sol uçtan X ordinatları).
@@ -127,7 +127,7 @@ Veri JSON'daki `geometri` bloğu görünüm koordinatlarında yazılır: `origin
 - **Besleme kablosu bölümü:** `elektrik.kablo` (damar sayısı, kesit, uzunluklar, `sartlar`) → tek hat şeması, kablo
   kesiti (IEC 60445 renkleri) ve uzunluğa göre gerilim düşümü tablosu (`gerilim_v`, `cos_phi`, 70 °C Cu).
   `kablo.giris_kisa`: şemadaki makine panosu giriş yazısı (boşsa "Kablo girişi (E)").
-- **Bağlantılar ön yüzdeyse** (örnek: `0726050-CELIK-KNV 90 7500`): `geometri.ordinat_on` (sol uçtan X ordinatları ön
+- **Bağlantılar ön yüzdeyse** (ör. konveyörlü makineler): `geometri.ordinat_on` (sol uçtan X ordinatları ön
   görünümde, zeminin altında; L ölçüsü bu durumda görünümün üstüne geçer). `geometri.on_yazi`: üst görünümdeki ön taraf
   yazısı (boşsa "OPERATÖR / YÜKLEME TARAFI"; konveyörlü makinede yükleme uçtadır). `diger.yag_ayirici`: "Hava · su ·
   egzoz · tahliye" tablosunda yağ ayırıcı satırı (bağlantı harfleri S1 emiş, S2 dönüş).

@@ -28,9 +28,21 @@ class H(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+    def cors(self):
+        """Tarayıcıdaki web kipi de bu sahte sunucuyla test edilebilsin (GitHub API de CORS'a izin verir)."""
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, X-GitHub-Api-Version")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, OPTIONS")
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.cors()
+        self.end_headers()
+
     def reply(self, code, obj=None):
         b = json.dumps(obj).encode() if obj is not None else b""
         self.send_response(code)
+        self.cors()
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(b)))
         self.end_headers()

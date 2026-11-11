@@ -9,3 +9,4 @@ __pycache__/
 *.dbtmp
 *.log
 tools/ayarlar.json
+_site/

@@ -24,7 +24,7 @@ const LayoutStudio = (() => {
   let timer = null;
   const studio = () => $('coverStudio');
   const isOpen = () => !studio().classList.contains('hidden');
-  const logos = () => ({ dolfin: '/belge/logos/dolfin.png', enva: '/belge/logos/enva.svg', vico: '/belge/logos/vico.png', ksystem: '/belge/logos/ksystem.png' });
+  const logos = () => ({ dolfin: 'belge/logos/dolfin.png', enva: 'belge/logos/enva.svg', vico: 'belge/logos/vico.png', ksystem: 'belge/logos/ksystem.png' });
 
   function value(f) {
     const m = app.data().makine || {};

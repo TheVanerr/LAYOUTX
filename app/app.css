@@ -1,10 +1,10 @@
 /* Layout Çizim Motoru — arayüz teması (P&PX ile aynı: koyu zemin, antetteki kırmızı çizgi arayüzde de tekrarlanır) */
 
-@font-face { font-family: 'Carlito'; font-weight: 400; src: local('Calibri'), url('/belge/fonts/Carlito-Regular.ttf') format('truetype'); }
-@font-face { font-family: 'Carlito'; font-weight: 700; src: local('Calibri Bold'), url('/belge/fonts/Carlito-Bold.ttf') format('truetype'); }
-@font-face { font-family: 'Selawik'; font-weight: 400; src: url('/belge/fonts/selawk.ttf') format('truetype'); }
-@font-face { font-family: 'Selawik'; font-weight: 600; src: url('/belge/fonts/selawksb.ttf') format('truetype'); }
-@font-face { font-family: 'Selawik'; font-weight: 700; src: url('/belge/fonts/selawkb.ttf') format('truetype'); }
+@font-face { font-family: 'Carlito'; font-weight: 400; src: local('Calibri'), url('../belge/fonts/Carlito-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Carlito'; font-weight: 700; src: local('Calibri Bold'), url('../belge/fonts/Carlito-Bold.ttf') format('truetype'); }
+@font-face { font-family: 'Selawik'; font-weight: 400; src: url('../belge/fonts/selawk.ttf') format('truetype'); }
+@font-face { font-family: 'Selawik'; font-weight: 600; src: url('../belge/fonts/selawksb.ttf') format('truetype'); }
+@font-face { font-family: 'Selawik'; font-weight: 700; src: url('../belge/fonts/selawkb.ttf') format('truetype'); }
 
 :root {
   color-scheme: dark;

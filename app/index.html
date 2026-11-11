@@ -4,13 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout Çizim Motoru</title>
-  <link rel="icon" type="image/png" href="/app/icon.png">
+  <meta name="description" content="Makine yerleşim planı (layout): kapak + antetli A3 sayfalar, TR / EN / DE, PDF ve HTML çıktı.">
+  <meta name="theme-color" content="#1b1e25">
+  <meta name="application-name" content="LayoutX">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LayoutX">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="256x256" href="app/icon.png">
+  <link rel="icon" type="image/svg+xml" href="app/icons/icon.svg">
+  <link rel="apple-touch-icon" href="app/icons/apple-touch-icon.png">
   <script>
     // Dosyadan (çift tıkla) açıldıysa: sunucuyu başlatan HTML sayfasına git
     if (location.protocol === 'file:') location.replace('../Layout.html');
   </script>
-  <link rel="stylesheet" href="/belge/belge.css">
-  <link rel="stylesheet" href="/app/app.css">
+  <link rel="stylesheet" href="belge/belge.css">
+  <link rel="stylesheet" href="app/app.css">
 </head>
 <body>
   <div id="offline" class="offline hidden" role="alert">
@@ -22,8 +31,8 @@
   <!-- ─────────────── Proje ekranı ─────────────── -->
   <section id="home" class="home">
     <div class="home-bar">
-      <img src="/app/icon.png" alt="" class="home-icon">
-      <img src="/belge/logos/dolfin.png" alt="Dolfin" class="home-logo">
+      <img src="app/icon.png" alt="" class="home-icon">
+      <img src="belge/logos/dolfin.png" alt="Dolfin" class="home-logo">
       <div class="home-title">
         <h1 data-i18n="Layout Çizim Motoru">Layout Çizim Motoru</h1>
         <p data-i18n="Yerleşim Planı · STEP → A3 pafta · TR / EN / DE">Yerleşim Planı · STEP → A3 pafta · TR / EN / DE</p>
@@ -33,6 +42,7 @@
         <div class="seg ui-lang" role="group" aria-label="Program dili">
           <button type="button" data-ui-lang="tr">TR</button><button type="button" data-ui-lang="en">EN</button><button type="button" data-ui-lang="de">DE</button>
         </div>
+        <button type="button" class="btn hidden" id="btnInstall" data-i18n="Uygulamayı yükle" data-i18n-title="Bu bilgisayara ya da telefona uygulama olarak yükler (PWA)">Uygulamayı yükle</button>
         <button type="button" class="btn btn-primary" id="btnNewProject" data-i18n="+ Yeni Proje">+ Yeni Proje</button>
       </div>
     </div>
@@ -54,7 +64,7 @@
   <!-- ─────────────── Proje çalışma ekranı ─────────────── -->
   <div id="app" class="app hidden">
     <header class="topbar">
-      <button type="button" class="tb-logo" id="btnHome" data-i18n-title="Projelere dön"><img src="/belge/logos/dolfin.png" alt="Dolfin"></button>
+      <button type="button" class="tb-logo" id="btnHome" data-i18n-title="Projelere dön"><img src="belge/logos/dolfin.png" alt="Dolfin"></button>
       <div class="tb-project">
         <strong id="projName"></strong>
         <span id="saveState" class="save-state"></span>
@@ -128,13 +138,21 @@
   <div id="modalRoot"></div>
   <div id="toast" class="toast hidden" role="status"></div>
 
-  <script src="/app/i18n-dict.js"></script>
-  <script src="/app/i18n.js"></script>
-  <script src="/belge/belge.js"></script>
-  <script src="/app/sections.js"></script>
-  <script src="/app/form.js"></script>
-  <script src="/app/checks.js"></script>
-  <script src="/app/studio.js"></script>
-  <script src="/app/app.js"></script>
+  <script src="app/i18n-dict.js"></script>
+  <script src="app/i18n.js"></script>
+  <script src="belge/belge.js"></script>
+  <script src="belge/kaynak.js"></script>
+  <script src="app/web.js"></script>
+  <script src="app/sections.js"></script>
+  <script src="app/form.js"></script>
+  <script src="app/checks.js"></script>
+  <script src="app/studio.js"></script>
+  <script src="app/app.js"></script>
+  <script>
+    // PWA: çevrimdışı çalışma ve uygulama olarak yükleme
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => null));
+    }
+  </script>
 </body>
 </html>

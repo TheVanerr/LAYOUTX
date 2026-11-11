@@ -19,6 +19,7 @@ const LayoutApp = (() => {
   const fmtTime = (t) => (t ? new Date(t * 1000).toLocaleString(locale(), { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '');
   const clone = (o) => JSON.parse(JSON.stringify(o));
   const VIEW_NAMES = { top: 'üst', front: 'ön', rear: 'arka', side: 'yan', iso: 'izometrik' };
+  const WEB = LayoutWeb.active;   // GitHub Pages / PWA: sunucu yok, veriler tarayıcıda + GitHub deposunda
 
   const state = {
     projects: [], issues: {},
@@ -35,6 +36,7 @@ const LayoutApp = (() => {
   /* ─────────────────────────── Yardımcılar ─────────────────────────── */
 
   async function api(method, url, body, raw) {
+    if (WEB) return LayoutWeb.handle(method, url, body);
     let r;
     try {
       r = await fetch(url, {
@@ -61,6 +63,10 @@ const LayoutApp = (() => {
   }
 
   async function heartbeat() {
+    if (WEB) {
+      onDbStatus(await LayoutWeb.Sync.status());
+      return;
+    }
     try {
       const r = await fetch('/api/ping', { cache: 'no-store' });
       setOnline(r.ok);
@@ -166,7 +172,7 @@ const LayoutApp = (() => {
         <ol>
           <li><a href="https://github.com/new?name=layoutx-veri&amp;visibility=private" target="_blank" rel="noopener">${L('Özel depo oluşturun')}</a> ${L('(layoutx-veri oluşturduysanız geçin).')}</li>
           <li><a href="https://github.com/settings/personal-access-tokens/new?name=LayoutX%20veri&amp;description=LayoutX%20veri%20deposu&amp;contents=write&amp;expires_in=365" target="_blank" rel="noopener">${L('Erişim anahtarı oluşturun')}</a>. ${L('"Only select repositories" altında yalnız bu depoyu seçin; Contents: Read and write.')}</li>
-          <li>${L('Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu bilgisayarda saklanır, depoya ve tarayıcıya gitmez.')}</li>
+          <li>${WEB ? L('Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu tarayıcıda saklanır, başka yere gönderilmez; yalnız bu depoya izinli olmalıdır.') : L('Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu bilgisayarda saklanır, depoya ve tarayıcıya gitmez.')}</li>
         </ol>
         <form id="dbForm" class="db-form">
           <div class="field"><label for="dbRepo">${L('Depo (kullanıcı/depo)')}</label><input id="dbRepo" class="field-input" value="${esc(s.repo || 'TheVanerr/layoutx-veri')}" autocomplete="off" spellcheck="false"></div>
@@ -284,6 +290,7 @@ const LayoutApp = (() => {
 
   /** Büyük dosya yükleme (ilerleme çubuğuyla) */
   function upload(name, kind, file, onProgress) {
+    if (WEB) return LayoutWeb.upload(name, kind, file);
     return new Promise((resolve, reject) => {
       const x = new XMLHttpRequest();
       x.open('PUT', `/api/upload?name=${encodeURIComponent(name)}&kind=${kind}&filename=${encodeURIComponent(file.name)}`);
@@ -404,9 +411,9 @@ const LayoutApp = (() => {
         <div class="field span2"><label for="npCopy">${L('Başlangıç verisi')}</label>
           <select id="npCopy" class="field-input"><option value="">${L('Şablon (varsayılan değerler)')}</option>${copies}</select>
           <div class="field-help">${L('Benzer bir makine için seçilen projenin metinleri ve tabloları kopyalanır; bağlantı noktaları yeni makinenin ölçüsüne oranlanır. O proje değişmez.')}</div></div>
-        <div class="field"><label for="npSeri">${L('Proje no (seri no)')} *</label><input id="npSeri" class="field-input" placeholder="0626051" required autocomplete="off"></div>
+        <div class="field"><label for="npSeri">${L('Proje no (seri no)')} *</label><input id="npSeri" class="field-input" placeholder="0000000" required autocomplete="off"></div>
         <div class="field"><label for="npFirma">${L('Marka')}</label><select id="npFirma" class="field-input">${brands}</select></div>
-        <div class="field"><label for="npMusteri">${L('Müşteri')} *</label><input id="npMusteri" class="field-input" placeholder="TOMTAŞ" required autocomplete="off"></div>
+        <div class="field"><label for="npMusteri">${L('Müşteri')} *</label><input id="npMusteri" class="field-input" placeholder="MÜŞTERİ" required autocomplete="off"></div>
         <div class="field"><label for="npModel">${L('Model')} *</label><input id="npModel" class="field-input" placeholder="ULT M200 3B L" required autocomplete="off"></div>
         <div class="field span2"><label for="npTip">${L('Tip (makine tam adı)')}</label><input id="npTip" class="field-input" placeholder="Ultrasonik Yıkama Makinesi – ULT M200 3B L" autocomplete="off"></div>
         <div class="field"><label for="npHaz">${L('Hazırlayan')}</label><input id="npHaz" class="field-input" value="${esc(tpl.hazirlayan || 'Fatih GÜRAL')}" autocomplete="off"></div>
@@ -414,8 +421,8 @@ const LayoutApp = (() => {
         <div class="field"><label for="npKontrol">${L('Kontrol')}</label><input id="npKontrol" class="field-input" value="${esc(tpl.kontrol || 'Furkan BIÇAK')}" autocomplete="off"></div>
         <div class="field"><label for="npOnay">${L('Onay')}</label><input id="npOnay" class="field-input" value="${esc(tpl.onay || 'Furkan BIÇAK')}" autocomplete="off"></div>
         <div class="field"><label for="npRev">${L('Revizyon')}</label><input id="npRev" class="field-input" value="${esc(tpl.rev || '00')}" autocomplete="off"></div>
-        <div class="field"><label for="npStep">${L('STEP dosyası')}</label><input id="npStep" class="field-input" type="file" accept=".step,.stp,.STEP,.STP"></div>
-        <details class="adv span2"><summary>${L('STEP ayarları (eksenler, eleme)')}</summary>
+        <div class="field${WEB ? ' hidden' : ''}"><label for="npStep">${L('STEP dosyası')}</label><input id="npStep" class="field-input" type="file" accept=".step,.stp,.STEP,.STP"></div>
+        <details class="adv span2${WEB ? ' hidden' : ''}"><summary>${L('STEP ayarları (eksenler, eleme)')}</summary>
           <div class="modal-grid" style="margin-top:8px">
             <div class="field"><label for="npUp">${L('Yukarı eksen')}</label>${axis('npUp', '+Y')}</div>
             <div class="field"><label for="npFront">${L('Operatör tarafı')}</label>${axis('npFront', '+Z')}</div>
@@ -445,7 +452,7 @@ const LayoutApp = (() => {
       };
       if (makine.tam_ad) makine.tam_ad = { tr: makine.tam_ad, en: makine.tam_ad, de: makine.tam_ad };
       else delete makine.tam_ad;
-      const file = $('npStep').files[0];
+      const file = WEB ? null : $('npStep').files[0];
       $('npGo').disabled = true;
       try {
         $('npStatus').textContent = t_('Proje oluşturuluyor…');
@@ -537,6 +544,7 @@ const LayoutApp = (() => {
   function setWorkspaceMode() {
     const tm = state.template;
     ['btnViews', 'btnPdf'].forEach((id) => $(id).classList.toggle('hidden', tm));
+    if (WEB) $('btnViews').classList.add('hidden');
     $('cvMode').classList.toggle('hidden', tm);
     $('btnRefresh').classList.toggle('hidden', tm);
     $('projName').textContent = tm ? t_('Şablon – yeni projelerin başlangıç değerleri') : state.name;
@@ -731,6 +739,7 @@ const LayoutApp = (() => {
 
   function markDirty() {
     state.dirty = true;
+    if (!state.template && state.name) schedulePreview();
     updateSaveState();
     clearTimeout(state.saveTimer);
     state.saveTimer = setTimeout(() => saveNow(), 800);
@@ -887,7 +896,8 @@ const LayoutApp = (() => {
     const groups = [
       ['step', 'Model (STEP)'], ['pdf', 'PDF (imalat resmi ve çıktılar)'], ['html', 'HTML çıktıları'], ['data', 'Veri'], ['view', 'Görünümler'], ['other', 'Diğer']
     ];
-    const html = [`<div class="file-actions"><button type="button" class="btn btn-sm" data-act="uploadStep">${esc(t_('STEP yükle'))}</button><button type="button" class="btn btn-sm" data-act="uploadPdf">${esc(t_('İmalat resmi ekle'))}</button><button type="button" class="btn btn-sm" data-act="openFolder">${esc(t_('Klasörü aç'))}</button></div>`];
+    const html = [WEB ? `<div class="file-actions"><button type="button" class="btn btn-sm" data-act="uploadPdf">${esc(t_('İmalat resmi ekle'))}</button></div>`
+      : `<div class="file-actions"><button type="button" class="btn btn-sm" data-act="uploadStep">${esc(t_('STEP yükle'))}</button><button type="button" class="btn btn-sm" data-act="uploadPdf">${esc(t_('İmalat resmi ekle'))}</button><button type="button" class="btn btn-sm" data-act="openFolder">${esc(t_('Klasörü aç'))}</button></div>`];
     groups.forEach(([k, label]) => {
       const fs = files.filter((f) => f.kind === k);
       if (!fs.length && (k === 'other' || k === 'view')) return;
@@ -935,11 +945,13 @@ const LayoutApp = (() => {
   function emptyState() {
     const L = (s, p) => esc(t_(s, p));
     if (state.template) {
-      showEmpty(`<h2>${L('Şablon')}</h2><p>${L('Yeni projeler bu değerlerle başlar (TOMTAŞ standardı). "rel" verilen bağlantı noktaları makine kutusuna göre yerleşir; {L} {W} {H} ölçülerle, {A} {kesit} {V} elektrik değerleriyle doldurulur.', { L: '{L}', W: '{W}', H: '{H}', A: '{A}', kesit: '{kesit}', V: '{V}' })}</p><p>${L('Soldan bölüm seçip sağdan düzenleyin; değişiklikler otomatik kaydedilir.')}</p>`);
+      showEmpty(`<h2>${L('Şablon')}</h2><p>${L('Yeni projeler bu değerlerle başlar (ÇNK standardı). "rel" verilen bağlantı noktaları makine kutusuna göre yerleşir; {L} {W} {H} ölçülerle, {A} {kesit} {V} elektrik değerleriyle doldurulur.', { L: '{L}', W: '{W}', H: '{H}', A: '{A}', kesit: '{kesit}', V: '{V}' })}</p><p>${L('Soldan bölüm seçip sağdan düzenleyin; değişiklikler otomatik kaydedilir.')}</p>`);
       return;
     }
     const d = state.detail;
-    if (!d.step) {
+    if (WEB && !d.views_meta) {
+      showEmpty(`<h2>${L('Görünümler henüz yok')}</h2><p>${L('Web sürümünde STEP okunamaz. Projeyi masaüstü uygulamasında açıp STEP\'ten görünümleri üretin; veritabanı eşitlenince görünümler buraya kendiliğinden gelir. Kapak ve metinleri şimdiden doldurabilirsiniz.')}</p>`);
+    } else if (!d.step) {
       showEmpty(`<h2>${L('STEP dosyası yok')}</h2><p>${L('Görünümler (üst, ön, arka, yan, izometrik) ve makine ölçüleri STEP\'ten üretilir. Kapak ve metinleri şimdiden doldurabilirsiniz.')}</p><div class="actions"><button type="button" class="btn btn-primary" data-act="uploadStep">${L('STEP yükle')}</button></div>`);
     } else if (!d.views_meta) {
       showEmpty(`<h2>${L('Görünümler üretilmedi')}</h2><p>${L('{s} yüklü. Görünümleri üretmek için eksenleri seçip çalıştırın (büyük dosyalarda birkaç dakika sürer).', { s: d.step })}</p><div class="actions"><button type="button" class="btn btn-primary" data-act="views">${L('Görünümleri üret')}</button></div>`);
@@ -959,7 +971,6 @@ const LayoutApp = (() => {
     }
     $('cvEmpty').classList.add('hidden');
     if (state.mode === 'doc') $('preview').classList.remove('hidden');
-    if (initial && d.preview && d.veriMtime) setFrame(`/preview/${encodeURIComponent(state.name)}`);
     refreshPreview();
   }
 
@@ -978,10 +989,9 @@ const LayoutApp = (() => {
     state.previewBusy = true;
     $('cvBusy').classList.remove('hidden');
     try {
-      if (state.dirty) await saveNow();
-      const r = await api('POST', '/api/preview', { name });
+      const html = await buildDoc({ embed: { lang: state.lang } });
       if (name !== state.name) return;
-      setFrame(r.url);
+      setFrame(html);
       state.previewOk = true;
     } catch (e) {
       if (name === state.name) {
@@ -998,13 +1008,77 @@ const LayoutApp = (() => {
     }
   }
 
-  function setFrame(url) {
+  function setFrame(html) {
     const f = $('preview');
     const w = frameWin();
     let y = 0;
     try { y = w && w.document && w.document.scrollingElement ? w.document.scrollingElement.scrollTop : 0; } catch (e) { y = 0; }
     f.dataset.restore = String(y);
-    f.src = `${url}?embed=1&lang=${state.lang}&t=${Date.now()}`;
+    f.srcdoc = html;
+  }
+
+  /* ─── Belge üretimi (tools/belge/kaynak.js): önizleme ve çıktılar tarayıcıda, masaüstü ve web aynı ─── */
+
+  let assetsP = null;
+  const dataUrl = (blob) => new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => res(fr.result);
+    fr.onerror = () => rej(fr.error);
+    fr.readAsDataURL(blob);
+  });
+  async function fetchData(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`${url}: ${r.status}`);
+    return dataUrl(await r.blob());
+  }
+  function docAssets() {
+    if (!assetsP) {
+      assetsP = (async () => {
+        const [css, js] = await Promise.all(['belge/belge.css', 'belge/belge.js'].map((u) => fetch(u).then((r) => {
+          if (!r.ok) throw new Error(`${u}: ${r.status}`);
+          return r.text();
+        })));
+        const fonts = {};
+        await Promise.all([[400, 'selawk'], [600, 'selawksb'], [700, 'selawkb']].map(async ([w, f]) => { fonts[w] = await fetchData(`belge/fonts/${f}.ttf`); }));
+        const logos = {};
+        await Promise.all(Object.entries(LayoutKaynak.LOGO_FILES).map(async ([k, f]) => { logos[k] = await fetchData(`belge/logos/${f}`); }));
+        return { css, js, fonts, logos };
+      })().catch((e) => {
+        assetsP = null;
+        throw e;
+      });
+    }
+    return assetsP;
+  }
+  async function projectImages() {
+    const vm = state.detail.views_meta || {};
+    const key = state.name + '|' + (state.detail.files || []).filter((f) => f.kind === 'view').map((f) => `${f.name}:${f.mtime}`).join(',');
+    if (state.imgCache && state.imgCache.key === key) return state.imgCache.map;
+    let map;
+    if (WEB) map = await LayoutWeb.images(state.name, vm);
+    else {
+      map = {};
+      for (const v of Object.values(vm)) {
+        if (v && v.png && !map[v.png]) map[v.png] = await fetchData(`/files/${encodeURIComponent(state.name)}/views/${encodeURIComponent(v.png)}?t=${Date.now()}`);
+      }
+    }
+    state.imgCache = { key, map };
+    return map;
+  }
+  /** Pafta HTML'i (geçerli, kaydedilmemiş düzenlemeler dahil). opts: { embed: {lang}, export: {langs, only, cover} } */
+  async function buildDoc(opts) {
+    const o = opts || {};
+    const [assets, images] = await Promise.all([docAssets(), projectImages()]);
+    return LayoutKaynak.build({ data: state.data, views: state.detail.views_meta, images, design: coverDesign(), assets,
+      export: o.export || null, embed: o.embed || null });
+  }
+  function downloadBlob(blob, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 5000);
   }
 
   function onFrameLoad() {
@@ -1075,7 +1149,10 @@ const LayoutApp = (() => {
     const keys = Object.keys(pts);
     if (!state.pickKey || !pts[state.pickKey]) state.pickKey = keys[0] || null;
     const vm = state.detail.views_meta;
-    const img = (v) => `/files/${encodeURIComponent(state.name)}/views/${encodeURIComponent(vm[v].png)}?t=${state.detail.veriMtime || Date.now()}`;
+    const img = (v) => {
+      const f = (state.detail.files || []).find((x) => x.name === `views/${vm[v].png}`);
+      return f && WEB ? f.url : `/files/${encodeURIComponent(state.name)}/views/${encodeURIComponent(vm[v].png)}?t=${state.detail.veriMtime || Date.now()}`;
+    };
     box.innerHTML = `
       <div class="picker-head">
         <span>${esc(t_('Nokta:'))}</span>
@@ -1158,7 +1235,8 @@ const LayoutApp = (() => {
           ['Yakın detay görünümleri', dets.length ? dets.map((k) => k.replace('detay_', '')).join(', ') : t_('yok')],
           ['İmalat resmi (PDF)', (d.files || []).filter((f) => f.kind === 'pdf' && !/-Layout-/.test(f.name)).map((f) => f.name).join(', ') || t_('yok')]
         ] },
-        { k: 'actions', buttons: [
+        ...(WEB ? [{ k: 'note', text: 'Web sürümü: STEP okuma ve görünüm üretme masaüstü uygulamasında yapılır; görünümler veritabanından hazır gelir.' }] : []),
+        { k: 'actions', buttons: WEB ? [{ label: 'İmalat resmi ekle', act: 'uploadPdf' }] : [
           { label: d.step ? 'STEP değiştir' : 'STEP yükle', act: 'uploadStep', primary: !d.step },
           { label: 'Görünümleri üret', act: 'views', primary: !!d.step && !d.views_meta },
           { label: 'İmalat resmi ekle', act: 'uploadPdf' },
@@ -1472,11 +1550,12 @@ const LayoutApp = (() => {
       fmt = f;
       try { localStorage.setItem('layout-export-fmt', f); } catch (e) { /* yok */ }
       m.querySelectorAll('[data-fmt]').forEach((b) => b.classList.toggle('active', b.dataset.fmt === f));
-      $('exGo').textContent = f === 'html' ? t_('HTML indir') : t_('PDF indir');
-      $('exPrint').classList.toggle('hidden', f === 'html');
+      $('exGo').textContent = f === 'html' ? t_('HTML indir') : (WEB ? t_('PDF olarak kaydet') : t_('PDF indir'));
+      $('exPrint').classList.toggle('hidden', f === 'html' || WEB);
       $('exNote').textContent = f === 'html'
         ? t_('HTML: tek dosya, internet ve program gerekmez; seçilen diller arka arkaya. Açınca sağ üstteki "Yazdır" düğmesiyle PDF de alınır.')
-        : t_('PDF: A3 yatay, vektörel. Dosya proje klasörüne kaydedilir ve indirilir. "Tarayıcıda yazdır" sunucu olmadan da çalışır (Hedef: "PDF olarak kaydet").');
+        : WEB ? t_('PDF: tarayıcının yazdırma penceresi açılır; Hedef olarak "PDF olarak kaydet" seçin (A3 yatay, kenar boşluğu yok). Seçilen diller arka arkaya tek dosya olur.')
+          : t_('PDF: A3 yatay, vektörel. Dosya proje klasörüne kaydedilir ve indirilir. "Tarayıcıda yazdır" sunucu olmadan da çalışır (Hedef: "PDF olarak kaydet").');
     };
     setFmt(fmt);
     const boxes = () => [...m.querySelectorAll('input[name=ps]')];
@@ -1510,7 +1589,7 @@ const LayoutApp = (() => {
         $('pdfStatus').textContent = t_('En az bir bölüm seçin.');
         return;
       }
-      if (a === 'print') {
+      if (a === 'print' || (a === 'ok' && fmt === 'pdf' && WEB)) {
         const w = frameWin();
         if (!(w && w.LBDoc && w.LBDoc.print)) {
           $('pdfStatus').textContent = t_('Önizleme henüz hazır değil; birkaç saniye sonra tekrar deneyin.');
@@ -1525,16 +1604,29 @@ const LayoutApp = (() => {
       $('pdfStatus').textContent = fmt === 'html' ? t_('HTML hazırlanıyor…') : t_('PDF hazırlanıyor…');
       try {
         await flushSave();
-        const r = await api('POST', '/api/export', { name: state.name, format: fmt, langs: c.langs, secs: c.only, cover: c.cover });
-        closeModal();
-        const link = document.createElement('a');
-        link.href = `${r.url}?dl=1`;
-        link.download = r.file;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        toast(t_('Kaydedildi: {p}', { p: `projects/${state.name}/${r.file}` }));
-        reloadDetail();
+        const file = `${LayoutKaynak.fileName(state.data)}-${c.langs.map((l) => l.toUpperCase()).join('-')}${c.only || !c.cover ? '-secim' : ''}`;
+        if (fmt === 'html') {
+          const html = await buildDoc({ export: { langs: c.langs, only: c.only, cover: c.cover } });
+          downloadBlob(new Blob([html], { type: 'text/html;charset=utf-8' }), `${file}.html`);
+          closeModal();
+          if (!WEB) {
+            await api('POST', '/api/savefile', { name: state.name, file: `${file}.html`, text: html });
+            toast(t_('Kaydedildi: {p}', { p: `projects/${state.name}/${file}.html` }));
+            reloadDetail();
+          } else toast(t_('İndirildi: {f}', { f: `${file}.html` }));
+        } else {
+          const html = await buildDoc({});
+          const r = await api('POST', '/api/print', { name: state.name, html, file: `${file}.pdf`, langs: c.langs, secs: c.only, cover: c.cover });
+          closeModal();
+          const link = document.createElement('a');
+          link.href = `${r.url}?dl=1`;
+          link.download = r.file;
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          toast(t_('Kaydedildi: {p}', { p: `projects/${state.name}/${r.file}` }));
+          reloadDetail();
+        }
       } catch (err) {
         e.target.disabled = false;
         $('pdfStatus').textContent = fmt === 'html'
@@ -1716,6 +1808,21 @@ const LayoutApp = (() => {
     document.querySelectorAll('[data-ui-lang]').forEach((b) => b.addEventListener('click', () => LayoutI18n.set(b.dataset.uiLang)));
     LayoutI18n.onChange(onUiLang);
     $('btnNewProject').addEventListener('click', newProjectModal);
+    // PWA: tarayıcı yüklemeye izin verince "Uygulamayı yükle" görünür
+    let installEvt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      installEvt = e;
+      $('btnInstall').classList.remove('hidden');
+    });
+    window.addEventListener('appinstalled', () => { installEvt = null; $('btnInstall').classList.add('hidden'); });
+    $('btnInstall').addEventListener('click', async () => {
+      if (!installEvt) return;
+      installEvt.prompt();
+      try { await installEvt.userChoice; } catch (e) { /* vazgeçildi */ }
+      installEvt = null;
+      $('btnInstall').classList.add('hidden');
+    });
     $('projSearch').addEventListener('input', drawCards);
     $('projectList').addEventListener('click', (e) => {
       const card = e.target.closest('.project-card');
@@ -1779,6 +1886,7 @@ const LayoutApp = (() => {
     document.addEventListener('keydown', onKey);
     window.addEventListener('pagehide', () => {
       // sunucuya "sayfa kapandı": başka pencere / sekme açık değilse uygulama kendini kapatır
+      if (WEB) return;
       try { navigator.sendBeacon('/api/bye'); } catch (e) { /* yok */ }
       if (state.dirty && state.name && !state.template) {
         try {
