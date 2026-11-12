@@ -15,10 +15,10 @@ antet ve başlık bloğu. Yalnızca bu bilgisayarda çalışır (http://127.0.0.
 |---|---|
 | **İlk kez:** `Kurulum.bat` (çift tık) | Masaüstü ve Başlat menüsüne **Layout Çizim Motoru** simgesi, `layoutx://` başlatma bağlantısı (yalnız bu kullanıcı, yönetici izni yok). Kaldırma: `python layout_app.py --uninstall` |
 | Masaüstü simgesi | Hafif uygulama: kendi penceresinde (adres çubuksuz) açılır; pencere kapanınca, süren iş bitince kendini kapatır |
-| `Layout.html` (çift tık) | Tarayıcıda başlatma sayfası: uygulama çalışıyorsa doğrudan açar; değilse **Uygulamayı başlat** (arka planda başlatıp bu sekmede açar) ya da **Ayrı pencerede aç** |
-| `Layout.bat` | Konsollu başlatma (günlük ekranda; sorun ararken) |
+| `index.html` (çift tık) | Tarayıcıda başlatma sayfası (`app/baslat.html`): uygulama çalışıyorsa doğrudan açar; değilse **Uygulamayı başlat** (arka planda başlatıp bu sekmede açar) ya da **Ayrı pencerede aç** |
+| `python layout_app.py` | Konsollu başlatma (günlük ekranda; sorun ararken) |
 
-`app/index.html` dosyadan açılırsa `Layout.html`'e yönlenir. Arka plandan başlatılan sunucu 15 dakika hiç istek gelmezse
+`index.html` dosyadan açılırsa `app/baslat.html`'e yönlenir; GitHub Pages'te web kipinde açılır. Arka plandan başlatılan sunucu 15 dakika hiç istek gelmezse
 (iş sürmüyorsa) kendini kapatır; günlük `%LOCALAPPDATA%\LayoutX\layout.log`. Simge: `app/icon.ico` (`python tools/make_icon.py`).
 
 ### Dil
@@ -56,7 +56,6 @@ her dil kapağıyla TR → EN → DE sırasıyla **tek dosyada** arka arkaya gel
 
 - **PDF:** headless Chrome/Edge ile A3 yatay, vektörel. **Tarayıcıda yazdır** sunucusuz çalışır (Hedef: "PDF olarak kaydet").
 - **HTML:** tek dosya, internet ve program gerekmez; içindeki **Yazdır** düğmesiyle PDF de alınır.
-- Komut satırı: `python tools/build_layout.py "projects/<proje>" --no-pdf --out=x.html --langs=tr,en [--secs=ust,on] [--cover=0]`.
 
 - **Ana ekran:** `projects/` altındaki projeler kart olarak listelenir (seri no, model, müşteri; STEP, görünümler,
   pafta durumu, PDF sayısı ve eksik sayısı). Arama kutusu seri no / müşteri / model içinde arar.
@@ -81,38 +80,36 @@ her dil kapağıyla TR → EN → DE sırasıyla **tek dosyada** arka arkaya gel
   makine kutusuna göre 0–1 oranı, `{L} {W} {H}` yer tutucuları ölçülerle doldurulur; standart elektrik metinlerindeki
   `{A}` (ana şalter), `{kesit}` (kablo kesiti) ve `{V}` (gerilim) paftada değerleriyle yazılır).
 - Doğrudan bağlantı: `?p=<proje>&s=<bölüm>&tab=edit|checks&mode=picker&studio=1`, `?new=1`, `?sablon=1`.
-- Proje klasöründe `_work/` (model.brep, tris.npy, structure.json, onizleme.html) ara dosyalardır; yer açmak için
+- Proje klasöründe `_work/` (model.brep, tris.npy, structure.json) ara dosyalardır; yer açmak için
   silinebilir (silinirse bir sonraki çalıştırmada STEP yeniden okunur).
 
 ### Dosyalar
 
 | Yol | İçerik |
 |---|---|
-| `Layout.html` · `Kurulum.bat` · `Layout.bat` | Başlatma sayfası · simge ve bağlantı kurulumu · konsollu başlatma |
+| `index.html` · `app/baslat.html` · `Kurulum.bat` | Uygulama sayfası · başlatma sayfası · simge ve bağlantı kurulumu |
 | `layout_app.py` | Yerel sunucu: projeler, kayıt, boru hattı, önizleme, pafta ve PDF; `--app`, `--protocol`, `--install`, `--uninstall` |
 | `app/` | Arayüz (`index.html`, `app.css`, `app.js`, `sections.js` bölümler, `form.js` alanlar, `checks.js` eksikler, `studio.js` kapak, `i18n.js` + `i18n-dict.js` program dili, `icon.png` / `icon.ico`) |
-| `tools/belge/` | Belge çalışma zamanı (`belge.js`: kapak, antet, başlık bloğu, sayfa dizgisi, PDF; `belge.css`), logolar, yazı tipleri (OFL) |
+| `belge/` | Belge üretimi (`kaynak.js`: veri + görünümler → belge HTML'i) ve çalışma zamanı (`belge.js`: kapak, antet, başlık bloğu, sayfa dizgisi, PDF; `belge.css`), logolar, yazı tipleri (OFL) |
 | `tools/ayarlar.json` | Kapak tasarımı (tüm projeler) |
 | `projects/` | Projeler |
 
 ## Komut satırı (aynı işin elle yapılışı)
 
-Klasör yapısı: `LAYOUT/projects/<MAKİNE>/` içinde `<makine>.STEP`, `*-layout-veri.json`, `views/`, `step-structure.json`, `<Model>-Layout.html`.
+Klasör yapısı: `LAYOUT/projects/<MAKİNE>/` içinde `<makine>.STEP`, `*-layout-veri.json`, `views/`, `step-structure.json`; indirilen PDF / HTML çıktılar.
 Betikler ortaktır (`LAYOUT/tools/`). Komutlar `LAYOUT/` klasöründen:
 
 1. `python tools/read_step.py "projects/<MAKİNE>/<dosya>.STEP" <gecici_klasor>`
    STEP okur (OCP/OpenCASCADE), `structure.json` (montaj ağacı + bbox) ve `model.brep` yazar. 413 MB için ~12 dk, 97 MB için ~3 dk.
 2. `python tools/mesh_model.py <gecici>/model.brep <gecici> 25 2.0`
    Köşegeni < 25 mm olan katıları (cıvata vb.) eler, 2 mm sapma ile üçgenler -> `tris.npy` (~1 dk).
-3. `python tools/render_views_vtk.py <gecici>/tris.npy "projects/<MAKİNE>/views" tools/views_cfg_<makine>.json`
+3. `python tools/render_views_vtk.py <gecici>/tris.npy "projects/<MAKİNE>/views" "projects/<MAKİNE>/views_cfg.json"`
    VTK ile gölgeli + kenar çizgili (feature edge + siluet) üst/ön/yan PNG, izometrik PNG ve `views_meta.json`.
    Eksen eşlemesi cfg içindeki R matrisleridir (satırlar: ekran-x, ekran-y, bakana doğru eksen; dünya
    koordinatlarında); izometrik görünüm `"dir"` (bakana doğru dünya vektörü) ile tanımlanır.
-   Mevcut cfg'ler: `views_cfg_kbn.json` (KBN 2B 1650), `views_cfg_ult.json` (ULT M200 3B L).
-   `render_views.py` eski matplotlib sürümüdür (kenar çizgisiz, yedek).
-4. `python tools/build_layout.py "projects/<MAKİNE>" [artifact_parcasi.html] [--no-pdf] [--out=<yol.html>]`
-   `*-layout-veri.json` + `views/` -> `<dosya_adi>.html` (tek dosya: kapak + antetli A3 yatay sayfalar, TR/EN/DE). İkinci argüman verilirse
-   claude.ai artifact için doctype'sız gövde parçasını da yazar.
+   cfg'yi uygulama eksen seçiminden yazar (`views_cfg.json`, proje klasöründe).
+4. Belge (kapak + antetli A3 yatay sayfalar, TR/EN/DE) uygulamada tarayıcıda üretilir: `belge/kaynak.js`
+   (`LayoutKaynak.build`) veri JSON + `views/` → tek dosya HTML; PDF bu HTML'in yazdırma kipinden basılır.
 
 Veri JSON'daki `geometri` bloğu görünüm koordinatlarında yazılır: `origin` = sol-ön-alt köşe, `boy/en/yukseklik`,
 `servis_alani`, `noktalar` (E/P/W/D/X bağlantı işaretleri), ek ölçü çizgileri ve etiketler.
@@ -135,14 +132,11 @@ Veri JSON'daki `geometri` bloğu görünüm koordinatlarında yazılır: `origin
   `makine.musteri` düz metin ya da üç dilli sözlük olabilir.
 - Uygulama görünümleri yeniden üretirken cfg'deki ek görünümleri (rear, detay_*) korur.
 
-**PDF indir düğmesi** (her paftada, başlıkta): TR/EN/DE onay kutuları → seçilen dillerin sayfaları (her dil kapağıyla)
-tek PDF'te birleşip doğrudan iner (`<dosya_adi>-TR-DE.pdf` gibi; A3 yatay, vektör). Nasıl çalışır: `build_layout.py`
-HTML'i yazar, aynı HTML'in yazdırma kipini (`#pdf-print=tr,en,de`) headless Chrome/Edge ile PDF'e basar, her dilin sayfa
-aralığını ayrı baskılarla sayar ve PDF'i + `tools/vendor/pdf-lib.min.js`'i (MIT) HTML'e gömer; tarayıcıda pdf-lib seçilen
-aralıkları tek `copyPages` çağrısıyla yeni PDF'e kopyalar. Derleme ~30 sn uzar. `--no-pdf` ile atlanır; gömülü PDF yoksa
-düğme yazdırma penceresini açar. Tarayıcı yolu bulunamazsa `CHROME_PATH` ortam değişkeniyle verilir.
+**PDF:** masaüstünde sunucu, uygulamanın ürettiği HTML'in yazdırma kipini (`#pdf-print=tr,en,de`) headless
+Chrome/Edge ile A3 yatay, vektörel PDF'e basar; seçilen diller her biri kapağıyla tek dosyada arka arkaya gelir.
+Tarayıcı yolu bulunamazsa `CHROME_PATH` ortam değişkeniyle verilir. Web sürümünde tarayıcının "PDF olarak kaydet"i kullanılır.
 
-**Sayfa dizgisi** (`tools/belge/belge.js`): HTML'deki `#lb-src` bölümleri (`.lb-sec` > `.lb-part`; tür `full` tam
+**Sayfa dizgisi** (`belge/belge.js`): HTML'deki `#lb-src` bölümleri (`.lb-sec` > `.lb-part`; tür `full` tam
 genişlik, `col` sütun, `table` / `list` satırlardan bölünür) açılışta ölçülür ve A3 yatay antetli sayfalara dağıtılır
 (iki sütun 185 mm; sağ sütun ve tam genişlik öğeler başlık bloğunun üstünde biter; sığmayan bölünmez öğe ölçeklenir).
 Dil değişince sayfalar yeniden dizilir. Ekranda sayfalar pencere genişliğine ölçeklenir; `?embed=1` başlık çubuğunu gizler

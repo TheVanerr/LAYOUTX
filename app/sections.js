@@ -288,7 +288,7 @@ const LayoutSections = (() => {
     return 'kapak';
   }
 
-  /** Belgede görünen bölümler (build_layout.py ile aynı koşullar) */
+  /** Belgede görünen bölümler (belge/kaynak.js ile aynı koşullar) */
   function presentInDoc(data, viewsMeta) {
     const E = data.elektrik || {};
     const G = data.geometri || {};

@@ -9,6 +9,6 @@ if errorlevel 1 (
   echo Kurulum basarisiz. Python kurulu ve PATH'te mi?
 ) else (
   echo.
-  echo Tamam. Masaustundeki "Layout Cizim Motoru" simgesiyle ya da Layout.html ile baslatabilirsiniz.
+  echo Tamam. Masaustundeki "Layout Cizim Motoru" simgesiyle ya da index.html ile baslatabilirsiniz.
 )
 pause

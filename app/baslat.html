@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout Çizim Motoru</title>
-  <link rel="icon" type="image/png" href="app/icon.png">
+  <link rel="icon" type="image/png" href="icon.png">
   <style>
     :root { color-scheme: dark; --bg: #14161b; --card: #1b1e25; --line: #2f343e; --text: #e8eaef; --muted: #aab0bc; --red: #d40000; --ok: #3fb56f; --warn: #f5a524; }
     * { box-sizing: border-box; }
@@ -44,7 +44,7 @@
   <main>
     <div class="card">
       <div class="head">
-        <img class="icon" src="app/icon.png" alt="">
+        <img class="icon" src="icon.png" alt="">
         <div>
           <h1 data-k="title">Layout Çizim Motoru</h1>
           <p data-k="sub">Yerleşim Planı · STEP → A3 pafta · TR / EN / DE</p>
@@ -75,11 +75,11 @@
 
       <h2 data-k="pdfTitle">PDF çıktısı</h2>
       <ul>
-        <li data-k="pdf1">Uygulamada üst çubuktaki "PDF İndir": dil (TR / EN / DE) ve bölüm seçilir; PDF proje klasörüne kaydedilir ve indirilir.</li>
-        <li data-k="pdf2">Teslim paftası (projects/&lt;proje&gt;/…-Layout.html) uygulama olmadan da açılır: çift tıklayın, sağ üstteki "PDF indir" seçilen dillerde PDF verir; "Yazdır" tarayıcının "PDF olarak kaydet"iyle çalışır.</li>
+        <li data-k="pdf1">Uygulamada üst çubuktaki "İndir": PDF ya da HTML, dil (TR / EN / DE) ve bölüm seçilir; seçilen diller arka arkaya tek dosya olur, proje klasörüne kaydedilir ve indirilir.</li>
+        <li data-k="pdf2">Web sürümü (GitHub Pages) kurulum gerektirmez: aynı arayüz tarayıcıda ya da telefona yüklenmiş uygulama olarak çalışır; STEP işleme yalnız bu bilgisayarda yapılır.</li>
       </ul>
     </div>
-    <p class="foot">LAYOUT/Layout.html · http://127.0.0.1:8765</p>
+    <p class="foot">LAYOUT/index.html · http://127.0.0.1:8765</p>
   </main>
 
   <script>
@@ -90,40 +90,40 @@
           title: 'Layout Çizim Motoru', sub: 'Yerleşim Planı · STEP → A3 pafta · TR / EN / DE',
           checking: 'Uygulama aranıyor…', off: 'Uygulama çalışmıyor. "Uygulamayı başlat"a tıklayın.', starting: 'Başlatılıyor… (ilk açılış birkaç saniye sürebilir)',
           ready: 'Uygulama hazır, açılıyor…', start: 'Uygulamayı başlat', window: 'Ayrı pencerede aç', open: 'Bu sekmede aç',
-          noLaunch: 'Başlatılamadı. Bir kez Kurulum.bat dosyasına çift tıklayın ya da Layout.bat ile başlatın.',
+          noLaunch: 'Başlatılamadı. Bir kez Kurulum.bat dosyasına çift tıklayın ya da konsolda python layout_app.py çalıştırın.',
           howTitle: 'Nasıl çalışır',
           how1: '"Uygulamayı başlat" uygulamayı arka planda çalıştırır ve bu sekmede açar. Tarayıcı izin isterse "Aç"a tıklayın (her zaman izin ver).',
           how2: '"Ayrı pencerede aç" uygulamayı adres çubuksuz kendi penceresinde açar; masaüstündeki "Layout Çizim Motoru" simgesi de aynısını yapar.',
           how3: 'Düğmeler çalışmıyorsa bir kez LAYOUT klasöründeki Kurulum.bat dosyasına çift tıklayın (masaüstü simgesi ve başlatma bağlantısı kurulur; yönetici izni gerekmez).',
           pdfTitle: 'PDF çıktısı',
-          pdf1: 'Uygulamada üst çubuktaki "PDF İndir": dil (TR / EN / DE) ve bölüm seçilir; PDF proje klasörüne kaydedilir ve indirilir.',
-          pdf2: 'Teslim paftası (projects/<proje>/…-Layout.html) uygulama olmadan da açılır: çift tıklayın, sağ üstteki "PDF indir" seçilen dillerde PDF verir; "Yazdır" tarayıcının "PDF olarak kaydet"iyle çalışır.'
+          pdf1: 'Uygulamada üst çubuktaki "İndir": PDF ya da HTML, dil (TR / EN / DE) ve bölüm seçilir; seçilen diller arka arkaya tek dosya olur, proje klasörüne kaydedilir ve indirilir.',
+          pdf2: 'Web sürümü (GitHub Pages) kurulum gerektirmez: aynı arayüz tarayıcıda ya da telefona yüklenmiş uygulama olarak çalışır; STEP işleme yalnız bu bilgisayarda yapılır.'
         },
         en: {
           title: 'Layout Drawing Engine', sub: 'Installation layout · STEP → A3 sheets · TR / EN / DE',
           checking: 'Looking for the program…', off: 'The program is not running. Click "Start program".', starting: 'Starting… (the first start can take a few seconds)',
           ready: 'Program ready, opening…', start: 'Start program', window: 'Open in own window', open: 'Open in this tab',
-          noLaunch: 'Could not start. Double-click Kurulum.bat once, or start with Layout.bat.',
+          noLaunch: 'Could not start. Double-click Kurulum.bat once, or run python layout_app.py in a console.',
           howTitle: 'How it works',
           how1: '"Start program" runs the program in the background and opens it in this tab. If the browser asks for permission, click "Open" (always allow).',
           how2: '"Open in own window" opens the program in its own window without an address bar; the "Layout Çizim Motoru" desktop icon does the same.',
           how3: 'If the buttons do not work, double-click Kurulum.bat in the LAYOUT folder once (installs the desktop icon and the start link; no administrator rights needed).',
           pdfTitle: 'PDF output',
-          pdf1: '"Download PDF" in the program\'s top bar: choose the languages (TR / EN / DE) and sections; the PDF is saved in the project folder and downloaded.',
-          pdf2: 'The delivery layout (projects/<project>/…-Layout.html) also opens without the program: double-click it, "Download PDF" (top right) gives the PDF in the chosen languages; "Print" works with the browser\'s "Save as PDF".'
+          pdf1: '"Download" in the top bar of the program: choose PDF or HTML, the languages (TR / EN / DE) and sections; the languages are combined into one file, saved in the project folder and downloaded.',
+          pdf2: 'The web version (GitHub Pages) needs no installation: the same interface runs in the browser or as an app installed on a phone; STEP processing runs only on this computer.'
         },
         de: {
           title: 'Layout-Zeichenprogramm', sub: 'Aufstellungsplan · STEP → A3-Blätter · TR / EN / DE',
           checking: 'Programm wird gesucht…', off: 'Das Programm läuft nicht. Auf „Programm starten" klicken.', starting: 'Wird gestartet… (der erste Start kann einige Sekunden dauern)',
           ready: 'Programm bereit, wird geöffnet…', start: 'Programm starten', window: 'Im eigenen Fenster öffnen', open: 'In diesem Tab öffnen',
-          noLaunch: 'Start fehlgeschlagen. Einmal Kurulum.bat doppelklicken oder mit Layout.bat starten.',
+          noLaunch: 'Start fehlgeschlagen. Einmal Kurulum.bat doppelklicken oder in der Konsole python layout_app.py ausführen.',
           howTitle: 'So funktioniert es',
           how1: '„Programm starten" führt das Programm im Hintergrund aus und öffnet es in diesem Tab. Fragt der Browser nach Erlaubnis, auf „Öffnen" klicken (immer erlauben).',
           how2: '„Im eigenen Fenster öffnen" öffnet das Programm in einem eigenen Fenster ohne Adressleiste; das Desktop-Symbol „Layout Çizim Motoru" macht dasselbe.',
           how3: 'Wenn die Schaltflächen nicht funktionieren, einmal Kurulum.bat im Ordner LAYOUT doppelklicken (richtet Desktop-Symbol und Startverknüpfung ein; keine Administratorrechte nötig).',
           pdfTitle: 'PDF-Ausgabe',
-          pdf1: '„PDF herunterladen" in der oberen Leiste des Programms: Sprachen (TR / EN / DE) und Abschnitte wählen; das PDF wird im Projektordner gespeichert und heruntergeladen.',
-          pdf2: 'Der Lieferplan (projects/<Projekt>/…-Layout.html) öffnet sich auch ohne Programm: doppelklicken, „PDF herunterladen" (oben rechts) liefert das PDF in den gewählten Sprachen; „Drucken" funktioniert mit „Als PDF speichern" des Browsers.'
+          pdf1: '„Herunterladen" in der oberen Leiste des Programms: PDF oder HTML, Sprachen (TR / EN / DE) und Abschnitte wählen; die Sprachen werden zu einer Datei zusammengefügt, im Projektordner gespeichert und heruntergeladen.',
+          pdf2: 'Die Webversion (GitHub Pages) braucht keine Installation: dieselbe Oberfläche läuft im Browser oder als auf dem Telefon installierte App; die STEP-Verarbeitung erfolgt nur auf diesem Computer.'
         }
       };
       var lang = 'tr';

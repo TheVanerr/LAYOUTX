@@ -1,7 +1,7 @@
 # Layout kuralları – ÇNK yerleşim planı standardı
 
 Her yeni yerleşim planı (layout) bu kurallarla üretilir. Bölüm sırası ve veri yapısı veritabanındaki referans paftayla aynıdır. Kapak, antet ve başlık bloğu P&ID / pnömatik dokümanlarıyla
-(P&PX) aynıdır. Uygulama: Layout Çizim Motoru (masaüstü simgesi, `Layout.html` ya da `python layout_app.py`; ilk kez `Kurulum.bat`). Komutlar ve araç zinciri: [tools/README.md](tools/README.md).
+(P&PX) aynıdır. Uygulama: Layout Çizim Motoru (masaüstü simgesi, `index.html` ya da `python layout_app.py`; ilk kez `Kurulum.bat`). Komutlar ve araç zinciri: [tools/README.md](tools/README.md).
 
 ## 1. Klasör ve adlandırma
 
@@ -19,7 +19,7 @@ Her yeni yerleşim planı (layout) bu kurallarla üretilir. Bölüm sırası ve 
 | `step-structure.json` | Montaj ağacı + kutu ölçüleri |
 | `<PROJE>-Layout-TR-EN.pdf` / `.html` | Uygulamadaki "İndir" çıktısı: seçilen diller arka arkaya tek dosya, kapak + antetli A3 yatay sayfalar |
 | `<PROJE>-Layout-TR-EN.pdf` | Uygulamadaki "PDF İndir" çıktısı (seçilen diller, her dil kapağıyla) |
-| `_work/` | Ara dosyalar (`model.brep`, `tris.npy`, `structure.json`, `onizleme.html`); silinebilir |
+| `_work/` | Ara dosyalar (`model.brep`, `tris.npy`, `structure.json`); silinebilir |
 
 - `makine.dosya_adi` = `<seri no>-<MÜŞTERİ>-<MODEL>-Layout` (boşluklar tire).
 - İlk yayın Rev **00**; her içerik değişikliğinde bir artar (01, 02 …). Tarih `gg.aa.yyyy`. Hazırlayan **Fatih GÜRAL**,
@@ -45,10 +45,10 @@ Her yeni yerleşim planı (layout) bu kurallarla üretilir. Bölüm sırası ve 
 | 11 | Notlar | Ölçü notu, servis alanı + terazileme, bağlantıların yeri ve X referansı |
 | 12 | Antet + başlık bloğu (her sayfada) | Üstte marka ve model, kırmızı çizgiler, altta firma ve sayfa no; ISO 5457 bölge çerçevesi; ISO 7200 başlık bloğu: Çizim adı (sayfadaki bölümler), Proje no, Müşteri, Model, Hazırlayan, Kontrol, Onay, Tarih, Belge türü, Ölçü birimi (mm), Ölçek, Rev, Sayfa n / N |
 
-Belge A3 yatay basılır; bölümler sayfalara kendiliğinden dizilir (`tools/belge/belge.js`): görünümler tam genişlik,
+Belge A3 yatay basılır; bölümler sayfalara kendiliğinden dizilir (`belge/belge.js`): görünümler tam genişlik,
 tablolar iki sütun hâlinde akar, uzun tablolar "(devam)" diye sonraki sütuna / sayfaya geçer, sağ sütun başlık bloğunun
 üstünde biter. Görsel dil (Calibri / Carlito ve Segoe UI / Selawik yazı tipleri, mavi ölçü çizgileri, turuncu bağlantı
-işaretleri, marka rengi antet) `tools/belge/` ve `tools/build_layout.py` içinde sabittir; proje başına değiştirilmez.
+işaretleri, marka rengi antet) `belge/` (`belge.js`, `belge.css`, `kaynak.js`) içinde sabittir; proje başına değiştirilmez.
 
 ## 3. Görünümler
 

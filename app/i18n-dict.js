@@ -1288,9 +1288,9 @@ const LAYOUT_DICT = {
 "Projects",
 "Projekte"
 ],
-"Projeler okunamadı: {e}. Uygulamayı masaüstündeki \"Layout Çizim Motoru\" simgesiyle ya da Layout.html ile başlatın.": [
-"Projects could not be read: {e}. Start the program with the \"Layout Çizim Motoru\" desktop icon or with Layout.html.",
-"Projekte konnten nicht gelesen werden: {e}. Programm über das Desktop-Symbol „Layout Çizim Motoru\" oder über Layout.html starten."
+"Projeler okunamadı: {e}. Uygulamayı masaüstündeki \"Layout Çizim Motoru\" simgesiyle ya da index.html ile başlatın.": [
+"Projects could not be read: {e}. Start the program with the \"Layout Çizim Motoru\" desktop icon or with index.html.",
+"Projekte konnten nicht gelesen werden: {e}. Programm über das Desktop-Symbol „Layout Çizim Motoru\" oder über index.html starten."
 ],
 "Projelere dön": [
 "Back to projects",

@@ -3,11 +3,11 @@
 
 Çalıştırma:  python layout_app.py          (tarayıcıda http://127.0.0.1:8765 açılır; yalnızca bu bilgisayarda)
              pythonw layout_app.py --app    hafif uygulama: kendi penceresinde açılır, pencere kapanınca kapanır (masaüstü simgesi)
-             pythonw layout_app.py --protocol layoutx://start   Layout.html'deki "Başlat" düğmesi (sunucu arka planda)
+             pythonw layout_app.py --protocol layoutx://start   app/baslat.html'deki "Başlat" düğmesi (sunucu arka planda)
              python layout_app.py --install / --uninstall      masaüstü + Başlat menüsü simgesi ve layoutx:// bağlantısı
 Projeler:    LAYOUT/projects/<seri no>-<MÜŞTERİ>-<MODEL>/
 Akış:        Yeni proje (kapak bilgileri) -> STEP yükle -> boru hattı (OCP okuma, üçgenleme, VTK görünümler, geometri)
-             -> bölümleri düzenle (otomatik kayıt + canlı önizleme) -> Pafta Üret (PDF gömülü teslim HTML'i) / PDF İndir.
+             -> bölümleri düzenle (otomatik kayıt + canlı önizleme) -> PDF / HTML indir (belge tarayıcıda belge/kaynak.js ile üretilir).
 Yalnızca standart kütüphane + numpy; ağır işler tools/ betiklerine alt süreç olarak verilir.
 """
 import os, re, sys, json, glob, time, copy, shutil, threading, subprocess, webbrowser, datetime, tempfile, pathlib
@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PROJECTS = os.path.join(ROOT, "projects")
 TOOLS = os.path.join(ROOT, "tools")
 APPDIR = os.path.join(ROOT, "app")
-BELGE = os.path.join(TOOLS, "belge")
+BELGE = os.path.join(ROOT, "belge")
 TEMPLATE = os.path.join(TOOLS, "sablon-layout-veri.json")
 SETTINGS = os.path.join(TOOLS, "ayarlar.json")
 # alt betikler her zaman python.exe ile (pythonw ile başlatılsa da), konsol penceresi açmadan
@@ -117,11 +117,6 @@ def files_url(name, rel):
     return "/files/" + urllib.parse.quote(name) + "/" + "/".join(urllib.parse.quote(x) for x in rel.split("/"))
 
 
-def html_name(data):
-    m = data.get("makine", {})
-    return (m.get("dosya_adi") or (str(m.get("model") or "Layout").replace(" ", "-") + "-Layout")) + ".html"
-
-
 def text(v):
     if isinstance(v, dict):
         return v.get("tr") or v.get("en") or v.get("de") or ""
@@ -146,20 +141,6 @@ def project_files(d, name):
     return out
 
 
-def doc_state(d, data):
-    """Teslim paftasının durumu: var mı, güncel mi (veri, görünüm ve kapak tasarımından yeni mi)."""
-    h = os.path.join(d, html_name(data))
-    if not os.path.exists(h):
-        return {"exists": False}
-    newest = max(mtime(find_veri(d) or ""), mtime(os.path.join(d, "views", "views_meta.json")), mtime(SETTINGS),
-                 mtime(os.path.join(BELGE, "belge.js")), mtime(os.path.join(BELGE, "belge.css")), mtime(os.path.join(TOOLS, "build_layout.py")))
-    with open(h, "rb") as f:   # gömülü PDF'ten hemen sonra pdf-lib gelir (≈ 0,5 MB); sondan 1,5 MB'ye bakmak yeter
-        f.seek(max(0, os.path.getsize(h) - 1500000))
-        tail = f.read()
-    return {"exists": True, "name": os.path.basename(h), "url": files_url(os.path.basename(d), os.path.basename(h)),
-            "mtime": mtime(h), "fresh": mtime(h) >= newest - 1, "pdf": b"pdf-lib 1.17.1" in tail, "size": os.path.getsize(h)}
-
-
 def summary(d):
     name = os.path.basename(d)
     veri = find_veri(d)
@@ -173,7 +154,6 @@ def summary(d):
             "views": os.path.exists(os.path.join(d, "views", "views_meta.json")),
             "pdfs": [os.path.basename(p) for p in sorted(glob.glob(os.path.join(d, "*.pdf")))],
             "htmls": [os.path.basename(p) for p in sorted(glob.glob(os.path.join(d, "*-Layout*.html")))],
-            "doc": doc_state(d, data) if veri else {"exists": False},
             "updated": max(mtime(veri or ""), mtime(os.path.join(d, "views", "views_meta.json"))),
             "job": job.get("state"), "jobKind": job.get("kind")}
 
@@ -199,8 +179,7 @@ def project_detail(name):
     s.update({"data": load_json(veri), "veriFile": os.path.basename(veri),
               "views_meta": load_json(meta, {}) if os.path.exists(meta) else None,
               "cfg": load_json(cfgp, {}) if os.path.exists(cfgp) else None,
-              "files": project_files(d, name), "veriMtime": mtime(veri),
-              "preview": os.path.exists(os.path.join(d, "_work", "onizleme.html"))})
+              "files": project_files(d, name), "veriMtime": mtime(veri)})
     return s
 
 
@@ -387,8 +366,6 @@ def run_pipeline(name, opts):
             data = load_json(veri)
             data["makine"]["kaynak_step"] = data["makine"].get("kaynak_step") or os.path.basename(step)
             save_json(veri, data)
-        job["step"] = "Önizleme"
-        preview(name, log)
         job["state"] = "done"
         job["step"] = "Tamam"
         log("== Bitti")
@@ -396,77 +373,6 @@ def run_pipeline(name, opts):
     except Exception as e:
         job["state"] = "error"
         log(f"HATA: {e}")
-
-
-def build_args(d, extra):
-    return [PY, os.path.join(TOOLS, "build_layout.py"), d] + extra
-
-
-def preview(name, log=None):
-    """Hızlı önizleme (PDF gömülmez): _work/onizleme.html"""
-    d = proj_dir(name)
-    os.makedirs(os.path.join(d, "_work"), exist_ok=True)
-    out_path = os.path.join(d, "_work", "onizleme.html")
-    env = dict(os.environ, PYTHONIOENCODING="utf-8")
-    p = subprocess.run(build_args(d, ["--no-pdf", "--out=" + out_path]), capture_output=True, text=True,
-                       encoding="utf-8", errors="replace", cwd=ROOT, env=env, creationflags=NOWIN)
-    out = ((p.stdout or "") + (p.stderr or "")).strip()
-    if log:
-        for line in out.splitlines():
-            log(line)
-    if p.returncode:
-        raise RuntimeError(out.splitlines()[-1] if out else "önizleme üretilemedi")
-    return "/preview/" + urllib.parse.quote(name)
-
-
-def run_build(name):
-    job = JOBS[name]
-    try:
-        run_proc(job, build_args(proj_dir(name), []), "Teslim paftası (HTML + gömülü PDF)")
-        job["state"] = "done"
-        job["step"] = "Tamam"
-        job["log"].append("== Bitti")
-    except Exception as e:
-        job["state"] = "error"
-        job["log"].append(f"HATA: {e}")
-
-
-def print_pdf(name, langs, secs=None, cover=True):
-    """Güncel önizlemeden seçilen dillerin PDF'ini proje klasörüne basar (kapaklarıyla, A3 yatay)."""
-    d = proj_dir(name)
-    preview(name)
-    browser = None
-    for b in (os.environ.get("CHROME_PATH"), r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-              r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
-              r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
-              shutil.which("chrome"), shutil.which("msedge"), shutil.which("google-chrome"), shutil.which("chromium")):
-        if b and os.path.exists(b):
-            browser = b
-            break
-    if not browser:
-        raise RuntimeError("Chrome / Edge bulunamadı (CHROME_PATH ortam değişkeniyle verilebilir)")
-    data = load_json(find_veri(d))
-    base = html_name(data)[:-5]
-    part_tag = "" if (secs is None and cover) else "-secim"
-    out = os.path.join(d, f"{base}-{'-'.join(l.upper() for l in langs)}{part_tag}.pdf")
-    tmp = tempfile.mkdtemp(prefix="layout-pdf-")
-    try:
-        part = os.path.join(tmp, "out.pdf")
-        url = pathlib.Path(os.path.join(d, "_work", "onizleme.html")).resolve().as_uri() + "#pdf-print=" + ",".join(langs)
-        if secs is not None:
-            url += "&secs=" + ",".join(re.sub(r"[^a-z]", "", x) for x in secs)
-        if not cover:
-            url += "&cover=0"
-        subprocess.run([browser, "--headless=new", "--disable-gpu", "--disable-crash-reporter", "--no-first-run",
-                        "--no-pdf-header-footer", "--virtual-time-budget=15000", "--user-data-dir=" + os.path.join(tmp, "profil"),
-                        "--print-to-pdf=" + part, url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=300,
-                       creationflags=NOWIN)
-        if not os.path.exists(part) or not os.path.getsize(part):
-            raise RuntimeError("tarayıcı PDF üretmedi")
-        shutil.move(part, out)
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
-    return os.path.basename(out)
 
 
 def find_chrome():
@@ -514,25 +420,6 @@ def print_html(name, html_text, file, langs, secs=None, cover=True):
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     return fn
-
-
-def export_html(name, langs, secs=None, cover=True):
-    """Seçilen diller arka arkaya tek HTML (kapak + antetli sayfalar, PDF gömülmez; içindeki düğme yazdırır)."""
-    d = proj_dir(name)
-    data = load_json(find_veri(d))
-    base = html_name(data)[:-5]
-    part_tag = "" if (secs is None and cover) else "-secim"
-    out = os.path.join(d, f"{base}-{'-'.join(l.upper() for l in langs)}{part_tag}.html")
-    extra = ["--no-pdf", "--out=" + out, "--langs=" + ",".join(langs), "--cover=" + ("1" if cover else "0")]
-    if secs is not None:
-        extra.append("--secs=" + ",".join(re.sub(r"[^a-z]", "", x) for x in secs))
-    env = dict(os.environ, PYTHONIOENCODING="utf-8")
-    p = subprocess.run(build_args(d, extra), capture_output=True, text=True, encoding="utf-8", errors="replace",
-                       cwd=ROOT, env=env, creationflags=NOWIN)
-    if p.returncode:
-        msg = ((p.stdout or "") + (p.stderr or "")).strip()
-        raise RuntimeError(msg.splitlines()[-1] if msg else "HTML üretilemedi")
-    return os.path.basename(out)
 
 
 def start_job(name, kind, target, *args):
@@ -612,9 +499,9 @@ class H(BaseHTTPRequestHandler):
     def _get(self):
         path, qs = self.q()
         if path in ("/", "/index.html"):
-            return self.send_file(os.path.join(APPDIR, "index.html"))
+            return self.send_file(os.path.join(ROOT, "index.html"))
         if path in ("/sw.js", "/manifest.webmanifest"):     # PWA: kök kapsamı için kökten sunulur
-            return self.send_file(os.path.join(APPDIR, path[1:]))
+            return self.send_file(os.path.join(ROOT, path[1:]))
         if path.startswith("/tools/") and path.endswith(".json"):
             return self.static(TOOLS, path[7:])
         if path.startswith("/app/"):
@@ -627,9 +514,6 @@ class H(BaseHTTPRequestHandler):
             if not parts or "_work" in parts or not p.startswith(os.path.normpath(PROJECTS) + os.sep):
                 return self.send_json({"error": "izin yok"}, 403)
             return self.send_file(p, download=parts[-1] if qs.get("dl") == "1" else None)
-        if path.startswith("/preview/"):
-            name = urllib.parse.unquote(path[9:])
-            return self.send_file(os.path.join(proj_dir(name), "_work", "onizleme.html"))
         if path == "/api/ping":
             return self.send_json({"app": APP_ID, "ok": True, "jobs": sum(1 for j in JOBS.values() if j.get("state") == "running"),
                                    "db": DB.status() if DB else None})
@@ -747,10 +631,6 @@ class H(BaseHTTPRequestHandler):
                 save_json(veri, req["data"])
             db_touch()
             return self.send_json({"ok": True, "mtime": mtime(veri), "conflict": os.path.basename(copy) if copy else None})
-        if path == "/api/preview":
-            if not os.path.exists(os.path.join(proj_dir(name), "views", "views_meta.json")):
-                return self.send_json({"error": "Görünümler yok: önce STEP yükleyip görünümleri üretin"}, 400)
-            return self.send_json({"ok": True, "url": preview(name)})
         if path == "/api/pipeline":
             d = proj_dir(name)
             if not find_veri(d):
@@ -758,11 +638,6 @@ class H(BaseHTTPRequestHandler):
             if not find_step(d):
                 return self.send_json({"error": "Önce STEP dosyası yükleyin"}, 400)
             start_job(name, "pipeline", run_pipeline, req)
-            return self.send_json({"ok": True})
-        if path == "/api/build":
-            if not os.path.exists(os.path.join(proj_dir(name), "views", "views_meta.json")):
-                return self.send_json({"error": "Görünümler yok: önce STEP yükleyip görünümleri üretin"}, 400)
-            start_job(name, "build", run_build)
             return self.send_json({"ok": True})
         if path == "/api/print":
             langs = [l for l in ("tr", "en", "de") if l in (req.get("langs") or [])]
@@ -780,17 +655,6 @@ class H(BaseHTTPRequestHandler):
             with open(os.path.join(d, fn), "w", encoding="utf-8") as f:
                 f.write(req["text"])
             return self.send_json({"ok": True, "file": fn, "url": files_url(os.path.basename(d), fn)})
-        if path in ("/api/pdf", "/api/export"):
-            langs = [l for l in ("tr", "en", "de") if l in (req.get("langs") or [])]
-            if not langs:
-                return self.send_json({"error": "En az bir dil seçin"}, 400)
-            secs = req.get("secs")
-            secs = [str(x) for x in secs] if isinstance(secs, list) else None
-            if secs is not None and not secs and req.get("cover") is False:
-                return self.send_json({"error": "En az bir bölüm seçin"}, 400)
-            cover = req.get("cover") is not False
-            fn = export_html(name, langs, secs, cover) if req.get("format") == "html" else print_pdf(name, langs, secs, cover)
-            return self.send_json({"ok": True, "file": fn, "url": files_url(os.path.basename(proj_dir(name)), fn)})
         if path == "/api/open":
             d = proj_dir(name)
             rel = req.get("file", "")
@@ -886,7 +750,7 @@ def pythonw():
 
 
 def install(quiet=False):
-    """layoutx:// bağlantısı (Layout.html'deki Başlat düğmesi) + masaüstü ve Başlat menüsü simgesi. Yönetici izni gerekmez."""
+    """layoutx:// bağlantısı (app/baslat.html'deki Başlat düğmesi) + masaüstü ve Başlat menüsü simgesi. Yönetici izni gerekmez."""
     import winreg
     script = os.path.abspath(__file__)
     icon = os.path.join(APPDIR, "icon.ico")

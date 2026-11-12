@@ -332,7 +332,7 @@ const LayoutApp = (() => {
     try {
       state.projects = await api('GET', '/api/projects');
     } catch (e) {
-      list.innerHTML = `<div class="home-empty">${esc(t_('Projeler okunamadı: {e}. Uygulamayı masaüstündeki "Layout Çizim Motoru" simgesiyle ya da Layout.html ile başlatın.', { e: e.message }))}</div>`;
+      list.innerHTML = `<div class="home-empty">${esc(t_('Projeler okunamadı: {e}. Uygulamayı masaüstündeki "Layout Çizim Motoru" simgesiyle ya da index.html ile başlatın.', { e: e.message }))}</div>`;
       return;
     }
     $('projCount').textContent = state.projects.length || '';
@@ -1017,7 +1017,7 @@ const LayoutApp = (() => {
     f.srcdoc = html;
   }
 
-  /* ─── Belge üretimi (tools/belge/kaynak.js): önizleme ve çıktılar tarayıcıda, masaüstü ve web aynı ─── */
+  /* ─── Belge üretimi (belge/kaynak.js): önizleme ve çıktılar tarayıcıda, masaüstü ve web aynı ─── */
 
   let assetsP = null;
   const dataUrl = (blob) => new Promise((res, rej) => {

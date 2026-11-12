@@ -7,7 +7,9 @@
 
 const LayoutWeb = (() => {
   const meta = document.querySelector('meta[name="layoutx-mode"]');
-  const active = !!(meta && meta.content === 'web') || /[?&]web=1/.test(location.search);
+  // web kipi: Pages yapısı (meta), ?web=1 ya da masaüstü sunucusu (127.0.0.1) dışındaki her http(s) adresi
+  const active = !!(meta && meta.content === 'web') || /[?&]web=1/.test(location.search) ||
+    (/^https?:$/.test(location.protocol) && !/^(127\.0\.0\.1|localhost|\[::1\])$/.test(location.hostname));
   const TOP_FILES = ['tools/sablon-layout-veri.json', 'tools/ayarlar.json'];
   const OUTPUT_RE = /-Layout(-[A-Z]{2})*(-secim)?\.(pdf|html)$/i;
   const MAX_BYTES = 50 * 1024 * 1024;
@@ -615,7 +617,7 @@ const LayoutWeb = (() => {
     if (method === 'POST') {
       if (p === '/api/create') return create(body || {});
       if (p === '/api/save') return save(body || {});
-      if (p === '/api/pipeline' || p === '/api/build' || p === '/api/open' || p === '/api/print') return desktopOnly();
+      if (p === '/api/pipeline' || p === '/api/open' || p === '/api/print') return desktopOnly();
       if (p === '/api/db/connect') return Sync.connect(body.repo, body.token);
       if (p === '/api/db/sync') { Sync.trigger(0); const s = await Sync.status(); s.busy = true; return s; }
       if (p === '/api/db/disconnect') return Sync.disconnect();

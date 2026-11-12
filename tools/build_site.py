@@ -15,18 +15,20 @@ if os.path.isdir(OUT):
     shutil.rmtree(OUT)
 os.makedirs(OUT)
 skip = shutil.ignore_patterns("__pycache__", "*.pyc", "*.tmp")
+# Depo kökü zaten sitenin kendisidir (Pages "Deploy from branch" ile de çalışır); burada yalnız gereken dosyalar
+# ayıklanır (Python araçları, belgeler siteye girmez) ve service worker'a sürüm yazılır.
 shutil.copytree(os.path.join(ROOT, "app"), os.path.join(OUT, "app"), ignore=skip)
-shutil.copytree(os.path.join(ROOT, "tools", "belge"), os.path.join(OUT, "belge"), ignore=skip)
+shutil.copytree(os.path.join(ROOT, "belge"), os.path.join(OUT, "belge"), ignore=skip)
 os.makedirs(os.path.join(OUT, "tools"))
 shutil.copy(os.path.join(ROOT, "tools", "sablon-layout-veri.json"), os.path.join(OUT, "tools", "sablon-layout-veri.json"))
-shutil.copy(os.path.join(ROOT, "app", "manifest.webmanifest"), os.path.join(OUT, "manifest.webmanifest"))
+shutil.copy(os.path.join(ROOT, "manifest.webmanifest"), os.path.join(OUT, "manifest.webmanifest"))
 
-with open(os.path.join(ROOT, "app", "sw.js"), encoding="utf-8") as f:
+with open(os.path.join(ROOT, "sw.js"), encoding="utf-8") as f:
     sw = f.read().replace("__BUILD__", VERSION)
 with open(os.path.join(OUT, "sw.js"), "w", encoding="utf-8") as f:
     f.write(sw)
 
-with open(os.path.join(ROOT, "app", "index.html"), encoding="utf-8") as f:
+with open(os.path.join(ROOT, "index.html"), encoding="utf-8") as f:
     html = f.read()
 html = html.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n  <meta name="layoutx-mode" content="web">', 1)
 html = re.sub(r"\s*<script>\s*// Dosyadan \(çift tıkla\).*?</script>", "", html, count=1, flags=re.S)   # masaüstü başlatıcısına yönlendirme yok

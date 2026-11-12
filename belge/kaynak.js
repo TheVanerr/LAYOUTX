@@ -1,5 +1,5 @@
 /* Belge kaynağı: proje verisi + görünümler -> tek dosya pafta HTML'i (kapak + antetli A3 sayfalar, TR/EN/DE).
-   tools/build_layout.py'nin tarayıcıdaki birebir karşılığı; uygulama (masaüstü ve web) önizlemeyi ve çıktıları bununla üretir.
+   Belge üretici: uygulama (masaüstü ve web) önizlemeyi ve çıktıları bununla üretir.
    build(input) eşzamanlıdır; gerekli dosyalar (belge.css/js, logolar, yazı tipleri, görünüm resimleri) dışarıdan verilir. */
 
 (function (root, factory) {

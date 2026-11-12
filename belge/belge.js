@@ -1,6 +1,6 @@
 /* Layout belgesi çalışma zamanı: kapak, antet, başlık bloğu ve sayfa dizgisi (A3 yatay).
    P&PX'teki kapak tasarımları (covers.js), antet (sheet.js renderLetterhead) ve başlık bloğu (ISO 7200) ile aynı düzen.
-   Pafta HTML'ine build_layout.py tarafından gömülür; Layout Stüdyosu kapak önizlemesinde de aynı dosyayı kullanır. */
+   Belge HTML'ine belge/kaynak.js tarafından gömülür; Layout Stüdyosu kapak önizlemesinde de aynı dosyayı kullanır. */
 
 (function (root, factory) {
   if (typeof module !== 'undefined' && module.exports) module.exports = factory();
