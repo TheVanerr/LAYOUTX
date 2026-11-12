@@ -107,6 +107,10 @@ const LayoutApp = (() => {
     chip.textContent = `☁ ${dbText(s)}`;
     chip.title = s && s.connected ? `${s.repo}${s.error ? ' · ' + s.error : ''}` : t_('Veritabanı sekmesinden GitHub deposuna bağlanın');
     if (!$('homeDb').classList.contains('hidden') && !state.dbForm) renderDb();
+    if (!$('home').classList.contains('hidden') && state.projects && !state.projects.length &&
+        (!prev || prev.connected !== s.connected || prev.busy !== s.busy || prev.last !== s.last)) {
+      if (!s.busy && s.last) renderProjects(); else drawCards();
+    }
     if (state.dbRev === null) {
       state.dbRev = s.rev;
       state.dbSeen = Object.assign({}, s.changed || {});
@@ -145,6 +149,18 @@ const LayoutApp = (() => {
     }
   }
 
+  const DB_REPO = 'TheVanerr/layoutx-veri';   // veritabanı deposu (özel)
+
+  /** Depoya bağlan (veritabanı sekmesi ve ana ekrandaki kısa form ortak kullanır) */
+  async function connectDb(repo, token) {
+    const st = await api('POST', '/api/db/connect', { repo: (repo || DB_REPO).trim(), token: (token || '').trim() });
+    state.dbForm = false;
+    onDbStatus(st);
+    toast(t_('Bağlandı: {r}. İlk eşitleme başladı.', { r: st.repo }));
+    setTimeout(pollDb, 800);
+    return st;
+  }
+
   function renderDb() {
     const s = state.db || { connected: false };
     const L = (x, p) => esc(t_(x, p));
@@ -156,12 +172,12 @@ const LayoutApp = (() => {
         <li>${L('Montaj ağacı, imalat resmi PDF\'leri')}</li>
         <li>${L('Şablon ve kapak tasarımı')}</li></ul></div>
       <div class="db-card"><h2>${L('Depoya girmeyenler')}</h2><ul>
-        <li>${L('STEP dosyaları (büyük; bilgisayarda kalır). Başka bilgisayarda görünümler hazır gelir.')}</li>
+        <li>${WEB ? L('STEP dosyaları: web sürümünde okunmaz; görünümler masaüstünde üretilip depodan hazır gelir.') : L('STEP dosyaları (büyük; bilgisayarda kalır). Başka bilgisayarda görünümler hazır gelir.')}</li>
         <li>${L('Ara dosyalar (_work) ve indirilen PDF / HTML çıktıları')}</li>
         <li>${L('50 MB üstü dosyalar')}</li>
-        <li>${L('Erişim anahtarı (yalnız bu bilgisayarda saklanır)')}</li></ul></div></div>
+        <li>${WEB ? L('Erişim anahtarı (yalnız bu tarayıcıda saklanır)') : L('Erişim anahtarı (yalnız bu bilgisayarda saklanır)')}</li></ul></div></div>
       <div class="db-card"><h2>${L('Kayıt nasıl çalışır')}</h2><ul>
-        <li>${L('Her değişiklik önce bu bilgisayardaki proje klasörüne yazılır; internet kesilse de kaybolmaz.')}</li>
+        <li>${WEB ? L('Her değişiklik önce bu tarayıcıya (cihazda) yazılır; internet kesilse de kaybolmaz, bağlantı gelince gönderilir.') : L('Her değişiklik önce bu bilgisayardaki proje klasörüne yazılır; internet kesilse de kaybolmaz.')}</li>
         <li>${L('Değişenler birkaç saniye içinde, ayrıca dakikada bir tek commit olarak depoya gönderilir; depodaki yenilikler aynı anda alınır.')}</li>
         <li>${L('İki bilgisayarda aynı dosya değişirse yeni olan asıl dosya olur, eskisi yanında .catisma-<tarih> adıyla saklanır. Silme ile düzenleme karşılaşırsa düzenleme kalır.')}</li>
         <li>${L('Eski sürümler GitHub\'daki commit geçmişinden alınabilir.')}</li></ul></div>`;
@@ -175,7 +191,7 @@ const LayoutApp = (() => {
           <li>${WEB ? L('Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu tarayıcıda saklanır, başka yere gönderilmez; yalnız bu depoya izinli olmalıdır.') : L('Anahtarı aşağıya yapıştırıp Bağlan deyin. Anahtar yalnız bu bilgisayarda saklanır, depoya ve tarayıcıya gitmez.')}</li>
         </ol>
         <form id="dbForm" class="db-form">
-          <div class="field"><label for="dbRepo">${L('Depo (kullanıcı/depo)')}</label><input id="dbRepo" class="field-input" value="${esc(s.repo || 'TheVanerr/layoutx-veri')}" autocomplete="off" spellcheck="false"></div>
+          <div class="field"><label for="dbRepo">${L('Depo (kullanıcı/depo)')}</label><input id="dbRepo" class="field-input" value="${esc(s.repo || DB_REPO)}" autocomplete="off" spellcheck="false"></div>
           <div class="field"><label for="dbToken">${L('Erişim anahtarı')}</label><input id="dbToken" class="field-input" type="password" autocomplete="off" spellcheck="false" placeholder="${s.connected ? esc(t_('Boş bırakılırsa mevcut anahtar kalır')) : 'github_pat_…'}"></div>
           <div class="insp-actions"><button type="submit" class="btn btn-primary" id="dbGo">${L('Bağlan')}</button>${s.connected ? `<button type="button" class="btn" id="dbCancel">${L('Vazgeç')}</button>` : ''}</div>
         </form>
@@ -187,12 +203,8 @@ const LayoutApp = (() => {
         $('dbResult').className = 'field-help';
         $('dbResult').textContent = t_('Deneniyor…');
         try {
-          const st = await api('POST', '/api/db/connect', { repo: $('dbRepo').value.trim(), token: $('dbToken').value.trim() });
-          state.dbForm = false;
-          onDbStatus(st);
+          await connectDb($('dbRepo').value, $('dbToken').value);
           renderDb();
-          toast(t_('Bağlandı: {r}. İlk eşitleme başladı.', { r: st.repo }));
-          setTimeout(pollDb, 800);
         } catch (err) {
           $('dbGo').disabled = false;
           $('dbResult').className = 'field-help warn';
@@ -340,11 +352,48 @@ const LayoutApp = (() => {
     loadIssueCounts();
   }
 
+  /** Web sürümü ilk açılış: veritabanına (layoutx-veri) bağlanmadan proje yoktur; anahtar burada girilir */
+  function drawConnectCard(list) {
+    const L = (x, p) => esc(t_(x, p));
+    list.innerHTML = `<div class="db-card connect-card">
+        <h2>${L('Veritabanına bağlanın')}</h2>
+        <p>${L('Projeler GitHub\'daki özel {r} deposunda durur. Bu deponun erişim anahtarını bir kez girin; anahtar yalnız bu tarayıcıda saklanır.', { r: DB_REPO })}</p>
+        <form id="ccForm" class="db-form">
+          <div class="field"><label for="ccToken">${L('Erişim anahtarı')} · ${esc(DB_REPO)}</label><input id="ccToken" class="field-input" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" required></div>
+          <div class="insp-actions"><button type="submit" class="btn btn-primary" id="ccGo">${L('Bağlan')}</button>
+            <button type="button" class="btn" id="ccMore">${L('Ayrıntılar / başka depo')}</button></div>
+        </form>
+        <div class="field-help" id="ccResult"><a href="https://github.com/settings/personal-access-tokens/new?name=LayoutX%20veri&amp;description=LayoutX%20veri%20deposu&amp;contents=write&amp;expires_in=365" target="_blank" rel="noopener">${L('Erişim anahtarı oluşturun')}</a> · ${L('"Only select repositories" altında yalnız bu depoyu seçin; Contents: Read and write.')}</div>
+      </div>`;
+    $('ccMore').addEventListener('click', () => selectHomeTab('db'));
+    $('ccForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $('ccGo').disabled = true;
+      $('ccResult').className = 'field-help';
+      $('ccResult').textContent = t_('Deneniyor…');
+      try {
+        await connectDb(DB_REPO, $('ccToken').value);
+        drawCards();
+      } catch (err) {
+        $('ccGo').disabled = false;
+        $('ccResult').className = 'field-help warn';
+        $('ccResult').textContent = err.message;
+      }
+    });
+    setTimeout(() => { if ($('ccToken')) $('ccToken').focus(); }, 50);
+  }
+
   function drawCards() {
     const list = $('projectList');
     const q = ascii($('projSearch').value).toLowerCase().trim();
     const rows = state.projects.filter((p) => !q || ascii([p.name, p.meta.seri_no, S.txt(p.meta.musteri), p.meta.model].join(' ')).toLowerCase().includes(q));
     if (!state.projects.length) {
+      const db = state.db || {};
+      if (WEB && !db.connected) return drawConnectCard(list);
+      if (db.connected && (db.busy || !db.last)) {
+        list.innerHTML = `<div class="home-empty">${esc(t_('Projeler depodan alınıyor… ({r})', { r: db.repo }))}</div>`;
+        return;
+      }
       list.innerHTML = `<div class="home-empty">${esc(t_('Henüz proje yok. "+ Yeni Proje" ile kapak bilgilerini girerek başlayın.'))}</div>`;
       return;
     }

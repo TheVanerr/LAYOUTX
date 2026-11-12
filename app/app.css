@@ -81,6 +81,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .pc-chip.dark { background: #1a1a2e; color: #fff; font-weight: 600; }
 .pc-meta { margin-top: 12px; font-size: 11.5px; color: #7a8190; }
 .home-empty { color: var(--muted); padding: 40px; }
+.connect-card { grid-column: 1 / -1; width: 100%; max-width: 760px; }
+.connect-card .db-form { grid-template-columns: 1fr auto; }
+.connect-card .db-form .insp-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 700px) { .connect-card .db-form { grid-template-columns: 1fr; } }
 
 /* ── Uygulama yerleşimi ── */
 .app { height: 100%; display: grid; grid-template-columns: 268px minmax(0, 1fr) 420px; grid-template-rows: 52px minmax(0, 1fr) 30px;

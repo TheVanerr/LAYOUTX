@@ -53,15 +53,17 @@ class H(BaseHTTPRequestHandler):
         return json.loads(self.rfile.read(n).decode()) if n else {}
 
     def route(self):
-        p = self.path.split("/repos/o/r", 1)[1]
-        return p.split("?")[0]
+        """/repos/<sahip>/<depo>/... -> /... (her depo adı aynı sahte depoya gider)"""
+        parts = self.path.split("?")[0].split("/repos/", 1)[1].split("/")
+        self.full = "/".join(parts[:2])
+        return "/" + "/".join(parts[2:]) if len(parts) > 2 else ""
 
     def do_GET(self):
         p = self.route()
         if self.headers.get("Authorization") != "Bearer TOKEN":
             return self.reply(401, {"message": "Bad credentials"})
         if p == "":
-            return self.reply(200, {"private": F.private, "default_branch": "main", "full_name": "o/r", "permissions": {"push": True}})
+            return self.reply(200, {"private": F.private, "default_branch": "main", "full_name": self.full, "permissions": {"push": True}})
         if p == "/git/ref/heads/main":
             return self.reply(409, {"message": "Git Repository is empty."}) if F.head is None else self.reply(200, {"object": {"sha": F.head}})
         if p.startswith("/git/commits/"):

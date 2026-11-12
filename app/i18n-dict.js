@@ -2287,5 +2287,33 @@ const LAYOUT_DICT = {
 "Şablon bulunamadı": [
 "Template not found",
 "Vorlage nicht gefunden"
+],
+"Ayrıntılar / başka depo": [
+"Details / other repository",
+"Details / anderes Repository"
+],
+"Erişim anahtarı (yalnız bu tarayıcıda saklanır)": [
+"Access token (stored only in this browser)",
+"Zugriffstoken (nur in diesem Browser gespeichert)"
+],
+"Her değişiklik önce bu tarayıcıya (cihazda) yazılır; internet kesilse de kaybolmaz, bağlantı gelince gönderilir.": [
+"Every change is first written to this browser (on the device); it is not lost if the internet drops and is sent once the connection is back.",
+"Jede Änderung wird zuerst in diesem Browser (auf dem Gerät) gespeichert; sie geht bei Internetausfall nicht verloren und wird gesendet, sobald die Verbindung wieder steht."
+],
+"Projeler depodan alınıyor… ({r})": [
+"Fetching projects from the repository… ({r})",
+"Projekte werden aus dem Repository geladen… ({r})"
+],
+"Projeler GitHub'daki özel {r} deposunda durur. Bu deponun erişim anahtarını bir kez girin; anahtar yalnız bu tarayıcıda saklanır.": [
+"Projects are stored in the private GitHub repository {r}. Enter this repository's access token once; the token is stored only in this browser.",
+"Die Projekte liegen im privaten GitHub-Repository {r}. Geben Sie den Zugriffstoken dieses Repositorys einmal ein; er wird nur in diesem Browser gespeichert."
+],
+"STEP dosyaları: web sürümünde okunmaz; görünümler masaüstünde üretilip depodan hazır gelir.": [
+"STEP files: not read in the web version; the views are generated on the desktop and arrive ready from the repository.",
+"STEP-Dateien: werden in der Webversion nicht gelesen; die Ansichten werden am Desktop erzeugt und kommen fertig aus dem Repository."
+],
+"Veritabanına bağlanın": [
+"Connect to the database",
+"Mit der Datenbank verbinden"
 ]
 };

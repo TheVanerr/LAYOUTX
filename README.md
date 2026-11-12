@@ -14,7 +14,7 @@ Gereksinimler: Windows, Python 3.11 (numpy, OCP / OpenCASCADE, vtk), Edge ya da 
 ## Web sürümü (PWA, GitHub Pages)
 
 Adres: https://thevanerr.github.io/LAYOUTX/ · telefona ya da bilgisayara **Uygulamayı yükle** ile kurulur
-(manifest kimliği `cnk-layoutx-cizim-motoru-3f7a2c91`).
+(manifest kimliği `layoutx-cizim-motoru-30b27058`).
 
 - Kurulum (bir kez): depo **Settings → Pages → Build and deployment → Source: GitHub Actions** (önerilen:
   her `main` gönderiminde `.github/workflows/pages.yml` denetler, `tools/build_site.py` ile yalnız gereken dosyaları
